@@ -1,0 +1,3 @@
+[submodule "ServerData"]
+	path = ServerData
+	url = https://github.com/wu11158001/ThrowBattle_Addressable.git
