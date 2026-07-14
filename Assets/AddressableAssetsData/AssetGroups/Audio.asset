@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Audio
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
-  m_GroupName: Default Local Group
-  m_GUID: 6176308365d083748b5e00d575ceb803
-  m_SerializeEntries: []
+  m_GroupName: Audio
+  m_GUID: 257816ed8f337464195795a8a0c6bad6
+  m_SerializeEntries:
+  - m_GUID: 3a88874b7a8581e4a858bb9085a67cd9
+    m_Address: Audio
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a6e314bcf37b9ef49816d086c87c1368, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: e2d4b83e46b8d3d4b85c0746c6aca063, type: 2}
-    - {fileID: 11400000, guid: 3a497d71958a2bc46aa4cc7e6d79a4ab, type: 2}
+    - {fileID: 11400000, guid: 7b9cff1479b87414a9e8e24e30756e9d, type: 2}
+    - {fileID: 11400000, guid: a606057134675ff42939bb4357608875, type: 2}
