@@ -1,0 +1,125 @@
+body { 
+    padding: 0; 
+    margin: 0; 
+    background-color: #111; /* 給網頁底色（黑邊） */
+    overflow: hidden; /* 防止出現捲軸 */
+}
+
+/* 讓容器撐滿整個瀏覽器視窗，並用 Flexbox 讓遊戲永遠置中 */
+#unity-container { 
+    position: fixed; 
+    width: 100vw; 
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 不管電腦或手機，都統一由 container 的 Flexbox 置中，消除舊的 translate 偏移動作 */
+#unity-container.unity-desktop { 
+    left: 0; 
+    top: 0; 
+    transform: none; 
+}
+#unity-container.unity-mobile { 
+    position: fixed; 
+    width: 100%; 
+    height: 100%; 
+}
+
+/* --- 關鍵修改：強制 Canvas 遵循 16:9 縮放 --- */
+#unity-canvas { 
+    background: {{{ BACKGROUND_COLOR }}}; 
+    width: 100% !important; 
+    height: auto !important; 
+    max-width: 100vw; 
+    max-height: 100vh; 
+    aspect-ratio: 16 / 9; /* 鎖定 16:9 比例 */
+    object-fit: contain; 
+}
+
+/* 手機端也套用相同的縮放邏輯 */
+.unity-mobile #unity-canvas { 
+    width: 100% !important; 
+    height: auto !important; 
+    max-width: 100vw; 
+    max-height: 100vh; 
+    aspect-ratio: 16 / 9;
+}
+
+/* 載入條置中 */
+#unity-loading-bar { 
+    position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    display: none; 
+    z-index: 10; /* 確保在最上層 */
+}
+
+#unity-logo { 
+    width: 200px; 
+    height: 162px;
+    background: url('thumbnail.png') no-repeat center;
+    background-size: contain; 
+    margin: 0 auto; /* 確保圖片自己在父層中水平置中 */
+}
+
+#unity-progress-bar-empty { 
+    width: 200px; 
+    height: 20px; 
+    margin-top: 15px; 
+    background: url('progress-bar-empty-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center; 
+    background-size: 100% 100%; /* 強制背景圖完美貼合這個外框 */
+}
+
+#unity-progress-bar-full { 
+    width: 0%; 
+    height: 20px;  /* 必須與 empty 完全一致 */
+    margin-top: 15px; /* 必須與 empty 完全一致 */
+    background: url('progress-bar-full-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center; 
+    background-size: 100% 100%; /* 強制背景圖完美貼合這個外框 */
+}
+
+/* 頁尾工具列懸浮在畫面的右下角，不佔用遊戲空間 */
+#unity-footer { 
+    position: absolute; 
+    right: 10px; 
+    bottom: 10px; 
+    z-index: 5; 
+}
+.unity-mobile #unity-footer { 
+    display: none; 
+}
+
+#unity-logo-title-footer { 
+    display: none; /* 隱藏原本佔空間的左下角大 Unity Logo */
+}
+
+#unity-build-title { 
+    float: right; 
+    margin-right: 10px; 
+    line-height: 38px; 
+    font-family: arial; 
+    font-size: 14px; 
+    color: #fff; /* 改為白色字體才看得見 */
+}
+
+#unity-fullscreen-button { 
+    cursor: pointer; 
+    float: right; 
+    width: 38px; 
+    height: 38px; 
+    background: url('fullscreen-button.png') no-repeat center; 
+}
+
+#unity-warning { 
+    position: absolute; 
+    left: 50%; 
+    top: 5%; 
+    transform: translate(-50%); 
+    background: white; 
+    padding: 10px; 
+    display: none; 
+    z-index: 20; 
+}
