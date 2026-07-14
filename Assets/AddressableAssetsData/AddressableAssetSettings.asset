@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6176308365d083748b5e00d575ceb803
   m_currentHash:
     serializedVersion: 2
-    Hash: 520d43434051bb94cbe273312fd155ff
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
       - m_Id: 63e71a9436b09f94d9e84c3a9fb2c677
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
       - m_Id: 8417eab5910113943bcb4086636c71a5
-        m_Value: <undefined>
+        m_Value: 'https://wu11158001.github.io/ThrowBattle_Addressable/[BuildTarget]'
       - m_Id: a46426d9275e3554abf92202b8e80eac
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
     m_ProfileEntryNames:
