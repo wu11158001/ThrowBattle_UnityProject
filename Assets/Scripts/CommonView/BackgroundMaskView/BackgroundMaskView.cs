@@ -10,7 +10,6 @@ using UnityEngine.AddressableAssets;
 public class BackgroundMaskView : MonoBehaviour
 {
     [SerializeField] private Button _btn_Mask;
-    [SerializeField] private Image _img_Mask;
 
     // 是否可以點擊
     private bool _isCanClick;

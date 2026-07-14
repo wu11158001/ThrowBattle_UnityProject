@@ -16,6 +16,18 @@ public class LobbyEntry : MonoBehaviour
                 
             }).Forget();
 
+        // 還未註冊
+        if(StaticDataManager.RegisterPlayerData == null)
+        {
+            // 開啟暱設置稱介面
+            ViewManager.OpenView<SetNicknameView>(
+                viewType: VIEW_TYPE.SetNicknameView,
+                callback: (view) =>
+                {
+
+                }).Forget();
+        }
+
         SceneLoader.Instance.CloseLoading();
     }
 }

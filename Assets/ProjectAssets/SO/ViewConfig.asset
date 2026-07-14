@@ -13,9 +13,23 @@ MonoBehaviour:
   m_Name: ViewConfig
   m_EditorClassIdentifier: Assembly-CSharp::ViewConfig
   Mappings:
+  - Type: 0
+    PrefabRef:
+      m_AssetGUID: 7e0cf3b0b00c82a41bd22a5f4fdb0619
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - Type: 100
     PrefabRef:
       m_AssetGUID: e8ec8a40cc35be04da7b33d18e8805a0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - Type: 101
+    PrefabRef:
+      m_AssetGUID: 571000533a33591408ec927179a394d6
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

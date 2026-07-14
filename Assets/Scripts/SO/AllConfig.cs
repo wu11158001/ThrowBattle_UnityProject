@@ -9,4 +9,5 @@ public class AllConfig : ScriptableObject
 {
     public ViewConfig ViewConfig;
     public AudioConfig AudioConfig;
+    public DataConfig DataConfig;
 }
