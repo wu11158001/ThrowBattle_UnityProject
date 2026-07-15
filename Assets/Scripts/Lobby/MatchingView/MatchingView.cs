@@ -10,6 +10,8 @@ public class MatchingView : BaseView
     [Header("配對中介面")]
     [SerializeField] private Button _btn_Cancel;
 
+    private MatchingViewModel _viewModel = new();
+
     private void Start()
     {
         Bind();
@@ -22,32 +24,10 @@ public class MatchingView : BaseView
             .First()
             .Subscribe(_ =>
             {
-                OnCancelClick();
+                _viewModel.SendCancelMatchRequest(
+                    successCallback: () => Close(),
+                    failCallback: (errorCode) => Close());
             })
             .AddTo(this);
-    }
-
-    /// <summary>
-    /// 取消配對點擊事件
-    /// </summary>
-    private void OnCancelClick()
-    {
-        CancelMatchRequest req = new()
-        {
-            playerId = StaticDataManager.RegisterPlayerData.PlayerId
-        };
-
-        _ = HttpManager.Instance.SendPostAsync<CancelMatchRequest, CancelMatchResponse>(
-                subUrl: "/api/lobby/cancel-match",
-                requestData: req,
-                onSuccess: (res) =>
-                {
-                    Close();
-                },
-                onFailure: (code, err) =>
-                {
-                    Close();
-                }
-            );
     }
 }

@@ -20,6 +20,13 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - Type: 1
+    PrefabRef:
+      m_AssetGUID: 91aade31e9163734f8c84ac89ba14df3
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   - Type: 100
     PrefabRef:
       m_AssetGUID: e8ec8a40cc35be04da7b33d18e8805a0
@@ -37,6 +44,13 @@ MonoBehaviour:
   - Type: 102
     PrefabRef:
       m_AssetGUID: 97d3dae3bbb564543938f04c490a242b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - Type: 200
+    PrefabRef:
+      m_AssetGUID: 9f5db9ad693114b4093b92c7292110d0
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

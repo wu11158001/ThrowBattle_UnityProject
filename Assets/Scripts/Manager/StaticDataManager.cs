@@ -24,6 +24,8 @@ public static class StaticDataManager
     #region 資料
     /// <summary> 註冊的玩家資料 </summary>
     public static PlayerData RegisterPlayerData;
+    /// <summary> 配對成功資料 </summary>
+    public static MatchSuccessData MatchData;
     #endregion
 }
 

@@ -13,6 +13,8 @@ public enum AUDIO_TYPE
 
     /// <summary> 按鈕點擊音效 </summary>
     ButtonClick = 100,
+    /// <summary> 取消點擊音效 </summary>
+    CancelClick,
 }
 
 /// <summary>

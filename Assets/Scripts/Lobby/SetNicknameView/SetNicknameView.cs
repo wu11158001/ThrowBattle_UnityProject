@@ -24,6 +24,8 @@ public class SetNicknameView : BaseView
     [SerializeField] private TextMeshProUGUI _text_BtnRegister;
     [SerializeField] private TextMeshProUGUI _text_Error;
 
+    private SetNicknameViewModel _viewModel = new();
+
     private void Start()
     {
         _text_Error.gameObject.SetActive(false);
@@ -72,46 +74,30 @@ public class SetNicknameView : BaseView
         _text_BtnRegister.text = "註冊中...";
         _btn_Register.interactable = false;
 
-        RegisterRequest req = new() { nickname = inputName };
-        _ = HttpManager.Instance.SendPostAsync<RegisterRequest, RegisterResponse>(
-                subUrl: StaticDataManager.RegisterSubUrl,
-                requestData: req,
-                onSuccess: (res) =>
+        _viewModel.SendRegisterRequest(
+            nickname: inputName,
+            successCallback: () =>
+            {
+                Close();
+            },
+            failCallback: (errorCode) =>
+            {
+                _btn_Register.interactable = true;
+                _text_BtnRegister.text = "註冊";
+                _text_Error.gameObject.SetActive(true);
+
+                if (errorCode == 400)
                 {
-                    PlayerData playerData = new()
-                    {
-                        Nickname = res.nickname,
-                        PlayerId = res.playerId,
-                    };
-
-                    // 全域資料設置
-                    StaticDataManager.RegisterPlayerData = playerData;
-
-                    // 發送廣播
-                    RegisterSuccessMessage registerSuccessMessage = new() { PlayerData = playerData };
-                    MessageBroker.Default.Publish(registerSuccessMessage);
-
-                    Close();
-                },
-                onFailure: (code, err) =>
-                {
-                    _btn_Register.interactable = true;
-                    _text_BtnRegister.text = "註冊";
-                    _text_Error.gameObject.SetActive(true);
-
-                    if (code == 400)
-                    {
-                        _text_Error.text = "註冊失敗！此暱稱已被佔用，請換一個。";
-                    }
-                    else if (code == 0)
-                    {
-                        _text_Error.text = "連不上伺服器，請檢查網路連線！";
-                    }
-                    else
-                    {
-                        _text_Error.text = "系統發生未知錯誤，請稍後再試。";
-                    }              
+                    _text_Error.text = "註冊失敗！此暱稱已被佔用，請換一個。";
                 }
-            );
+                else if (errorCode == 0)
+                {
+                    _text_Error.text = "連不上伺服器，請檢查網路連線！";
+                }
+                else
+                {
+                    _text_Error.text = "系統發生未知錯誤，請稍後再試。";
+                }
+            });
     }
 }

@@ -82,3 +82,21 @@ public class CancelMatchResponse
     public string currentStatus;
 }
 #endregion
+
+#region 配對成功
+/// <summary>
+/// 配對成功資料
+/// </summary>
+[Serializable]
+public class MatchSuccessData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 是否為房主(Player1) </summary>
+    public bool isCreator;
+    /// <summary> 對手暱稱 </summary>
+    public string opponentNickname;
+    /// <summary> 對手角色編號 </summary>
+    public int opponentCharacterIndex;
+}
+#endregion

@@ -201,6 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6074295562619345790}
+  - component: {fileID: 3565086218205080555}
   - component: {fileID: 1788780033003248780}
   - component: {fileID: 3498891534424966532}
   - component: {fileID: 8947441513473366403}
@@ -231,6 +232,19 @@ RectTransform:
   m_AnchoredPosition: {x: 28.9487, y: -118}
   m_SizeDelta: {x: 217.8975, y: 72.4582}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3565086218205080555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3970355716708990060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff09b7806dbcaf4c90c1d624c052f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonClickSound
+  _sfxType: 101
 --- !u!222 &1788780033003248780
 CanvasRenderer:
   m_ObjectHideFlags: 0

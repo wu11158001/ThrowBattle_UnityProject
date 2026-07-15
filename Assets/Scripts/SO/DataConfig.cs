@@ -7,6 +7,5 @@ using NaughtyAttributes;
 [CreateAssetMenu(fileName = "DataConfig", menuName = "SO Config/DataConfig")]
 public class DataConfig : ScriptableObject
 {
-    [Label("API URL")]
-    public string HttpBaseUrl = "http://localhost:3000";
+    [Label("API URL")] public string BaseUrl = "http://localhost:3000";
 }

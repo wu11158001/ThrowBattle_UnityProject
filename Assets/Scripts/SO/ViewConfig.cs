@@ -14,6 +14,8 @@ public enum VIEW_TYPE
     LobbyView = 100,
     SetNicknameView,
     MatchingView,
+
+    GameView = 200,
 }
 
 /// <summary>

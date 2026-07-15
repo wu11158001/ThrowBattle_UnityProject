@@ -8,22 +8,24 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
 {
     protected override void OnApplicationQuit()
     {
-        // 發送玩家離線登出
+        // 移除大廳玩家
         if (StaticDataManager.RegisterPlayerData != null && !string.IsNullOrEmpty(StaticDataManager.RegisterPlayerData.PlayerId))
         {
             string pId = StaticDataManager.RegisterPlayerData.PlayerId;
             LogoutRequest req = new() { playerId = pId };
 
             _ = SendPostAsync<LogoutRequest, RegisterResponse>(
-                    subUrl: "/api/lobby/logout",
-                    req,
-                    onSuccess: (res) => {
-                        Debug.Log($"[API 成功回傳] [Url = /api/lobby/logout]: 成功通知伺服器移除玩家: {pId}");
-                    },
-                    onFailure: (code, err) => {
-                        Debug.LogWarning($"[API 回傳失敗] [Url = /api/lobby/logout]: 通知伺服器移除玩家失敗: {err}");
-                    }
-                );
+                subUrl: "/api/lobby/logout",
+                requestData: req,
+                onSuccess: (res) =>
+                {
+                    Debug.Log($"[API 成功回傳][Url = /api/lobby/logout]: 離線通知已發送: {pId}");
+                },
+                onFailure: (code, err) => 
+                {
+                    Debug.Log($"[API 回傳失敗][Url = /api/lobby/logout]: 離線通知未處理（可能已被 Socket 清除）: {err}");
+                }
+            );
         }
 
         base.OnApplicationQuit();
@@ -45,7 +47,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
         Action<TResponse> onSuccess = null,
         Action<long, string> onFailure = null)
     {
-        if (StaticDataManager.DataConfig == null || string.IsNullOrEmpty(StaticDataManager.DataConfig.HttpBaseUrl))
+        if (StaticDataManager.DataConfig == null || string.IsNullOrEmpty(StaticDataManager.DataConfig.BaseUrl))
         {
             string urlError = "請求 URL 錯誤：HttpBaseUrl 未初始化！";
             Debug.LogError(urlError);
@@ -53,7 +55,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
             return default;
         }
 
-        string url = StaticDataManager.DataConfig.HttpBaseUrl + subUrl;
+        string url = StaticDataManager.DataConfig.BaseUrl + subUrl;
         string jsonPayload = JsonUtility.ToJson(requestData);
 
         using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))
