@@ -9,10 +9,11 @@ using UnityEngine.AddressableAssets;
 public enum VIEW_TYPE
 {
     BackgroundView = 0,
+    MessagePopupView,
 
     LobbyView = 100,
     SetNicknameView,
-
+    MatchingView,
 }
 
 /// <summary>

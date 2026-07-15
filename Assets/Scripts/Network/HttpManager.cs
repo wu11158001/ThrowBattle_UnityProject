@@ -2,11 +2,33 @@ using System;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using UniRx;
 using Cysharp.Threading.Tasks;
 
-public static class HttpManager
+public class HttpManager : SingletonMonoBehaviour<HttpManager>
 {
+    protected override void OnApplicationQuit()
+    {
+        // 發送玩家離線登出
+        if (StaticDataManager.RegisterPlayerData != null && !string.IsNullOrEmpty(StaticDataManager.RegisterPlayerData.PlayerId))
+        {
+            string pId = StaticDataManager.RegisterPlayerData.PlayerId;
+            LogoutRequest req = new() { playerId = pId };
+
+            _ = SendPostAsync<LogoutRequest, RegisterResponse>(
+                    subUrl: "/api/lobby/logout",
+                    req,
+                    onSuccess: (res) => {
+                        Debug.Log($"[API 成功回傳] [Url = /api/lobby/logout]: 成功通知伺服器移除玩家: {pId}");
+                    },
+                    onFailure: (code, err) => {
+                        Debug.LogWarning($"[API 回傳失敗] [Url = /api/lobby/logout]: 通知伺服器移除玩家失敗: {err}");
+                    }
+                );
+        }
+
+        base.OnApplicationQuit();
+    }
+
     /// <summary>
     /// POST 請求
     /// </summary>
@@ -17,25 +39,23 @@ public static class HttpManager
     /// <param name="onSuccess">成功時的回呼 (傳入解析後的 Response 物件)</param>
     /// <param name="onFailure">失敗時的回呼 (傳入錯誤訊息字串)</param>
     /// <returns>回傳 UniTask<TResponse>，若失敗則回傳預設值</returns>
-    public static async UniTask<TResponse> SendPostAsync<TRequest, TResponse>(
+    public async UniTask<TResponse> SendPostAsync<TRequest, TResponse>(
         string subUrl,
         TRequest requestData,
         Action<TResponse> onSuccess = null,
         Action<long, string> onFailure = null)
     {
-        // 檢查網址
         if (StaticDataManager.DataConfig == null || string.IsNullOrEmpty(StaticDataManager.DataConfig.HttpBaseUrl))
         {
             string urlError = "請求 URL 錯誤：HttpBaseUrl 未初始化！";
             Debug.LogError(urlError);
-            onFailure?.Invoke(-1, urlError); // -1 = 未知錯誤
+            onFailure?.Invoke(-1, urlError);
             return default;
         }
 
         string url = StaticDataManager.DataConfig.HttpBaseUrl + subUrl;
         string jsonPayload = JsonUtility.ToJson(requestData);
 
-        // 發送請求
         using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonPayload);
@@ -45,11 +65,12 @@ public static class HttpManager
 
             try
             {
-                await webRequest.SendWebRequest();
+                AsyncOperation asyncOp = webRequest.SendWebRequest();
+                await asyncOp.ToUniTask();
             }
             catch (Exception ex)
             {
-                // 處理物理性斷網或超時
+                // 捕捉真斷網（ DNS 失敗、連接失敗、連線超時等物理性異常）
                 string netError = $"網路連線失敗: {ex.Message}";
                 Debug.LogError($"網路連線失敗: {netError}");
                 onFailure?.Invoke(0, netError);
@@ -62,8 +83,8 @@ public static class HttpManager
                 try
                 {
                     TResponse response = JsonUtility.FromJson<TResponse>(webRequest.downloadHandler.text);
+                    Debug.Log($"[API 成功回傳] [Url = {subUrl}]: {JsonUtility.ToJson(response, true)}");
 
-                    // 觸發成功 Action
                     onSuccess?.Invoke(response);
                     return response;
                 }
@@ -80,6 +101,7 @@ public static class HttpManager
             {
                 string serverRawError = webRequest.downloadHandler?.text;
                 string friendlyMessage = "網路請求失敗";
+
                 if (!string.IsNullOrEmpty(serverRawError))
                 {
                     try
@@ -93,6 +115,7 @@ public static class HttpManager
                     }
                 }
 
+                Debug.LogWarning($"[API 回傳失敗] [Url = {subUrl}]: {friendlyMessage}");
                 onFailure?.Invoke(webRequest.responseCode, friendlyMessage);
                 return default;
             }

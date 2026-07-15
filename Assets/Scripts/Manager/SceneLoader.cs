@@ -34,7 +34,7 @@ public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
     /// <returns></returns>
     public async UniTask LoadSceneAsync(SCENE_TYPE sceneType)
     {
-        ViewManager.ClearAll();
+        ViewManager.Instance.ClearAll();
 
         _canvasGroup.alpha = 1;
 

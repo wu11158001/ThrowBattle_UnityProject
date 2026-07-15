@@ -9,8 +9,9 @@ public class LobbyEntry : MonoBehaviour
     private void Start()
     {
         // 開啟大廳介面
-        ViewManager.OpenView<LobbyView>(
+        ViewManager.Instance.OpenView<LobbyView>(
             viewType: VIEW_TYPE.LobbyView,
+            canvasType: CANVAS_TYPE.Canvas_HUD,
             callback: (view) =>
             {
                 
@@ -20,8 +21,9 @@ public class LobbyEntry : MonoBehaviour
         if(StaticDataManager.RegisterPlayerData == null)
         {
             // 開啟暱設置稱介面
-            ViewManager.OpenView<SetNicknameView>(
+            ViewManager.Instance.OpenView<SetNicknameView>(
                 viewType: VIEW_TYPE.SetNicknameView,
+                canvasType: CANVAS_TYPE.Canvas_Highest,
                 callback: (view) =>
                 {
 

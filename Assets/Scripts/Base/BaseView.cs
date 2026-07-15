@@ -55,7 +55,7 @@ public abstract class BaseView : MonoBehaviour
         Close();
     }
 
-    public virtual void Setup(AssetReferenceGameObject myRef)
+    public virtual void SetData(AssetReferenceGameObject myRef)
     {
         _myRef = myRef;
 
@@ -84,7 +84,10 @@ public abstract class BaseView : MonoBehaviour
     /// </summary>
     public virtual void CloseViewHandle()
     {
-        ViewManager.CloseView();
+        if(ViewManager.Instance != null)
+        {
+            ViewManager.Instance.CloseView();
+        }        
     }
 
     /// <summary>

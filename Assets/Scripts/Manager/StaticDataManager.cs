@@ -15,19 +15,24 @@ public static class StaticDataManager
     #region API URL
     /// <summary> 註冊 URL </summary>
     public static readonly string RegisterSubUrl = "/api/lobby/register";
+    /// <summary> 玩家配對 URL </summary>
+    public static readonly string MatchSubUrl = "/api/lobby/match";
+    /// <summary> 取消玩家配對 URL </summary>
+    public static readonly string CancelMatchSubUrl = "/api/lobby/cancel-match";
     #endregion
 
     #region 資料
     /// <summary> 註冊的玩家資料 </summary>
     public static PlayerData RegisterPlayerData;
-
-    /// <summary>
-    /// 玩家資料
-    /// </summary>
-    public class PlayerData
-    {
-        public string Nickname;
-        public string PlayerId;
-    }
     #endregion
+}
+
+/// <summary>
+/// 玩家資料
+/// </summary>
+public class PlayerData
+{
+    public string Nickname;
+    public string PlayerId;
+    public int CharacterIndex;
 }

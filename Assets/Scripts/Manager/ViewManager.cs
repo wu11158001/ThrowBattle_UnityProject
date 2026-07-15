@@ -5,22 +5,40 @@ using System.Collections.Generic;
 using UnityEngine.AddressableAssets;
 
 /// <summary>
+/// Canvas類型
+/// </summary>
+public enum CANVAS_TYPE
+{
+    Canvas_Static,
+    Canvas_Dynamic,
+    Canvas_HUD,
+    Canvas_Highest,
+}
+
+/// <summary>
 /// 介面管理中心
 /// </summary>
-public static class ViewManager
+public class ViewManager : SingletonMonoBehaviour<ViewManager>
 {
-    private static Transform _canvasRoot;
-    private static Stack<BaseView> _viewStack = new();
+    [SerializeField] private RectTransform _canvas_Static;
+    [SerializeField] private RectTransform _canvas_Dynamic;
+    [SerializeField] private RectTransform _canvas_HUD;
+    [SerializeField] private RectTransform _canvas_Highest;
+
+    private Stack<BaseView> _viewStack = new();
+
+    private MessagePopupView _messagePopupView;
 
     /// <summary>
     /// 開啟介面
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <param name="viewType"></param>
+    /// <param name="canvasType"></param>
     /// <param name="isClosePreView">是否關閉前個介面</param>
     /// <param name="callback"></param>
     /// <returns></returns>
-    public static async UniTask OpenView<T>(VIEW_TYPE viewType, bool isClosePreView = false, Action<T> callback = null) where T : BaseView
+    public async UniTask OpenView<T>(
+        VIEW_TYPE viewType, CANVAS_TYPE canvasType, bool isClosePreView = false, Action<T> callback = null) where T : BaseView
     {
         var prefabRef = StaticDataManager.ViewConfig.GetPrefabRef(viewType);
         if (prefabRef == null)
@@ -29,17 +47,37 @@ public static class ViewManager
             return;
         }
 
-        if (_canvasRoot == null)
+        RectTransform canvasRoot = null;
+        switch (canvasType)
         {
-            var canvas = GameObject.Find("Canvas").transform;
-            if (canvas != null) _canvasRoot = canvas.transform;
+            case CANVAS_TYPE.Canvas_Static:
+                canvasRoot = _canvas_Static;
+                break;
+
+            case CANVAS_TYPE.Canvas_Dynamic:
+                canvasRoot = _canvas_Dynamic;
+                break;
+
+            case CANVAS_TYPE.Canvas_HUD:
+                canvasRoot = _canvas_HUD;
+                break;
+
+            case CANVAS_TYPE.Canvas_Highest:
+                canvasRoot = _canvas_Highest;
+                break;
         }
 
-        var handle = prefabRef.InstantiateAsync(_canvasRoot);
+        if (canvasRoot == null)
+        {
+            Debug.LogError("無法找到Canvas!");
+            return;
+        }
+
+        var handle = prefabRef.InstantiateAsync(canvasRoot);
         GameObject obj = await handle.Task;
 
         T view = obj.GetComponent<T>();
-        view.Setup(prefabRef);
+        view.SetData(prefabRef);
 
         obj.transform.SetAsLastSibling();
 
@@ -60,7 +98,7 @@ public static class ViewManager
     /// 關閉介面
     /// </summary>
     /// <param name="isOpenPreView">是否開啟前個介面</param>
-    public static void CloseView(bool isOpenPreView = false)
+    public void CloseView(bool isOpenPreView = false)
     {
         if (_viewStack == null || _viewStack.Count == 0) return;
 
@@ -88,7 +126,7 @@ public static class ViewManager
     /// <typeparam name="T"></typeparam>
     /// <param name="viewType"></param>
     /// <returns></returns>
-    public static T GetView<T>(VIEW_TYPE viewType) where T : BaseView
+    public T GetView<T>(VIEW_TYPE viewType) where T : BaseView
     {
         foreach (var view in _viewStack)
         {
@@ -105,7 +143,7 @@ public static class ViewManager
     /// <summary>
     /// 清除所有介面
     /// </summary>
-    public static void ClearAll()
+    public void ClearAll()
     {
         try
         {
@@ -123,4 +161,35 @@ public static class ViewManager
             Debug.LogError($"清除介面時發生錯誤: {e}");
         }
     }
+
+    #region 唯一介面
+
+    /// <summary>
+    /// 顯示訊息彈窗
+    /// </summary>
+    /// <param name="message">訊息內容</param>
+    public void ShowMessagePopupView(string message)
+    {
+        if(_messagePopupView == null)
+        {
+            OpenView<MessagePopupView>(
+                viewType: VIEW_TYPE.MessagePopupView,
+                canvasType: CANVAS_TYPE.Canvas_Highest,
+                callback: (view) =>
+                {
+                    view.DoShow();
+                    view.SetMessage(message);
+
+                    _messagePopupView = view;
+                }).Forget();
+        }
+        else
+        {
+            _messagePopupView.gameObject.SetActive(true);
+            _messagePopupView.DoShow();
+            _messagePopupView.SetMessage(message);
+        }
+    }
+
+    #endregion
 }

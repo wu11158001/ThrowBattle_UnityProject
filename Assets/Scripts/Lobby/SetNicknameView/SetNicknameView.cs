@@ -2,6 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UniRx;
+using UniRx.Triggers;
+using UnityEngine.InputSystem;
+
+/// <summary>
+/// 註冊成功訊息
+/// </summary>
+public class RegisterSuccessMessage
+{
+    public PlayerData PlayerData { get; set; }
+}
 
 /// <summary>
 /// 設置暱稱介面
@@ -18,12 +28,27 @@ public class SetNicknameView : BaseView
     {
         _text_Error.gameObject.SetActive(false);
         _text_BtnRegister.text = "註冊";
+        if_Nickname.ActivateInputField();
 
         Bind();
     }
 
     private void Bind()
     {
+        // 每幀驅動
+        this.UpdateAsObservable()
+            .Subscribe(_ =>
+            {
+                var keyboard = Keyboard.current;
+                if (keyboard == null) return;
+
+                if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame)
+                {
+                    OnRegisterClick();
+                }
+            })
+            .AddTo(this);
+
         // 輸入框
         if_Nickname.onValueChanged.AddListener((value) => _btn_Register.interactable = value.Length >= 2);
 
@@ -47,17 +72,24 @@ public class SetNicknameView : BaseView
         _text_BtnRegister.text = "註冊中...";
         _btn_Register.interactable = false;
 
-        RegisterRequest req = new RegisterRequest { nickname = inputName };
-        _ = HttpManager.SendPostAsync<RegisterRequest, RegisterResponse>(
+        RegisterRequest req = new() { nickname = inputName };
+        _ = HttpManager.Instance.SendPostAsync<RegisterRequest, RegisterResponse>(
                 subUrl: StaticDataManager.RegisterSubUrl,
-                req,
+                requestData: req,
                 onSuccess: (res) =>
                 {
-                    StaticDataManager.RegisterPlayerData = new()
+                    PlayerData playerData = new()
                     {
                         Nickname = res.nickname,
                         PlayerId = res.playerId,
                     };
+
+                    // 全域資料設置
+                    StaticDataManager.RegisterPlayerData = playerData;
+
+                    // 發送廣播
+                    RegisterSuccessMessage registerSuccessMessage = new() { PlayerData = playerData };
+                    MessageBroker.Default.Publish(registerSuccessMessage);
 
                     Close();
                 },
