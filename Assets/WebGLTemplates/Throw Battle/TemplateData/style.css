@@ -60,7 +60,7 @@ body {
 #unity-logo { 
     width: 200px; 
     height: 162px;
-    background: url('thumbnail.png') no-repeat center;
+    background: url('ThrowBattle.png') no-repeat center;
     background-size: contain; 
     margin: 0 auto; /* 確保圖片自己在父層中水平置中 */
 }
