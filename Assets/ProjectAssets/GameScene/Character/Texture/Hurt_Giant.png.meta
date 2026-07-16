@@ -1,25 +1,29 @@
 fileFormatVersion: 2
-guid: 93e35379d23430d4f88210ee9ffe6446
+guid: 8d68fb518dea57741a38fa9f964dd0bb
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Special Attacks/Star_Boy_-_Comet_Fist_Charge_Complete_Sheet.png
+  uploadId: 833940
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8649714330753796895
-    second: Star_Boy-Idle_Sheet_0
+      213: -3412091949253861136
+    second: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_0
   - first:
-      213: 1375792360148334323
-    second: Star_Boy-Idle_Sheet_1
+      213: -9103445568442639905
+    second: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_1
   - first:
-      213: 8391987695275765931
-    second: Star_Boy-Idle_Sheet_2
+      213: 9026524823204079052
+    second: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_2
   - first:
-      213: 7132877473592646858
-    second: Star_Boy-Idle_Sheet_3
+      213: -1624775143368172100
+    second: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_3
   - first:
-      213: -688694558976920593
-    second: Star_Boy-Idle_Sheet_4
-  - first:
-      213: -7238881315528338579
-    second: Star_Boy-Idle_Sheet_5
+      213: -8652515341130062553
+    second: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -193,13 +197,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_0
+      name: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_0
       rect:
         serializedVersion: 2
-        x: 429
-        y: 1455
-        width: 357
-        height: 793
+        x: 272
+        y: 253
+        width: 447
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +212,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e470d2f4aa06f780800000000000000
-      internalID: -8649714330753796895
+      spriteID: 0f0e0cf3370d5a0d0800000000000000
+      internalID: -3412091949253861136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_1
+      name: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_1
       rect:
         serializedVersion: 2
-        x: 1635
-        y: 1450
-        width: 358
-        height: 792
+        x: 1473
+        y: 253
+        width: 447
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f6765fbcdbc71310800000000000000
-      internalID: 1375792360148334323
+      spriteID: fd95fd4dc701aa180800000000000000
+      internalID: -9103445568442639905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_2
+      name: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_2
       rect:
         serializedVersion: 2
-        x: 2841
-        y: 1450
-        width: 344
-        height: 789
+        x: 2674
+        y: 253
+        width: 447
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba07c50a854567470800000000000000
-      internalID: 8391987695275765931
+      spriteID: cc5235b8088a44d70800000000000000
+      internalID: 9026524823204079052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_3
+      name: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_3
       rect:
         serializedVersion: 2
-        x: 4034
-        y: 1450
-        width: 372
-        height: 787
+        x: 3875
+        y: 253
+        width: 447
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,20 +278,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acc10e745421df260800000000000000
-      internalID: 7132877473592646858
+      spriteID: cbdd7a39d93a379e0800000000000000
+      internalID: -1624775143368172100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_4
+      name: Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_4
       rect:
         serializedVersion: 2
-        x: 5244
-        y: 1447
-        width: 356
-        height: 787
+        x: 5076
+        y: 253
+        width: 447
+        height: 689
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,30 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fe3bf6d82f34176f0800000000000000
-      internalID: -688694558976920593
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Star_Boy-Idle_Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 427
-        y: 251
-        width: 369
-        height: 782
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6398b8fbc35a8b90800000000000000
-      internalID: -7238881315528338579
+      spriteID: 7252356e3271ce780800000000000000
+      internalID: -8652515341130062553
       vertices: []
       indices: 
       edges: []
@@ -338,21 +320,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Star_Boy-Idle_Sheet_0: -8649714330753796895
-      Star_Boy-Idle_Sheet_1: 1375792360148334323
-      Star_Boy-Idle_Sheet_2: 8391987695275765931
-      Star_Boy-Idle_Sheet_3: 7132877473592646858
-      Star_Boy-Idle_Sheet_4: -688694558976920593
-      Star_Boy-Idle_Sheet_5: -7238881315528338579
+      Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_0: -3412091949253861136
+      Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_1: -9103445568442639905
+      Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_2: 9026524823204079052
+      Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_3: -1624775143368172100
+      Star_Boy_-_Comet_Fist_Charge_Complete_Sheet_4: -8652515341130062553
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 346308
-  packageName: Nova Dynamic Star Boy Player Sprites
-  packageVersion: 1.0
-  assetPath: Assets/NovaDevs/Sprites/Star Boy/Idle/Star_Boy-Idle_Sheet.png
-  uploadId: 833940

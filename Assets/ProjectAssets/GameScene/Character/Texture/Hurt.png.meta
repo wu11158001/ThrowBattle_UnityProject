@@ -1,28 +1,56 @@
 fileFormatVersion: 2
-guid: 29974e23f4a72aa4ea7ad3e54cb90bf5
+guid: 77b9e15d9e6149741a3cdf9ac9ef2124
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Charging/Star_Boy_-_Charging_Star_Power_Sheet.png
+  uploadId: 833940
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5741462498592697618
-    second: Star_Boy-Jog_Sheet_0
+      213: -628368523349306920
+    second: Star_Boy_-_Charging_Star_Power_Sheet_0
   - first:
-      213: -5668941725400953782
-    second: Star_Boy-Jog_Sheet_1
+      213: -3535566831114868607
+    second: Star_Boy_-_Charging_Star_Power_Sheet_1
   - first:
-      213: 7675203479286694935
-    second: Star_Boy-Jog_Sheet_2
+      213: -3177080273346999157
+    second: Star_Boy_-_Charging_Star_Power_Sheet_2
   - first:
-      213: -1657400928393471567
-    second: Star_Boy-Jog_Sheet_3
+      213: -1765651436674416622
+    second: Star_Boy_-_Charging_Star_Power_Sheet_3
   - first:
-      213: 1462497246405017139
-    second: Star_Boy-Jog_Sheet_4
+      213: 7619329899161442188
+    second: Star_Boy_-_Charging_Star_Power_Sheet_4
   - first:
-      213: -3699288613790151948
-    second: Star_Boy-Jog_Sheet_5
+      213: -7564300705305798723
+    second: Star_Boy_-_Charging_Star_Power_Sheet_5
   - first:
-      213: -1449008124665707770
-    second: Star_Boy-Jog_Sheet_6
+      213: 6675046250704623187
+    second: Star_Boy_-_Charging_Star_Power_Sheet_6
+  - first:
+      213: 7885584169952049962
+    second: Star_Boy_-_Charging_Star_Power_Sheet_7
+  - first:
+      213: 4982240103241324846
+    second: Star_Boy_-_Charging_Star_Power_Sheet_8
+  - first:
+      213: -2815826019091356503
+    second: Star_Boy_-_Charging_Star_Power_Sheet_9
+  - first:
+      213: 1731680077748777464
+    second: Star_Boy_-_Charging_Star_Power_Sheet_10
+  - first:
+      213: -8079554190905050814
+    second: Star_Boy_-_Charging_Star_Power_Sheet_11
+  - first:
+      213: 200792722264942268
+    second: Star_Boy_-_Charging_Star_Power_Sheet_12
+  - first:
+      213: 6118550304216538535
+    second: Star_Boy_-_Charging_Star_Power_Sheet_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -196,155 +224,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_0
+      name: Star_Boy_-_Charging_Star_Power_Sheet_1
       rect:
         serializedVersion: 2
-        x: 416
-        y: 1469
-        width: 383
-        height: 748
+        x: 4095
+        y: 1453
+        width: 346
+        height: 734
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 21d28df09b5cdaf40800000000000000
-      internalID: 5741462498592697618
+      spriteID: 188aeb703b42feec0800000000000000
+      internalID: -3535566831114868607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_1
+      name: Star_Boy_-_Charging_Star_Power_Sheet_5
       rect:
         serializedVersion: 2
-        x: 1599
-        y: 1454
-        width: 412
-        height: 737
+        x: 474
+        y: 1451
+        width: 381
+        height: 683
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a4c061d398fd351b0800000000000000
-      internalID: -5668941725400953782
+      spriteID: db7d20ef594360790800000000000000
+      internalID: -7564300705305798723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_2
+      name: Star_Boy_-_Charging_Star_Power_Sheet_6
       rect:
         serializedVersion: 2
-        x: 2871
-        y: 1455
-        width: 358
-        height: 726
+        x: 1690
+        y: 1452
+        width: 336
+        height: 680
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 714c9b146ecc38a60800000000000000
-      internalID: 7675203479286694935
+      spriteID: 3565d88f23782ac50800000000000000
+      internalID: 6675046250704623187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_3
+      name: Star_Boy_-_Charging_Star_Power_Sheet_7
       rect:
         serializedVersion: 2
-        x: 4071
-        y: 1460
-        width: 347
-        height: 708
+        x: 2901
+        y: 1450
+        width: 331
+        height: 727
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1b954bc03aabff8e0800000000000000
-      internalID: -1657400928393471567
+      spriteID: a2b7f60e5093f6d60800000000000000
+      internalID: 7885584169952049962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_4
+      name: Star_Boy_-_Charging_Star_Power_Sheet_8
       rect:
         serializedVersion: 2
-        x: 5252
-        y: 1455
-        width: 354
-        height: 765
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 33e35f83f75db4410800000000000000
-      internalID: 1462497246405017139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 453
-        y: 257
-        width: 355
-        height: 723
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4fa046dfa9c79acc0800000000000000
-      internalID: -3699288613790151948
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Star_Boy-Jog_Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 1668
-        y: 257
+        x: 5297
+        y: 1449
         width: 353
-        height: 718
+        height: 730
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 60345aca9c614ebe0800000000000000
-      internalID: -1449008124665707770
+      spriteID: e2997631af8742540800000000000000
+      internalID: 4982240103241324846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Charging_Star_Power_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 250
+        width: 344
+        height: 716
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f136da1bd9280810800000000000000
+      internalID: 1731680077748777464
       vertices: []
       indices: 
       edges: []
@@ -353,7 +359,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a015d7347078b8e4b8b6b97c1d730e07
     internalID: 0
     vertices: []
     indices: 
@@ -363,22 +369,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Star_Boy-Jog_Sheet_0: 5741462498592697618
-      Star_Boy-Jog_Sheet_1: -5668941725400953782
-      Star_Boy-Jog_Sheet_2: 7675203479286694935
-      Star_Boy-Jog_Sheet_3: -1657400928393471567
-      Star_Boy-Jog_Sheet_4: 1462497246405017139
-      Star_Boy-Jog_Sheet_5: -3699288613790151948
-      Star_Boy-Jog_Sheet_6: -1449008124665707770
+      Star_Boy_-_Charging_Star_Power_Sheet_1: -3535566831114868607
+      Star_Boy_-_Charging_Star_Power_Sheet_10: 1731680077748777464
+      Star_Boy_-_Charging_Star_Power_Sheet_5: -7564300705305798723
+      Star_Boy_-_Charging_Star_Power_Sheet_6: 6675046250704623187
+      Star_Boy_-_Charging_Star_Power_Sheet_7: 7885584169952049962
+      Star_Boy_-_Charging_Star_Power_Sheet_8: 4982240103241324846
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 346308
-  packageName: Nova Dynamic Star Boy Player Sprites
-  packageVersion: 1.0
-  assetPath: Assets/NovaDevs/Sprites/Star Boy/Jog/Star_Boy-Jog_Sheet.png
-  uploadId: 833940

@@ -1,19 +1,38 @@
 fileFormatVersion: 2
-guid: f370d97373d7e1b47af58fda9f5343b7
+guid: 5109cf68d7ec0fa48920ab0a1acb849c
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Charging/Star_Boy_-_Full_Charged_Sheet.png
+  uploadId: 833940
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7665540096462232933
-    second: Star_Boy_-_Light_Attack_1_Sheet_0
+      213: -7114857866144701856
+    second: Star_Boy_-_Full_Charged_Sheet_0
   - first:
-      213: 8721339101002363267
-    second: Star_Boy_-_Light_Attack_1_Sheet_1
+      213: -4014249434180325573
+    second: Star_Boy_-_Full_Charged_Sheet_1
   - first:
-      213: 8571766500569477261
-    second: Star_Boy_-_Light_Attack_1_Sheet_2
+      213: 5485363556236216451
+    second: Star_Boy_-_Full_Charged_Sheet_2
   - first:
-      213: 7008634687677430020
-    second: Star_Boy_-_Light_Attack_1_Sheet_3
+      213: 3497370513791117949
+    second: Star_Boy_-_Full_Charged_Sheet_3
+  - first:
+      213: -6107461343386125707
+    second: Star_Boy_-_Full_Charged_Sheet_4
+  - first:
+      213: 8229191038069288754
+    second: Star_Boy_-_Full_Charged_Sheet_5
+  - first:
+      213: -8991919474301454044
+    second: Star_Boy_-_Full_Charged_Sheet_6
+  - first:
+      213: 2014785523138439045
+    second: Star_Boy_-_Full_Charged_Sheet_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -187,89 +206,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Star_Boy_-_Light_Attack_1_Sheet_0
+      name: Star_Boy_-_Full_Charged_Sheet_0
       rect:
         serializedVersion: 2
-        x: 404
-        y: 258
-        width: 395
-        height: 749
+        x: 504
+        y: 1435
+        width: 394
+        height: 792
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b92ead265e78e9590800000000000000
-      internalID: -7665540096462232933
+      spriteID: 0622d058772f24d90800000000000000
+      internalID: -7114857866144701856
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Light_Attack_1_Sheet_1
+      name: Star_Boy_-_Full_Charged_Sheet_1
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 251
-        width: 433
-        height: 670
+        x: 1702
+        y: 1435
+        width: 397
+        height: 799
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38178f864bb680970800000000000000
-      internalID: 8721339101002363267
+      spriteID: b3f6ed378658a48c0800000000000000
+      internalID: -4014249434180325573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Light_Attack_1_Sheet_2
+      name: Star_Boy_-_Full_Charged_Sheet_3
       rect:
         serializedVersion: 2
-        x: 2876
-        y: 252
-        width: 488
-        height: 709
+        x: 2903
+        y: 1435
+        width: 397
+        height: 799
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d807904973805f670800000000000000
-      internalID: 8571766500569477261
+      spriteID: d7ae172d3f7298030800000000000000
+      internalID: 3497370513791117949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Light_Attack_1_Sheet_3
+      name: Star_Boy_-_Full_Charged_Sheet_5
       rect:
         serializedVersion: 2
-        x: 4073
-        y: 248
-        width: 508
-        height: 712
+        x: 4107
+        y: 1435
+        width: 394
+        height: 792
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4097e777d1ca34160800000000000000
-      internalID: 7008634687677430020
+      spriteID: 23fa2f426a5f33270800000000000000
+      internalID: 8229191038069288754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Full_Charged_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 5308
+        y: 1435
+        width: 394
+        height: 792
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 429385d11e8463380800000000000000
+      internalID: -8991919474301454044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Full_Charged_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 235
+        width: 394
+        height: 792
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587244d22c4f5fb10800000000000000
+      internalID: 2014785523138439045
       vertices: []
       indices: 
       edges: []
@@ -278,7 +341,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 381373471f4b28143b32b156adc4c357
     internalID: 0
     vertices: []
     indices: 
@@ -288,19 +351,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Star_Boy_-_Light_Attack_1_Sheet_0: -7665540096462232933
-      Star_Boy_-_Light_Attack_1_Sheet_1: 8721339101002363267
-      Star_Boy_-_Light_Attack_1_Sheet_2: 8571766500569477261
-      Star_Boy_-_Light_Attack_1_Sheet_3: 7008634687677430020
+      Star_Boy_-_Full_Charged_Sheet_0: -7114857866144701856
+      Star_Boy_-_Full_Charged_Sheet_1: -4014249434180325573
+      Star_Boy_-_Full_Charged_Sheet_3: 3497370513791117949
+      Star_Boy_-_Full_Charged_Sheet_5: 8229191038069288754
+      Star_Boy_-_Full_Charged_Sheet_6: -8991919474301454044
+      Star_Boy_-_Full_Charged_Sheet_7: 2014785523138439045
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 346308
-  packageName: Nova Dynamic Star Boy Player Sprites
-  packageVersion: 1.0
-  assetPath: Assets/NovaDevs/Sprites/Star Boy/Light Attacks/Star_Boy_-_Light_Attack_1_Sheet.png
-  uploadId: 833940

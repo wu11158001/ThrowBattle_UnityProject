@@ -1,31 +1,32 @@
 fileFormatVersion: 2
-guid: 5109cf68d7ec0fa48920ab0a1acb849c
+guid: e70d4ee4b67f90640a8e7ce0b7a8ba87
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Rail Grind/Star_Boy_-_Rail_Grind_Sheet.png
+  uploadId: 833940
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7114857866144701856
-    second: Star_Boy_-_Full_Charged_Sheet_0
+      213: 7271889036528682711
+    second: Star_Boy_-_Rail_Grind_Sheet_0
   - first:
-      213: -4014249434180325573
-    second: Star_Boy_-_Full_Charged_Sheet_1
+      213: -7193301744880095110
+    second: Star_Boy_-_Rail_Grind_Sheet_1
   - first:
-      213: 5485363556236216451
-    second: Star_Boy_-_Full_Charged_Sheet_2
+      213: -7231067115176144520
+    second: Star_Boy_-_Rail_Grind_Sheet_2
   - first:
-      213: 3497370513791117949
-    second: Star_Boy_-_Full_Charged_Sheet_3
+      213: -1972515671569814371
+    second: Star_Boy_-_Rail_Grind_Sheet_3
   - first:
-      213: -6107461343386125707
-    second: Star_Boy_-_Full_Charged_Sheet_4
+      213: 1651857766735106525
+    second: Star_Boy_-_Rail_Grind_Sheet_4
   - first:
-      213: 8229191038069288754
-    second: Star_Boy_-_Full_Charged_Sheet_5
-  - first:
-      213: -8991919474301454044
-    second: Star_Boy_-_Full_Charged_Sheet_6
-  - first:
-      213: 2014785523138439045
-    second: Star_Boy_-_Full_Charged_Sheet_7
+      213: 8991488640521030180
+    second: Star_Boy_-_Rail_Grind_Sheet_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -199,133 +200,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_0
+      name: Star_Boy_-_Rail_Grind_Sheet_0
       rect:
         serializedVersion: 2
-        x: 504
-        y: 1435
-        width: 394
-        height: 792
+        x: 438
+        y: 1442
+        width: 399
+        height: 663
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0622d058772f24d90800000000000000
-      internalID: -7114857866144701856
+      spriteID: 7d68954fc80fae460800000000000000
+      internalID: 7271889036528682711
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_1
+      name: Star_Boy_-_Rail_Grind_Sheet_1
       rect:
         serializedVersion: 2
-        x: 1702
-        y: 1435
-        width: 397
-        height: 799
+        x: 1653
+        y: 1443
+        width: 388
+        height: 629
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b3f6ed378658a48c0800000000000000
-      internalID: -4014249434180325573
+      spriteID: a70793ebc224c2c90800000000000000
+      internalID: -7193301744880095110
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_3
+      name: Star_Boy_-_Rail_Grind_Sheet_2
       rect:
         serializedVersion: 2
-        x: 2903
-        y: 1435
-        width: 397
-        height: 799
+        x: 2858
+        y: 1452
+        width: 388
+        height: 618
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7ae172d3f7298030800000000000000
-      internalID: 3497370513791117949
+      spriteID: 871dae445c616ab90800000000000000
+      internalID: -7231067115176144520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_5
+      name: Star_Boy_-_Rail_Grind_Sheet_3
       rect:
         serializedVersion: 2
-        x: 4107
-        y: 1435
-        width: 394
-        height: 792
+        x: 4112
+        y: 1446
+        width: 355
+        height: 604
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23fa2f426a5f33270800000000000000
-      internalID: 8229191038069288754
+      spriteID: d9ca032927730a4e0800000000000000
+      internalID: -1972515671569814371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_6
+      name: Star_Boy_-_Rail_Grind_Sheet_4
       rect:
         serializedVersion: 2
-        x: 5308
-        y: 1435
-        width: 394
-        height: 792
+        x: 5315
+        y: 1443
+        width: 353
+        height: 609
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 429385d11e8463380800000000000000
-      internalID: -8991919474301454044
+      spriteID: dd157bd03e39ce610800000000000000
+      internalID: 1651857766735106525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Star_Boy_-_Full_Charged_Sheet_7
+      name: Star_Boy_-_Rail_Grind_Sheet_5
       rect:
         serializedVersion: 2
-        x: 504
-        y: 235
-        width: 394
-        height: 792
+        x: 527
+        y: 249
+        width: 341
+        height: 608
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 587244d22c4f5fb10800000000000000
-      internalID: 2014785523138439045
+      spriteID: 42a4734974f28cc70800000000000000
+      internalID: 8991488640521030180
       vertices: []
       indices: 
       edges: []
@@ -334,7 +335,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 381373471f4b28143b32b156adc4c357
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -344,21 +345,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Star_Boy_-_Full_Charged_Sheet_0: -7114857866144701856
-      Star_Boy_-_Full_Charged_Sheet_1: -4014249434180325573
-      Star_Boy_-_Full_Charged_Sheet_3: 3497370513791117949
-      Star_Boy_-_Full_Charged_Sheet_5: 8229191038069288754
-      Star_Boy_-_Full_Charged_Sheet_6: -8991919474301454044
-      Star_Boy_-_Full_Charged_Sheet_7: 2014785523138439045
+      Star_Boy_-_Rail_Grind_Sheet_0: 7271889036528682711
+      Star_Boy_-_Rail_Grind_Sheet_1: -7193301744880095110
+      Star_Boy_-_Rail_Grind_Sheet_2: -7231067115176144520
+      Star_Boy_-_Rail_Grind_Sheet_3: -1972515671569814371
+      Star_Boy_-_Rail_Grind_Sheet_4: 1651857766735106525
+      Star_Boy_-_Rail_Grind_Sheet_5: 8991488640521030180
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 346308
-  packageName: Nova Dynamic Star Boy Player Sprites
-  packageVersion: 1.0
-  assetPath: Assets/NovaDevs/Sprites/Star Boy/Charging/Star_Boy_-_Full_Charged_Sheet.png
-  uploadId: 833940
