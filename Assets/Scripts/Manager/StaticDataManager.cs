@@ -36,5 +36,4 @@ public class PlayerData
 {
     public string Nickname;
     public string PlayerId;
-    public int CharacterIndex;
 }

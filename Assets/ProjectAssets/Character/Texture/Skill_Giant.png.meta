@@ -1,0 +1,1316 @@
+fileFormatVersion: 2
+guid: ea578ff89a5481f44b4d0636f2ab5ce9
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Medium Attacks/Star_Boy_-_Medium_Attack_Sheet.png
+  uploadId: 833940
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 751773747105811492
+    second: Star_Boy_-_Medium_Attack_Sheet_0
+  - first:
+      213: 523472229322106423
+    second: Star_Boy_-_Medium_Attack_Sheet_1
+  - first:
+      213: -3863826442499811100
+    second: Star_Boy_-_Medium_Attack_Sheet_2
+  - first:
+      213: -8093807960374312585
+    second: Star_Boy_-_Medium_Attack_Sheet_3
+  - first:
+      213: -1599212631726314748
+    second: Star_Boy_-_Medium_Attack_Sheet_4
+  - first:
+      213: -8564894157006227543
+    second: Star_Boy_-_Medium_Attack_Sheet_5
+  - first:
+      213: -6969213229702447378
+    second: Star_Boy_-_Medium_Attack_Sheet_6
+  - first:
+      213: 219587178518230089
+    second: Star_Boy_-_Medium_Attack_Sheet_7
+  - first:
+      213: -2764737336015112457
+    second: Star_Boy_-_Medium_Attack_Sheet_8
+  - first:
+      213: 6496850758682529434
+    second: Star_Boy_-_Medium_Attack_Sheet_9
+  - first:
+      213: 4311033219026175466
+    second: Star_Boy_-_Medium_Attack_Sheet_10
+  - first:
+      213: -2707945599163970269
+    second: Star_Boy_-_Medium_Attack_Sheet_11
+  - first:
+      213: 2468392779225542153
+    second: Star_Boy_-_Medium_Attack_Sheet_12
+  - first:
+      213: 4321768357359066553
+    second: Star_Boy_-_Medium_Attack_Sheet_13
+  - first:
+      213: -3598069467151078615
+    second: Star_Boy_-_Medium_Attack_Sheet_14
+  - first:
+      213: -8596428741886403983
+    second: Star_Boy_-_Medium_Attack_Sheet_15
+  - first:
+      213: 5399923538980204966
+    second: Star_Boy_-_Medium_Attack_Sheet_16
+  - first:
+      213: 8303088676591933699
+    second: Star_Boy_-_Medium_Attack_Sheet_17
+  - first:
+      213: 4594762921182039132
+    second: Star_Boy_-_Medium_Attack_Sheet_18
+  - first:
+      213: 3189763777066451727
+    second: Star_Boy_-_Medium_Attack_Sheet_19
+  - first:
+      213: -3337714997788331407
+    second: Star_Boy_-_Medium_Attack_Sheet_20
+  - first:
+      213: -1373292883760676959
+    second: Star_Boy_-_Medium_Attack_Sheet_21
+  - first:
+      213: 89753960520805192
+    second: Star_Boy_-_Medium_Attack_Sheet_22
+  - first:
+      213: -6610445174744828348
+    second: Star_Boy_-_Medium_Attack_Sheet_23
+  - first:
+      213: 5846394557208456481
+    second: Star_Boy_-_Medium_Attack_Sheet_24
+  - first:
+      213: 1829694768247108908
+    second: Star_Boy_-_Medium_Attack_Sheet_25
+  - first:
+      213: 2258596980968413790
+    second: Star_Boy_-_Medium_Attack_Sheet_26
+  - first:
+      213: -1672798277670358517
+    second: Star_Boy_-_Medium_Attack_Sheet_27
+  - first:
+      213: -5168827049092908463
+    second: Star_Boy_-_Medium_Attack_Sheet_28
+  - first:
+      213: -2097757651187825312
+    second: Star_Boy_-_Medium_Attack_Sheet_29
+  - first:
+      213: -220214284569877318
+    second: Star_Boy_-_Medium_Attack_Sheet_30
+  - first:
+      213: -8861907486600430476
+    second: Star_Boy_-_Medium_Attack_Sheet_31
+  - first:
+      213: 1182600022271347818
+    second: Star_Boy_-_Medium_Attack_Sheet_32
+  - first:
+      213: -579907785518248655
+    second: Star_Boy_-_Medium_Attack_Sheet_33
+  - first:
+      213: 247286444634684801
+    second: Star_Boy_-_Medium_Attack_Sheet_34
+  - first:
+      213: 3730248132194313922
+    second: Star_Boy_-_Medium_Attack_Sheet_35
+  - first:
+      213: -3016369355806975382
+    second: Star_Boy_-_Medium_Attack_Sheet_36
+  - first:
+      213: 730835083622464613
+    second: Star_Boy_-_Medium_Attack_Sheet_37
+  - first:
+      213: 1436416795956178444
+    second: Star_Boy_-_Medium_Attack_Sheet_38
+  - first:
+      213: 8549956061135420340
+    second: Star_Boy_-_Medium_Attack_Sheet_39
+  - first:
+      213: -2693785853592609996
+    second: Star_Boy_-_Medium_Attack_Sheet_40
+  - first:
+      213: -2538068643563868607
+    second: Star_Boy_-_Medium_Attack_Sheet_41
+  - first:
+      213: 9134820143464010415
+    second: Star_Boy_-_Medium_Attack_Sheet_42
+  - first:
+      213: 6186370862167557704
+    second: Star_Boy_-_Medium_Attack_Sheet_43
+  - first:
+      213: -4848280061036504556
+    second: Star_Boy_-_Medium_Attack_Sheet_44
+  - first:
+      213: -3582957864878535530
+    second: Star_Boy_-_Medium_Attack_Sheet_45
+  - first:
+      213: -4681830491164711095
+    second: Star_Boy_-_Medium_Attack_Sheet_46
+  - first:
+      213: -8329871252084720577
+    second: Star_Boy_-_Medium_Attack_Sheet_47
+  - first:
+      213: -3472556453389005155
+    second: Star_Boy_-_Medium_Attack_Sheet_48
+  - first:
+      213: -5013269489302646156
+    second: Star_Boy_-_Medium_Attack_Sheet_49
+  - first:
+      213: 4269844105065321887
+    second: Star_Boy_-_Medium_Attack_Sheet_50
+  - first:
+      213: 3083453906976920815
+    second: Star_Boy_-_Medium_Attack_Sheet_51
+  - first:
+      213: 7344295392070145679
+    second: Star_Boy_-_Medium_Attack_Sheet_52
+  - first:
+      213: 901272531455479641
+    second: Star_Boy_-_Medium_Attack_Sheet_53
+  - first:
+      213: -3225360939061007679
+    second: Star_Boy_-_Medium_Attack_Sheet_54
+  - first:
+      213: 6083064950717813185
+    second: Star_Boy_-_Medium_Attack_Sheet_55
+  - first:
+      213: 4313046151302580833
+    second: Star_Boy_-_Medium_Attack_Sheet_56
+  - first:
+      213: -5868845086942793697
+    second: Star_Boy_-_Medium_Attack_Sheet_57
+  - first:
+      213: -1155713386499749180
+    second: Star_Boy_-_Medium_Attack_Sheet_58
+  - first:
+      213: 2216085334887464684
+    second: Star_Boy_-_Medium_Attack_Sheet_59
+  - first:
+      213: 3100934803942614469
+    second: Star_Boy_-_Medium_Attack_Sheet_60
+  - first:
+      213: 29909562202923631
+    second: Star_Boy_-_Medium_Attack_Sheet_61
+  - first:
+      213: 7377492802181953869
+    second: Star_Boy_-_Medium_Attack_Sheet_62
+  - first:
+      213: 4588664936845769662
+    second: Star_Boy_-_Medium_Attack_Sheet_63
+  - first:
+      213: 1343287154122042395
+    second: Star_Boy_-_Medium_Attack_Sheet_64
+  - first:
+      213: 8400879007599887479
+    second: Star_Boy_-_Medium_Attack_Sheet_65
+  - first:
+      213: 3365365976789828671
+    second: Star_Boy_-_Medium_Attack_Sheet_66
+  - first:
+      213: 6939445717736404481
+    second: Star_Boy_-_Medium_Attack_Sheet_67
+  - first:
+      213: 2279283464326878831
+    second: Star_Boy_-_Medium_Attack_Sheet_68
+  - first:
+      213: 960574942647591917
+    second: Star_Boy_-_Medium_Attack_Sheet_69
+  - first:
+      213: -3209554062624256342
+    second: Star_Boy_-_Medium_Attack_Sheet_70
+  - first:
+      213: -7341663192998529142
+    second: Star_Boy_-_Medium_Attack_Sheet_71
+  - first:
+      213: 3273526089530887841
+    second: Star_Boy_-_Medium_Attack_Sheet_72
+  - first:
+      213: -6045334787686042262
+    second: Star_Boy_-_Medium_Attack_Sheet_73
+  - first:
+      213: 4065675552009333557
+    second: Star_Boy_-_Medium_Attack_Sheet_74
+  - first:
+      213: -6105989161212751848
+    second: Star_Boy_-_Medium_Attack_Sheet_75
+  - first:
+      213: 8952862218908564863
+    second: Star_Boy_-_Medium_Attack_Sheet_76
+  - first:
+      213: 6650517317495694571
+    second: Star_Boy_-_Medium_Attack_Sheet_77
+  - first:
+      213: 7335550015096832229
+    second: Star_Boy_-_Medium_Attack_Sheet_78
+  - first:
+      213: 9073568185834432243
+    second: Star_Boy_-_Medium_Attack_Sheet_79
+  - first:
+      213: 4013623307060775851
+    second: Star_Boy_-_Medium_Attack_Sheet_80
+  - first:
+      213: 7981760876567720213
+    second: Star_Boy_-_Medium_Attack_Sheet_81
+  - first:
+      213: -3383050700171060450
+    second: Star_Boy_-_Medium_Attack_Sheet_82
+  - first:
+      213: -4335245788772057667
+    second: Star_Boy_-_Medium_Attack_Sheet_83
+  - first:
+      213: -8797894240427446503
+    second: Star_Boy_-_Medium_Attack_Sheet_84
+  - first:
+      213: 9169491600897436931
+    second: Star_Boy_-_Medium_Attack_Sheet_85
+  - first:
+      213: -7163998708776741687
+    second: Star_Boy_-_Medium_Attack_Sheet_86
+  - first:
+      213: 5227349496931163790
+    second: Star_Boy_-_Medium_Attack_Sheet_87
+  - first:
+      213: 7811616280144313206
+    second: Star_Boy_-_Medium_Attack_Sheet_88
+  - first:
+      213: 7388750910834299076
+    second: Star_Boy_-_Medium_Attack_Sheet_89
+  - first:
+      213: -4457409567135435319
+    second: Star_Boy_-_Medium_Attack_Sheet_90
+  - first:
+      213: -3120548068716693006
+    second: Star_Boy_-_Medium_Attack_Sheet_91
+  - first:
+      213: 4308132471647910136
+    second: Star_Boy_-_Medium_Attack_Sheet_92
+  - first:
+      213: -4179418655374602133
+    second: Star_Boy_-_Medium_Attack_Sheet_93
+  - first:
+      213: -1530195673855694520
+    second: Star_Boy_-_Medium_Attack_Sheet_94
+  - first:
+      213: 6128124781532259178
+    second: Star_Boy_-_Medium_Attack_Sheet_95
+  - first:
+      213: -7399083353292287803
+    second: Star_Boy_-_Medium_Attack_Sheet_96
+  - first:
+      213: 6567559174071744041
+    second: Star_Boy_-_Medium_Attack_Sheet_97
+  - first:
+      213: 969812919771754226
+    second: Star_Boy_-_Medium_Attack_Sheet_98
+  - first:
+      213: 4915797677792592829
+    second: Star_Boy_-_Medium_Attack_Sheet_99
+  - first:
+      213: -1066473816494214738
+    second: Star_Boy_-_Medium_Attack_Sheet_100
+  - first:
+      213: 4944318593417482567
+    second: Star_Boy_-_Medium_Attack_Sheet_101
+  - first:
+      213: -611459114655164653
+    second: Star_Boy_-_Medium_Attack_Sheet_102
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 7457
+        width: 415
+        height: 677
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42cc4bb6d36de6a00800000000000000
+      internalID: 751773747105811492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 7456
+        width: 399
+        height: 753
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 736a686183fb34700800000000000000
+      internalID: 523472229322106423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2854
+        y: 7456
+        width: 362
+        height: 743
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e8990d625ee06ac0800000000000000
+      internalID: -3863826442499811100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 4047
+        y: 7459
+        width: 435
+        height: 794
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77109a9fa840daf80800000000000000
+      internalID: -8093807960374312585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 5248
+        y: 7457
+        width: 421
+        height: 798
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ba2ad95947ec9e0800000000000000
+      internalID: -1599212631726314748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 6255
+        width: 402
+        height: 816
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a733d89422632980800000000000000
+      internalID: -8564894157006227543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 6255
+        width: 402
+        height: 816
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeef1a7fd71684f90800000000000000
+      internalID: -6969213229702447378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 2847
+        y: 6255
+        width: 402
+        height: 816
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9443fcc10612c0300800000000000000
+      internalID: 219587178518230089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 4049
+        y: 6259
+        width: 422
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f63f858a0ea1a9d0800000000000000
+      internalID: -2764737336015112457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 5250
+        y: 6254
+        width: 439
+        height: 807
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9ecffdd753792a50800000000000000
+      internalID: 6496850758682529434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 5056
+        width: 396
+        height: 743
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae5c6f23fddd3db30800000000000000
+      internalID: 4311033219026175466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 5056
+        width: 399
+        height: 753
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32dcfba23d17b6ad0800000000000000
+      internalID: -2707945599163970269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 2838
+        y: 5050
+        width: 352
+        height: 801
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ea0e3972e714220800000000000000
+      internalID: 2468392779225542153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 4039
+        y: 5050
+        width: 352
+        height: 801
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bd19ed5c610afb30800000000000000
+      internalID: 4321768357359066553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 5240
+        y: 5050
+        width: 352
+        height: 801
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92be74d02e6111ec0800000000000000
+      internalID: -3598069467151078615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 3861
+        width: 607
+        height: 627
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17a17e6ea9953b880800000000000000
+      internalID: -8596428741886403983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 3857
+        width: 808
+        height: 633
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a17f2349d160fa40800000000000000
+      internalID: 5399923538980204966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 2749
+        y: 3855
+        width: 874
+        height: 670
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30994d2e82f7a3370800000000000000
+      internalID: 8303088676591933699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 3955
+        y: 3846
+        width: 874
+        height: 684
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5c01306880e3cf30800000000000000
+      internalID: 4594762921182039132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 5156
+        y: 3846
+        width: 849
+        height: 684
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af7fd2f56511fce0800000000000000
+      internalID: -1373292883760676959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_53
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 2646
+        width: 509
+        height: 684
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f883b9796f18c00800000000000000
+      internalID: 901272531455479641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_54
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 2646
+        width: 509
+        height: 684
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ca29da80573d33d0800000000000000
+      internalID: -3225360939061007679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_55
+      rect:
+        serializedVersion: 2
+        x: 2881
+        y: 2646
+        width: 488
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c11a2dd7536b6450800000000000000
+      internalID: 6083064950717813185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_56
+      rect:
+        serializedVersion: 2
+        x: 4102
+        y: 2625
+        width: 472
+        height: 636
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16a81448f940bdb30800000000000000
+      internalID: 4313046151302580833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 5133
+        y: 1515
+        width: 701
+        height: 801
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aae8ed1c59f5573d0800000000000000
+      internalID: -3209554062624256342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 1568
+        width: 661
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae467172a6ed6d20800000000000000
+      internalID: 3273526089530887841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_74
+      rect:
+        serializedVersion: 2
+        x: 1473
+        y: 1584
+        width: 661
+        height: 634
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ba189af5e2c6830800000000000000
+      internalID: 4065675552009333557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_75
+      rect:
+        serializedVersion: 2
+        x: 2646
+        y: 1598
+        width: 735
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8105783753b234ba0800000000000000
+      internalID: -6105989161212751848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_76
+      rect:
+        serializedVersion: 2
+        x: 3856
+        y: 1603
+        width: 765
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7d7f09f0c4fe3c70800000000000000
+      internalID: 8952862218908564863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_85
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 214
+        width: 705
+        height: 874
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30d6b6a6704904f70800000000000000
+      internalID: 9169491600897436931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_87
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 229
+        width: 752
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8e1669fba64b8840800000000000000
+      internalID: 5227349496931163790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_88
+      rect:
+        serializedVersion: 2
+        x: 2822
+        y: 251
+        width: 764
+        height: 750
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67bf8ab7e9f686c60800000000000000
+      internalID: 7811616280144313206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_91
+      rect:
+        serializedVersion: 2
+        x: 4082
+        y: 246
+        width: 488
+        height: 533
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f93c9b901691b4d0800000000000000
+      internalID: -3120548068716693006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_92
+      rect:
+        serializedVersion: 2
+        x: 5302
+        y: 251
+        width: 418
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f836e158af89cb30800000000000000
+      internalID: 4308132471647910136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Medium_Attack_Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 5205
+        y: 2725
+        width: 496
+        height: 505
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 724b5edfd31e97d4a954306c311c01d9
+      internalID: 49015319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ef0b5ba481782e44da4d4a539524fc9d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Star_Boy_-_Medium_Attack_Sheet_0: 751773747105811492
+      Star_Boy_-_Medium_Attack_Sheet_1: 523472229322106423
+      Star_Boy_-_Medium_Attack_Sheet_10: 4311033219026175466
+      Star_Boy_-_Medium_Attack_Sheet_11: -2707945599163970269
+      Star_Boy_-_Medium_Attack_Sheet_12: 2468392779225542153
+      Star_Boy_-_Medium_Attack_Sheet_13: 4321768357359066553
+      Star_Boy_-_Medium_Attack_Sheet_14: -3598069467151078615
+      Star_Boy_-_Medium_Attack_Sheet_15: -8596428741886403983
+      Star_Boy_-_Medium_Attack_Sheet_16: 5399923538980204966
+      Star_Boy_-_Medium_Attack_Sheet_17: 8303088676591933699
+      Star_Boy_-_Medium_Attack_Sheet_18: 4594762921182039132
+      Star_Boy_-_Medium_Attack_Sheet_19: 49015319
+      Star_Boy_-_Medium_Attack_Sheet_2: -3863826442499811100
+      Star_Boy_-_Medium_Attack_Sheet_21: -1373292883760676959
+      Star_Boy_-_Medium_Attack_Sheet_3: -8093807960374312585
+      Star_Boy_-_Medium_Attack_Sheet_4: -1599212631726314748
+      Star_Boy_-_Medium_Attack_Sheet_5: -8564894157006227543
+      Star_Boy_-_Medium_Attack_Sheet_53: 901272531455479641
+      Star_Boy_-_Medium_Attack_Sheet_54: -3225360939061007679
+      Star_Boy_-_Medium_Attack_Sheet_55: 6083064950717813185
+      Star_Boy_-_Medium_Attack_Sheet_56: 4313046151302580833
+      Star_Boy_-_Medium_Attack_Sheet_6: -6969213229702447378
+      Star_Boy_-_Medium_Attack_Sheet_7: 219587178518230089
+      Star_Boy_-_Medium_Attack_Sheet_70: -3209554062624256342
+      Star_Boy_-_Medium_Attack_Sheet_72: 3273526089530887841
+      Star_Boy_-_Medium_Attack_Sheet_74: 4065675552009333557
+      Star_Boy_-_Medium_Attack_Sheet_75: -6105989161212751848
+      Star_Boy_-_Medium_Attack_Sheet_76: 8952862218908564863
+      Star_Boy_-_Medium_Attack_Sheet_8: -2764737336015112457
+      Star_Boy_-_Medium_Attack_Sheet_85: 9169491600897436931
+      Star_Boy_-_Medium_Attack_Sheet_87: 5227349496931163790
+      Star_Boy_-_Medium_Attack_Sheet_88: 7811616280144313206
+      Star_Boy_-_Medium_Attack_Sheet_9: 6496850758682529434
+      Star_Boy_-_Medium_Attack_Sheet_91: -3120548068716693006
+      Star_Boy_-_Medium_Attack_Sheet_92: 4308132471647910136
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -49,8 +49,6 @@ public class MatchRequest
 {
     /// <summary> 玩家專屬ID </summary>
     public string playerId;
-    /// <summary> 所選角色編號 </summary>
-    public int characterIndex;
 }
 
 /// <summary> 配對回傳 </summary>
@@ -59,7 +57,7 @@ public class MatchResponse
 {
     /// <summary> 配對回傳訊息 </summary>
     public string message;
-    /// <summary> 當前狀態(在大廳[Lobby]/配對中[Matching]) </summary>
+    /// <summary> 當前狀態(在大廳[Lobby]/配對中[Matching]/遊戲中[InGame]) </summary>
     public string currentStatus;
 }
 #endregion
@@ -96,7 +94,5 @@ public class MatchSuccessData
     public bool isCreator;
     /// <summary> 對手暱稱 </summary>
     public string opponentNickname;
-    /// <summary> 對手角色編號 </summary>
-    public int opponentCharacterIndex;
 }
 #endregion

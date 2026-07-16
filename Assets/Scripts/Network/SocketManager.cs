@@ -123,7 +123,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     private async UniTaskVoid HandleMatchSuccessAsync(MatchSuccessData data)
     {
         await UniTask.SwitchToMainThread();
-        Debug.Log($"進入房間: {data.roomId} | 對手: {data.opponentNickname} (角色: {data.opponentCharacterIndex})");
+        Debug.Log($"進入房間: {data.roomId} | 對手: {data.opponentNickname}");
         StaticDataManager.MatchData = data;
         SceneLoader.Instance.LoadSceneAsync(sceneType: SCENE_TYPE.GameScene).Forget();
     }

@@ -15,7 +15,6 @@ public class LobbyViewModel
         MatchRequest req = new()
         {
             playerId = StaticDataManager.RegisterPlayerData.PlayerId,
-            characterIndex = StaticDataManager.RegisterPlayerData.CharacterIndex,
         };
 
         _ = HttpManager.Instance.SendPostAsync<MatchRequest, MatchResponse>(

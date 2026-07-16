@@ -13,5 +13,7 @@ public class GameEntry : MonoBehaviour
             {
 
             }).Forget();
+
+        SceneLoader.Instance.CloseLoading();
     }
 }
