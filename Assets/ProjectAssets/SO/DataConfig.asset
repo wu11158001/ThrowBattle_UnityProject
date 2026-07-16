@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7781344e18b152a48b783f590b32cb4b, type: 3}
   m_Name: DataConfig
   m_EditorClassIdentifier: Assembly-CSharp::DataConfig
-  HttpBaseUrl: http://localhost:3000
+  BaseUrl: https://throwbattle-server.onrender.com

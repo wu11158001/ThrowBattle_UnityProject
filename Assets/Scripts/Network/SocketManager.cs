@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.InteropServices; // 💡 引入執行 JS 橋接所需的命名空間
+using System.Collections.Generic;
 using UnityEngine;
 using SocketIOClient;
 using Newtonsoft.Json;
@@ -6,7 +8,18 @@ using Cysharp.Threading.Tasks;
 
 public class SocketManager : SingletonMonoBehaviour<SocketManager>
 {
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern void ConnectToSocketJS(string url);
+
+    [DllImport("__Internal")]
+    private static extern void EmitJoinEventJS(string playerId);
+#endif
+
     private SocketIOUnity socket;
+
+    // 暫存 PlayerID，供 JS 連線成功後使用
+    private string savedPlayerId;
 
     protected override void OnDestroy()
     {
@@ -16,84 +29,92 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
     protected override void OnApplicationQuit()
     {
-        // Socket 斷線
         Disconnect();
-
         base.OnApplicationQuit();
     }
 
-    /// <summary>
-    /// 主動中斷連線
-    /// </summary>
     public void Disconnect()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // WebGL 端由瀏覽器自行處理
+#else
         if (socket != null && socket.Connected)
         {
             socket.DisconnectAsync();
-            Debug.Log("[Socket] 已主動中斷連線。");
+            Debug.Log("[Socket] 已主動中斷 C# 連線。");
         }
+#endif
     }
 
     /// <summary>
     /// 開始連線至 Socket 伺服器
     /// </summary>
-    /// <param name="playerId"></param>
     public void ConnectToServer(string playerId)
     {
+        savedPlayerId = playerId;
+        string cleanUrl = StaticDataManager.DataConfig.BaseUrl;
+
+        // 判斷運行平台
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // WebGL：呼叫 JS 橋接器
+            Debug.Log("[Socket] WebGL 環境：啟動瀏覽器原生 WebSocket 連線...");
+            ConnectToSocketJS(cleanUrl);
+#else
+        // 編輯器測試
         if (socket != null && socket.Connected) return;
 
-        Debug.Log("[Socket] 正在嘗試連線至伺服器...");
-
-        var uri = new Uri(StaticDataManager.DataConfig.BaseUrl);
-        socket = new SocketIOUnity(uri, new SocketIOOptions
+        Debug.Log("[Socket] 編輯器環境：啟動 C# SocketIOUnity 連線...");
+        var uri = new Uri(cleanUrl);
+        var options = new SocketIOOptions
         {
-            Transport = SocketIOClient.Transport.TransportProtocol.WebSocket // 強制使用 WebSocket 傳輸
-        });
-
-        // 系統事件監聽: 連線
-        socket.OnConnected += (sender, e) =>
-        {
-            // 利用 UniTask 異步執行身分綁定，避免阻塞
-            SendJoinEventAsync(playerId).Forget();
+            Path = "/socket.io/",
+            Transport = SocketIOClient.Transport.TransportProtocol.WebSocket,
+            EIO = SocketIOClient.EngineIO.V4
         };
 
-        // 系統事件監聽: 斷線
-        socket.OnDisconnected += (sender, e) =>
-        {
-            Debug.LogWarning($"[Socket] 與伺服器連線中斷：{e}");
-        };
+        socket = new SocketIOUnity(uri, options);
 
-        // 監聽配對成功
+        socket.OnConnected += (sender, e) => { SendJoinEventAsync(playerId).Forget(); };
+        socket.OnDisconnected += (sender, e) => { Debug.LogWarning($"[Socket] 與伺服器連線中斷：{e}"); };
+        socket.OnError += (sender, e) => { Debug.LogError($"[Socket] 連線發生錯誤: {e}"); };
+
         socket.On("match_success", (response) =>
         {
-            string jsonText = response.GetValue<string>();
-            Debug.Log($"[Socket] 收到配對成功訊號！ 原始 JSON: {jsonText}");
-
+            string jsonText = response.ToString();
             MatchSuccessData matchData = JsonConvert.DeserializeObject<MatchSuccessData>(jsonText);
-
-            // 使用 UniTask 安全切換回主執行緒並執行後續邏輯
             HandleMatchSuccessAsync(matchData).Forget();
         });
 
-        // 監聽錯誤訊息
-        socket.On("error_msg", (response) =>
-        {
-            string error = response.GetValue<string>();
-            Debug.LogError($"[Socket] 伺服器錯誤提示: {error}");
-        });
-
-        // 啟動連線
         socket.ConnectAsync();
+#endif
+    }
+
+    private async UniTaskVoid SendJoinEventAsync(string playerId)
+    {
+        Debug.Log("[Socket] 編輯器連線成功！準備發送 join 驗證...");
+        var joinData = new Dictionary<string, string> { { "playerId", playerId } };
+        await socket.EmitAsync("join", joinData);
     }
 
     /// <summary>
-    /// 連線成功後，向伺服器發送 join 驗證
+    ///  Socket 連線成功
     /// </summary>
-    private async UniTaskVoid SendJoinEventAsync(string playerId)
+    public void OnSocketConnectedJS()
     {
-        Debug.Log("[Socket] 連線成功！準備發送 join 驗證身分...");
-        var joinData = new { playerId = playerId };
-        await socket.EmitAsync("join", joinData);
+        Debug.Log("[Socket] 網頁端連線成功！準備發送 join 驗證身分...");
+#if UNITY_WEBGL && !UNITY_EDITOR
+            EmitJoinEventJS(savedPlayerId);
+#endif
+    }
+
+    /// <summary>
+    /// 配對成功
+    /// </summary>
+    public void OnMatchSuccessJS(string jsonText)
+    {
+        Debug.Log($"[Socket] 網頁端收到配對成功！ 原始 JSON: {jsonText}");
+        MatchSuccessData matchData = JsonConvert.DeserializeObject<MatchSuccessData>(jsonText);
+        HandleMatchSuccessAsync(matchData).Forget();
     }
 
     /// <summary>
@@ -101,15 +122,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     private async UniTaskVoid HandleMatchSuccessAsync(MatchSuccessData data)
     {
-        // 使用 UniTask 一行指令直接切換回 Unity 主執行緒！
         await UniTask.SwitchToMainThread();
-
-        Debug.Log($"進入房間: {data.roomId} | 對手: {data.opponentNickname} (角色編號: {data.opponentCharacterIndex})");
-
-        // 設置全域配對成功資料
+        Debug.Log($"進入房間: {data.roomId} | 對手: {data.opponentNickname} (角色: {data.opponentCharacterIndex})");
         StaticDataManager.MatchData = data;
-
-        // 進入遊戲場景
         SceneLoader.Instance.LoadSceneAsync(sceneType: SCENE_TYPE.GameScene).Forget();
     }
 }
