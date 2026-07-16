@@ -12,5 +12,6 @@ public static class ConfigManager
         StaticDataManager.ViewConfig = allConfig.ViewConfig;
         StaticDataManager.AudioConfig = allConfig.AudioConfig;
         StaticDataManager.DataConfig = allConfig.DataConfig;
+        StaticDataManager.ObjectPrefabConfig = allConfig.ObjectPrefabConfig;
     }
 }

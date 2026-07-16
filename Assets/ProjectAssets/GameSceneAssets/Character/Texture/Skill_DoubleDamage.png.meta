@@ -1,0 +1,1158 @@
+fileFormatVersion: 2
+guid: 0b2f8ee340fe4924f8f4909cd0713735
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Heavy Attacks/Star_Boy_-_Heavy_Attack_Sheet.png
+  uploadId: 833940
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7319151499053573011
+    second: Star_Boy_-_Heavy_Attack_Sheet_0
+  - first:
+      213: 8922249620911845642
+    second: Star_Boy_-_Heavy_Attack_Sheet_1
+  - first:
+      213: -8257539562047421979
+    second: Star_Boy_-_Heavy_Attack_Sheet_2
+  - first:
+      213: 6384497264652465264
+    second: Star_Boy_-_Heavy_Attack_Sheet_3
+  - first:
+      213: 4398291883793278453
+    second: Star_Boy_-_Heavy_Attack_Sheet_4
+  - first:
+      213: 1014775022442840705
+    second: Star_Boy_-_Heavy_Attack_Sheet_5
+  - first:
+      213: 6964483106298438853
+    second: Star_Boy_-_Heavy_Attack_Sheet_6
+  - first:
+      213: 8937046261518906600
+    second: Star_Boy_-_Heavy_Attack_Sheet_7
+  - first:
+      213: -8938061146656082078
+    second: Star_Boy_-_Heavy_Attack_Sheet_8
+  - first:
+      213: 6261907169049391795
+    second: Star_Boy_-_Heavy_Attack_Sheet_9
+  - first:
+      213: -1179161259854979456
+    second: Star_Boy_-_Heavy_Attack_Sheet_10
+  - first:
+      213: -6928452433846436300
+    second: Star_Boy_-_Heavy_Attack_Sheet_11
+  - first:
+      213: 4759317152466337018
+    second: Star_Boy_-_Heavy_Attack_Sheet_12
+  - first:
+      213: 4225327716379100053
+    second: Star_Boy_-_Heavy_Attack_Sheet_13
+  - first:
+      213: -6549780708450565263
+    second: Star_Boy_-_Heavy_Attack_Sheet_14
+  - first:
+      213: -4338179748997880759
+    second: Star_Boy_-_Heavy_Attack_Sheet_15
+  - first:
+      213: 1830114217978596014
+    second: Star_Boy_-_Heavy_Attack_Sheet_16
+  - first:
+      213: 4646961443066253343
+    second: Star_Boy_-_Heavy_Attack_Sheet_17
+  - first:
+      213: -8111232577270125222
+    second: Star_Boy_-_Heavy_Attack_Sheet_18
+  - first:
+      213: 7935088528834492942
+    second: Star_Boy_-_Heavy_Attack_Sheet_19
+  - first:
+      213: -5247599570332405515
+    second: Star_Boy_-_Heavy_Attack_Sheet_20
+  - first:
+      213: 2219106867977439438
+    second: Star_Boy_-_Heavy_Attack_Sheet_21
+  - first:
+      213: -2779305566465073043
+    second: Star_Boy_-_Heavy_Attack_Sheet_22
+  - first:
+      213: -5417703680820779932
+    second: Star_Boy_-_Heavy_Attack_Sheet_23
+  - first:
+      213: -2758016501403499590
+    second: Star_Boy_-_Heavy_Attack_Sheet_24
+  - first:
+      213: -5518425287759179477
+    second: Star_Boy_-_Heavy_Attack_Sheet_25
+  - first:
+      213: 7602971317764002015
+    second: Star_Boy_-_Heavy_Attack_Sheet_26
+  - first:
+      213: -695107228518386682
+    second: Star_Boy_-_Heavy_Attack_Sheet_27
+  - first:
+      213: -7819291447380490128
+    second: Star_Boy_-_Heavy_Attack_Sheet_28
+  - first:
+      213: -8623101187035832607
+    second: Star_Boy_-_Heavy_Attack_Sheet_29
+  - first:
+      213: 3115486071717065037
+    second: Star_Boy_-_Heavy_Attack_Sheet_30
+  - first:
+      213: 4936908269872041083
+    second: Star_Boy_-_Heavy_Attack_Sheet_31
+  - first:
+      213: 3295825446662379284
+    second: Star_Boy_-_Heavy_Attack_Sheet_32
+  - first:
+      213: 5600314687956353866
+    second: Star_Boy_-_Heavy_Attack_Sheet_33
+  - first:
+      213: -3706193639725754136
+    second: Star_Boy_-_Heavy_Attack_Sheet_34
+  - first:
+      213: -2877611305085094532
+    second: Star_Boy_-_Heavy_Attack_Sheet_35
+  - first:
+      213: 4426154513170257004
+    second: Star_Boy_-_Heavy_Attack_Sheet_36
+  - first:
+      213: 5312913191563067325
+    second: Star_Boy_-_Heavy_Attack_Sheet_37
+  - first:
+      213: 1042805695574062084
+    second: Star_Boy_-_Heavy_Attack_Sheet_38
+  - first:
+      213: -4805510949791414652
+    second: Star_Boy_-_Heavy_Attack_Sheet_39
+  - first:
+      213: -7083708806942882675
+    second: Star_Boy_-_Heavy_Attack_Sheet_40
+  - first:
+      213: -5877143354320910912
+    second: Star_Boy_-_Heavy_Attack_Sheet_41
+  - first:
+      213: -5129759439949962478
+    second: Star_Boy_-_Heavy_Attack_Sheet_42
+  - first:
+      213: 5895592690585753301
+    second: Star_Boy_-_Heavy_Attack_Sheet_43
+  - first:
+      213: 8721643287868680540
+    second: Star_Boy_-_Heavy_Attack_Sheet_44
+  - first:
+      213: 4154412824974633880
+    second: Star_Boy_-_Heavy_Attack_Sheet_45
+  - first:
+      213: 308931826445527005
+    second: Star_Boy_-_Heavy_Attack_Sheet_46
+  - first:
+      213: 6356479988841072643
+    second: Star_Boy_-_Heavy_Attack_Sheet_47
+  - first:
+      213: 1427345942641881088
+    second: Star_Boy_-_Heavy_Attack_Sheet_48
+  - first:
+      213: -8832998846912350205
+    second: Star_Boy_-_Heavy_Attack_Sheet_49
+  - first:
+      213: -6797871269321857948
+    second: Star_Boy_-_Heavy_Attack_Sheet_50
+  - first:
+      213: -3377932864127378955
+    second: Star_Boy_-_Heavy_Attack_Sheet_51
+  - first:
+      213: -2820310300084352302
+    second: Star_Boy_-_Heavy_Attack_Sheet_52
+  - first:
+      213: 727303604113807752
+    second: Star_Boy_-_Heavy_Attack_Sheet_53
+  - first:
+      213: 2197643239492132725
+    second: Star_Boy_-_Heavy_Attack_Sheet_54
+  - first:
+      213: 1451678300142273448
+    second: Star_Boy_-_Heavy_Attack_Sheet_55
+  - first:
+      213: -1896737229561257259
+    second: Star_Boy_-_Heavy_Attack_Sheet_56
+  - first:
+      213: -4741293125895868174
+    second: Star_Boy_-_Heavy_Attack_Sheet_57
+  - first:
+      213: -233436215182085660
+    second: Star_Boy_-_Heavy_Attack_Sheet_58
+  - first:
+      213: -1548726663345327084
+    second: Star_Boy_-_Heavy_Attack_Sheet_59
+  - first:
+      213: -7203851445971539400
+    second: Star_Boy_-_Heavy_Attack_Sheet_60
+  - first:
+      213: 8448345348928443240
+    second: Star_Boy_-_Heavy_Attack_Sheet_61
+  - first:
+      213: -396040511614518703
+    second: Star_Boy_-_Heavy_Attack_Sheet_62
+  - first:
+      213: 1933010041248770491
+    second: Star_Boy_-_Heavy_Attack_Sheet_63
+  - first:
+      213: 797841929208719345
+    second: Star_Boy_-_Heavy_Attack_Sheet_64
+  - first:
+      213: 4393561878311885652
+    second: Star_Boy_-_Heavy_Attack_Sheet_65
+  - first:
+      213: -4952998377661332851
+    second: Star_Boy_-_Heavy_Attack_Sheet_66
+  - first:
+      213: 6508485843359539332
+    second: Star_Boy_-_Heavy_Attack_Sheet_67
+  - first:
+      213: -3896516701705839238
+    second: Star_Boy_-_Heavy_Attack_Sheet_68
+  - first:
+      213: 6256721346373150889
+    second: Star_Boy_-_Heavy_Attack_Sheet_69
+  - first:
+      213: 1339248581339819297
+    second: Star_Boy_-_Heavy_Attack_Sheet_70
+  - first:
+      213: 2638982149900275636
+    second: Star_Boy_-_Heavy_Attack_Sheet_71
+  - first:
+      213: -38702242462796275
+    second: Star_Boy_-_Heavy_Attack_Sheet_72
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 7456
+        width: 411
+        height: 468
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6cd4a97d762d6a90800000000000000
+      internalID: -7319151499053573011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 7442
+        width: 765
+        height: 548
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0170d312c232db70800000000000000
+      internalID: 8922249620911845642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2554
+        y: 7443
+        width: 858
+        height: 477
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e1cd65c483576d80800000000000000
+      internalID: -8257539562047421979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3799
+        y: 7452
+        width: 840
+        height: 493
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07430198f6a4a9850800000000000000
+      internalID: 6384497264652465264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 7442
+        width: 765
+        height: 548
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f56bf74a2fd90d30800000000000000
+      internalID: 4398291883793278453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 6253
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18205a3a184351e00800000000000000
+      internalID: 1014775022442840705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 6248
+        width: 454
+        height: 712
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4a02b5c70d6a060800000000000000
+      internalID: 6964483106298438853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 2877
+        y: 6252
+        width: 480
+        height: 712
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e4311f6934c60c70800000000000000
+      internalID: 8937046261518906600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 4071
+        y: 6253
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 267f7d43eb0a5f380800000000000000
+      internalID: -8938061146656082078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 5070
+        y: 6256
+        width: 411
+        height: 468
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b239aba463c6e650800000000000000
+      internalID: 6261907169049391795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 5042
+        width: 765
+        height: 548
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08e1175e417c2afe0800000000000000
+      internalID: -1179161259854979456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 5043
+        width: 858
+        height: 477
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43e746d483139df90800000000000000
+      internalID: -6928452433846436300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 2567
+        y: 5052
+        width: 840
+        height: 493
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afcfd26fbbd7c0240800000000000000
+      internalID: 4759317152466337018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 3886
+        y: 5042
+        width: 765
+        height: 548
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 593836adb2163aa30800000000000000
+      internalID: 4225327716379100053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 5094
+        y: 5053
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 173091cd5218a15a0800000000000000
+      internalID: -6549780708450565263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 3848
+        width: 454
+        height: 712
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9442031c080bbc3c0800000000000000
+      internalID: -4338179748997880759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 3852
+        width: 480
+        height: 712
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa81055f2fd56910800000000000000
+      internalID: 1830114217978596014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 2692
+        y: 3853
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1096e2dfc25d7040800000000000000
+      internalID: 4646961443066253343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 3953
+        y: 3853
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5dec3532fc1f6f80800000000000000
+      internalID: -8111232577270125222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 5173
+        y: 3853
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec8cc6860f9dbce10800000000000000
+      internalID: 2219106867977439438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_44
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 2680
+        width: 624
+        height: 806
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c59251f6c50890970800000000000000
+      internalID: 8721643287868680540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_45
+      rect:
+        serializedVersion: 2
+        x: 2758
+        y: 2680
+        width: 624
+        height: 806
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89ba0fa047077a930800000000000000
+      internalID: 4154412824974633880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_46
+      rect:
+        serializedVersion: 2
+        x: 3896
+        y: 2636
+        width: 706
+        height: 847
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd7291ffbdb894400800000000000000
+      internalID: 308931826445527005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_47
+      rect:
+        serializedVersion: 2
+        x: 5095
+        y: 2658
+        width: 790
+        height: 824
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30840cc2fd0c63850800000000000000
+      internalID: 6356479988841072643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_49
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 2680
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 308ba541952ea6580800000000000000
+      internalID: -8832998846912350205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_57
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 1473
+        width: 624
+        height: 806
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f0b9feb50b833eb0800000000000000
+      internalID: -4741293125895868174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_60
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 1473
+        width: 624
+        height: 806
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83aae2c0747c60c90800000000000000
+      internalID: -7203851445971539400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 2845
+        y: 1488
+        width: 403
+        height: 765
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f7e569e101821b00800000000000000
+      internalID: 797841929208719345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 4044
+        y: 1448
+        width: 401
+        height: 748
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45b5a7f004119fc30800000000000000
+      internalID: 4393561878311885652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 5278
+        y: 1451
+        width: 381
+        height: 683
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d820966b73a634bb0800000000000000
+      internalID: -4952998377661332851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_72
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 252
+        width: 336
+        height: 680
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d067ef9f380867ff0800000000000000
+      internalID: -38702242462796275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Heavy_Attack_Sheet_73
+      rect:
+        serializedVersion: 2
+        x: 2692
+        y: 3853
+        width: 443
+        height: 717
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 888150849ab6e154c8c69b1ee8f207e9
+      internalID: -615558589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 346d7c0b197dd1d48bb7c2b5f75b18bd
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Star_Boy_-_Heavy_Attack_Sheet_0: -7319151499053573011
+      Star_Boy_-_Heavy_Attack_Sheet_1: 8922249620911845642
+      Star_Boy_-_Heavy_Attack_Sheet_10: -1179161259854979456
+      Star_Boy_-_Heavy_Attack_Sheet_11: -6928452433846436300
+      Star_Boy_-_Heavy_Attack_Sheet_12: 4759317152466337018
+      Star_Boy_-_Heavy_Attack_Sheet_13: 4225327716379100053
+      Star_Boy_-_Heavy_Attack_Sheet_14: -6549780708450565263
+      Star_Boy_-_Heavy_Attack_Sheet_15: -4338179748997880759
+      Star_Boy_-_Heavy_Attack_Sheet_16: 1830114217978596014
+      Star_Boy_-_Heavy_Attack_Sheet_17: 4646961443066253343
+      Star_Boy_-_Heavy_Attack_Sheet_18: -8111232577270125222
+      Star_Boy_-_Heavy_Attack_Sheet_19: 1436645576
+      Star_Boy_-_Heavy_Attack_Sheet_2: -8257539562047421979
+      Star_Boy_-_Heavy_Attack_Sheet_21: 2219106867977439438
+      Star_Boy_-_Heavy_Attack_Sheet_3: 6384497264652465264
+      Star_Boy_-_Heavy_Attack_Sheet_4: 4398291883793278453
+      Star_Boy_-_Heavy_Attack_Sheet_44: 8721643287868680540
+      Star_Boy_-_Heavy_Attack_Sheet_45: 4154412824974633880
+      Star_Boy_-_Heavy_Attack_Sheet_46: 308931826445527005
+      Star_Boy_-_Heavy_Attack_Sheet_47: 6356479988841072643
+      Star_Boy_-_Heavy_Attack_Sheet_49: -8832998846912350205
+      Star_Boy_-_Heavy_Attack_Sheet_5: 1014775022442840705
+      Star_Boy_-_Heavy_Attack_Sheet_57: -4741293125895868174
+      Star_Boy_-_Heavy_Attack_Sheet_6: 6964483106298438853
+      Star_Boy_-_Heavy_Attack_Sheet_60: -7203851445971539400
+      Star_Boy_-_Heavy_Attack_Sheet_64: 797841929208719345
+      Star_Boy_-_Heavy_Attack_Sheet_65: 4393561878311885652
+      Star_Boy_-_Heavy_Attack_Sheet_66: -4952998377661332851
+      Star_Boy_-_Heavy_Attack_Sheet_7: 8937046261518906600
+      Star_Boy_-_Heavy_Attack_Sheet_72: -38702242462796275
+      Star_Boy_-_Heavy_Attack_Sheet_73: -615558589
+      Star_Boy_-_Heavy_Attack_Sheet_8: -8938061146656082078
+      Star_Boy_-_Heavy_Attack_Sheet_9: 6261907169049391795
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

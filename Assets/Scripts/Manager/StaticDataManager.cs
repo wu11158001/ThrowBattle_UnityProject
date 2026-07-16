@@ -10,6 +10,8 @@ public static class StaticDataManager
     public static AudioConfig AudioConfig { get; set; }
     /// <summary> 資料配置檔 </summary>
     public static DataConfig DataConfig { get; set; }
+    /// <summary> 遊戲物件配置檔 </summary>
+    public static ObjectPrefabConfig ObjectPrefabConfig { get; set; }
     #endregion
 
     #region API URL
@@ -26,6 +28,8 @@ public static class StaticDataManager
     public static PlayerData RegisterPlayerData;
     /// <summary> 配對成功資料 </summary>
     public static MatchSuccessData MatchData;
+    /// <summary> 對戰模式 </summary>
+    public static PLAY_TYPE PlayType;
     #endregion
 }
 

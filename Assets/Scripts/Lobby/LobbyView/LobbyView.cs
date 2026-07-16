@@ -5,6 +5,19 @@ using UniRx;
 using Cysharp.Threading.Tasks;
 
 /// <summary>
+/// 對戰模式
+/// </summary>
+public enum PLAY_TYPE
+{
+    /// <summary> 連線配對 </summary>
+    Match,
+    /// <summary> AI對戰 </summary>
+    WithAi,
+    /// <summary> 兩名玩家 </summary>
+    TwoPlayer,
+}
+
+/// <summary>
 /// 大廳介面
 /// </summary>
 public class LobbyView : BaseView
@@ -13,6 +26,8 @@ public class LobbyView : BaseView
     [SerializeField] private TextMeshProUGUI _text_Nickname;
     [SerializeField] private Button _btn_Match;
     [SerializeField] private TextMeshProUGUI _text_BtnMatch;
+    [SerializeField] private Button _btn_TwoPlayer;
+    [SerializeField] private Button _btn_WithAi;
 
     private LobbyViewModel _viewModel = new();
 
@@ -34,10 +49,30 @@ public class LobbyView : BaseView
             })
             .AddTo(this);
 
+        // AI對戰按鈕
+        _btn_WithAi.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                StaticDataManager.PlayType = PLAY_TYPE.WithAi;
+                SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.GameScene).Forget();
+            })
+            .AddTo(this);
+
+        // 兩名玩家按鈕
+        _btn_TwoPlayer.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                StaticDataManager.PlayType = PLAY_TYPE.TwoPlayer;
+                SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.GameScene).Forget();
+            })
+            .AddTo(this);
+
         // 玩家配對按鈕
         _btn_Match.OnClickAsObservable()
             .Subscribe(_ =>
             {
+                StaticDataManager.PlayType = PLAY_TYPE.Match;
+
                 _btn_Match.interactable = false;
                 _text_BtnMatch.text = "配對中...";
 
