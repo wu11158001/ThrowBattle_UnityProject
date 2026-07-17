@@ -6,6 +6,8 @@ using Cysharp.Threading.Tasks;
 
 public class HttpManager : SingletonMonoBehaviour<HttpManager>
 {
+    private DataConfig _dataConfig;
+
     protected override void OnApplicationQuit()
     {
         // 移除大廳玩家
@@ -31,6 +33,13 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
         base.OnApplicationQuit();
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _dataConfig = StaticDataManager.DataConfig;
+    }
+
     /// <summary>
     /// POST 請求
     /// </summary>
@@ -47,7 +56,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
         Action<TResponse> onSuccess = null,
         Action<long, string> onFailure = null)
     {
-        if (StaticDataManager.DataConfig == null || string.IsNullOrEmpty(StaticDataManager.DataConfig.BaseUrl))
+        if (_dataConfig == null || string.IsNullOrEmpty(_dataConfig.BaseUrl))
         {
             string urlError = "請求 URL 錯誤：HttpBaseUrl 未初始化！";
             Debug.LogError(urlError);
@@ -55,7 +64,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
             return default;
         }
 
-        string url = StaticDataManager.DataConfig.BaseUrl + subUrl;
+        string url = _dataConfig.BaseUrl + subUrl;
         string jsonPayload = JsonUtility.ToJson(requestData);
 
         using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))

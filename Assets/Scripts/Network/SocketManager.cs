@@ -17,6 +17,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 #endif
 
     private SocketIOUnity socket;
+    private DataConfig _dataConfig;
 
     // 暫存 PlayerID，供 JS 連線成功後使用
     private string savedPlayerId;
@@ -31,6 +32,13 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     {
         Disconnect();
         base.OnApplicationQuit();
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _dataConfig = StaticDataManager.DataConfig;
     }
 
     public void Disconnect()
@@ -52,7 +60,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     public void ConnectToServer(string playerId)
     {
         savedPlayerId = playerId;
-        string cleanUrl = StaticDataManager.DataConfig.BaseUrl;
+        string cleanUrl = _dataConfig.BaseUrl;
 
         // 判斷運行平台
 #if UNITY_WEBGL && !UNITY_EDITOR

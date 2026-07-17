@@ -1,0 +1,573 @@
+fileFormatVersion: 2
+guid: 607d03af23b504c4f9b6d9b701f30bfb
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346308
+  packageName: Nova Dynamic Star Boy Player Sprites
+  packageVersion: 1.0
+  assetPath: Assets/NovaDevs/Sprites/Star Boy/Death/Star_Boy_-_Death_Sheet.png
+  uploadId: 833940
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6783567732911848323
+    second: Star_Boy_-_Death_Sheet_0
+  - first:
+      213: 5352724003394275591
+    second: Star_Boy_-_Death_Sheet_1
+  - first:
+      213: 2504738250925188658
+    second: Star_Boy_-_Death_Sheet_2
+  - first:
+      213: -2484333153671081219
+    second: Star_Boy_-_Death_Sheet_3
+  - first:
+      213: -6176271003811235255
+    second: Star_Boy_-_Death_Sheet_4
+  - first:
+      213: -2717816780838071929
+    second: Star_Boy_-_Death_Sheet_5
+  - first:
+      213: -7888664991624560268
+    second: Star_Boy_-_Death_Sheet_6
+  - first:
+      213: -5818634737545069192
+    second: Star_Boy_-_Death_Sheet_7
+  - first:
+      213: 4371799945254759679
+    second: Star_Boy_-_Death_Sheet_8
+  - first:
+      213: 67531809745618577
+    second: Star_Boy_-_Death_Sheet_9
+  - first:
+      213: 3670937939982815361
+    second: Star_Boy_-_Death_Sheet_10
+  - first:
+      213: 3166541011388679620
+    second: Star_Boy_-_Death_Sheet_11
+  - first:
+      213: -5285305191688222485
+    second: Star_Boy_-_Death_Sheet_12
+  - first:
+      213: 2965061926359979390
+    second: Star_Boy_-_Death_Sheet_13
+  - first:
+      213: -725270190436076536
+    second: Star_Boy_-_Death_Sheet_14
+  - first:
+      213: -7227522453694082543
+    second: Star_Boy_-_Death_Sheet_15
+  - first:
+      213: 2561897362335386414
+    second: Star_Boy_-_Death_Sheet_16
+  - first:
+      213: -3532894040572813203
+    second: Star_Boy_-_Death_Sheet_17
+  - first:
+      213: -1123684560667313020
+    second: Star_Boy_-_Death_Sheet_18
+  - first:
+      213: 7077963320393688419
+    second: Star_Boy_-_Death_Sheet_19
+  - first:
+      213: 3569414937350449345
+    second: Star_Boy_-_Death_Sheet_20
+  - first:
+      213: -865647258137028036
+    second: Star_Boy_-_Death_Sheet_21
+  - first:
+      213: 5318192426511478002
+    second: Star_Boy_-_Death_Sheet_22
+  - first:
+      213: -4482396680452351224
+    second: Star_Boy_-_Death_Sheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 3319
+        width: 137
+        height: 154
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d74ccf9761debd1a0800000000000000
+      internalID: -6783567732911848323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 3286
+        width: 167
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 709c5030f12b84a40800000000000000
+      internalID: 5352724003394275591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 3061
+        y: 3245
+        width: 166
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 236aab52b2e92c220800000000000000
+      internalID: 2504738250925188658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 4183
+        y: 3140
+        width: 196
+        height: 117
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df295b7c820e58dd0800000000000000
+      internalID: -2484333153671081219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 5264
+        y: 3162
+        width: 191
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94a394dce3a794aa0800000000000000
+      internalID: -6176271003811235255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 1884
+        width: 123
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7811d859900684ad0800000000000000
+      internalID: -2717816780838071929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 1835
+        width: 118
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 471882e6cf4d58290800000000000000
+      internalID: -7888664991624560268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 2948
+        y: 1766
+        width: 135
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87db0eed88e004fa0800000000000000
+      internalID: -5818634737545069192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 4116
+        y: 1746
+        width: 190
+        height: 213
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffc6bfd23e0cbac30800000000000000
+      internalID: 4371799945254759679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 5275
+        y: 1735
+        width: 263
+        height: 259
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1964deab2dbefe000800000000000000
+      internalID: 67531809745618577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 497
+        width: 311
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 804b0ecba925fe5f0800000000000000
+      internalID: -725270190436076536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 477
+        width: 386
+        height: 387
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32efa3e435ac6df40a30def94f3f7a88
+      internalID: -701687904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Star_Boy_-_Death_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 2798
+        y: 456
+        width: 415
+        height: 427
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c978ed288391c24e950d26afa53c6f3
+      internalID: 1155513861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e543e4ec8c9fa3f41bd457501bbe820f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Star_Boy_-_Death_Sheet_0: -6783567732911848323
+      Star_Boy_-_Death_Sheet_1: 5352724003394275591
+      Star_Boy_-_Death_Sheet_10: -701687904
+      Star_Boy_-_Death_Sheet_11: 1155513861
+      Star_Boy_-_Death_Sheet_14: -725270190436076536
+      Star_Boy_-_Death_Sheet_2: 2504738250925188658
+      Star_Boy_-_Death_Sheet_3: -2484333153671081219
+      Star_Boy_-_Death_Sheet_4: -6176271003811235255
+      Star_Boy_-_Death_Sheet_5: -2717816780838071929
+      Star_Boy_-_Death_Sheet_6: -7888664991624560268
+      Star_Boy_-_Death_Sheet_7: -5818634737545069192
+      Star_Boy_-_Death_Sheet_8: 4371799945254759679
+      Star_Boy_-_Death_Sheet_9: 67531809745618577
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

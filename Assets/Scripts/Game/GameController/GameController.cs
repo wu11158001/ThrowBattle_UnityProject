@@ -13,6 +13,34 @@ public class GameController : MonoBehaviour
     private CharacterMoveController _moveController;
     private CharacterThrowController _throwController;
 
+    /// <summary>
+    /// 是否遊戲結束
+    /// </summary>
+    public ReactiveProperty<bool> IsGameOver = new ReactiveProperty<bool>(false);
+
+    /// <summary>
+    /// 移動輸入方向接收
+    /// </summary>
+    /// <param name="direction"></param>
+    public void SetInputDirection(float direction) => _moveController.SetInputDirection(direction);
+
+    /// <summary>
+    /// 設置投擲蓄力狀態
+    /// </summary>
+    /// <param name="isPressing"></param>
+    public void SetThrowPressState(bool isPressing) => _throwController.SetThrowPressState(isPressing);
+
+    /// <summary>
+    /// 設置下次投擲的類型
+    /// </summary>
+    /// <param name="type"></param>
+    public void SetNextThrowType(THROW_TYPE type) => _throwController.SetNextThrowType(type);
+
+    /// <summary>
+    /// 執行投擲
+    /// </summary>
+    public void ExecuteThrow() => _throwController.ExecuteThrow();
+
     private void Start()
     {
         _context = GameplayManager.CurrentContext;
@@ -78,12 +106,21 @@ public class GameController : MonoBehaviour
         // 新操作者初始化
         if (_context.CurrentTurnCharacter != null)
         {
-            _context.CurrentTurnCharacter.SetControlTip(true);
-            UpdateMoveControlPanelVisibility(true);
+            // 本地顯示操作提示
+            _context.CurrentTurnCharacter.SetControlTip(_context.CurrentTurnCharacter.IsLocalPlayer);
+
+            // 本地玩家的回合設置
+            SetIsLocalTurn(_context.CurrentTurnCharacter.IsLocalPlayer);
+
+            // 如果是 AI 的回合，觸發 AI 的大腦驅動
+            if (!_context.CurrentTurnCharacter.IsLocalPlayer)
+            {
+                
+            }
         }
         else
         {
-            UpdateMoveControlPanelVisibility(false);
+            SetIsLocalTurn(false);
         }
 
         // 通知子控制器重置當前狀態
@@ -96,31 +133,19 @@ public class GameController : MonoBehaviour
         _context.GameView.SetWindStrength(windStrength);
     }
 
-    // 接收來自 GameView 的原生輸入訊號並轉發給子控制器
-    public void SetInputDirection(float direction) => _moveController.SetInputDirection(direction);
-    public void SetThrowPressState(bool isPressing) => _throwController.SetThrowPressState(isPressing);
-
     /// <summary>
-    /// 投擲結束
+    /// 設置是否是本地回合
     /// </summary>
-    public void OnThrowComplete()
+    /// <param name="isLocalTurn"></param>
+    public void SetIsLocalTurn(bool isLocalTurn)
     {
-        SwitchTurn();
-    }
-
-    /// <summary>
-    /// 切換操作面板顯示狀態
-    /// </summary>
-    /// <param name="isActive"></param>
-    public void UpdateMoveControlPanelVisibility(bool isActive)
-    {
-        _context.GameView.SetMoveControlActive(isActive);
+        _context.GameView.SetIsLocalTurn(isLocalTurn);
     }
 
     /// <summary>
     /// 切換回合
     /// </summary>
-    private void SwitchTurn()
+    public void SwitchTurn()
     {
         if (StaticDataManager.PlayType == PLAY_TYPE.TwoPlayer)
         {

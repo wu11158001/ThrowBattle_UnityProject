@@ -25,9 +25,18 @@ public class ThrowObjectView : BaseObject
     }
 
     /// <summary>
-    /// 投擲
+    /// 設置物件大小
     /// </summary>
-    public void OnThrow()
+    /// <param name="size"></param>
+    public void SetSize(float size)
+    {
+        transform.localScale = new(size, size, size);
+    }
+
+    /// <summary>
+    /// 開始投擲
+    /// </summary>
+    public void StartThrow()
     {
         if (_bodyObj != null) _bodyObj.SetActive(true);
         if (_FxObj != null) _FxObj.SetActive(false);
@@ -45,7 +54,7 @@ public class ThrowObjectView : BaseObject
     }
 
     /// <summary>
-    /// 更新物理位置（由 Controller 驅動）
+    /// 更新物理位置
     /// </summary>
     public void UpdatePosition(Vector3 position)
     {

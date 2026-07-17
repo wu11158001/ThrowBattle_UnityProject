@@ -1,0 +1,122 @@
+using UnityEngine;
+using Cysharp.Threading.Tasks;
+
+/// <summary>
+/// 角色動畫控制
+/// </summary>
+public class CharacterAnimControl : MonoBehaviour
+{
+    [SerializeField] private Animator _anim;
+
+    private readonly int _isMovingParamId = Animator.StringToHash("IsMoving");
+    private readonly int _hurtParamId = Animator.StringToHash("Hurt");
+    private readonly int _hurt_GiantParamId = Animator.StringToHash("Hurt_Giant");
+    private readonly int _hurt_StrengthDamageParamId = Animator.StringToHash("Hurt_StrengthDamage");
+    private readonly int _normalAttackParamId = Animator.StringToHash("NormalAttack");
+    private readonly int _skill_StrengthDamageParamId = Animator.StringToHash("Skill_StrengthDamage");
+    private readonly int _skill_GiantParamId = Animator.StringToHash("Skill_Giant");
+    private readonly int _derideParamId = Animator.StringToHash("Deride");
+    private readonly int _deathParamId = Animator.StringToHash("Death");
+
+    private GameplayContext _context;
+
+    private void Start()
+    {
+        _context = GameplayManager.CurrentContext;
+    }
+
+    /// <summary>
+    /// 執行投擲(動畫影格觸發)
+    /// </summary>
+    public void ExecuteThrow()
+    {
+        _context.GameController.ExecuteThrow();
+    }
+
+    /// <summary>
+    /// 這回合結束(影格觸發)
+    /// </summary>
+    public void OnThisTurnFinish()
+    {
+        SwitchTurnAsync().Forget();
+    }
+
+    /// <summary>
+    /// 切換回合
+    /// </summary>
+    /// <returns></returns>
+    private async UniTaskVoid SwitchTurnAsync()
+    {
+        await UniTask.Delay(1000);
+        _context.GameController.SwitchTurn();
+    }
+
+    /// <summary>
+    /// 移動動畫控制
+    /// </summary>
+    /// <param name="isMove"></param>
+    public void MoveAnimationControl(bool isMove)
+    {
+        _anim.SetBool(_isMovingParamId, isMove);
+    }
+
+    /// <summary>
+    /// 撥放嘲諷動畫
+    /// </summary>
+    public void PlayDerideAnimation()
+    {
+        _anim.SetTrigger(_derideParamId);
+    }
+
+    /// <summary>
+    /// 撥放投擲動畫
+    /// </summary>
+    /// <param name="type"></param>
+    public void PlayThrowAnimation(THROW_TYPE type)
+    {
+        switch (type)
+        {
+            case THROW_TYPE.Normal:
+                _anim.SetTrigger(_normalAttackParamId);
+                break;
+
+            case THROW_TYPE.Giant:
+                _anim.SetTrigger(_skill_GiantParamId);
+                break;
+
+            case THROW_TYPE.StrengthDamage:
+                _anim.SetTrigger(_skill_StrengthDamageParamId);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 撥放受擊動畫
+    /// </summary>
+    /// <param name="type"></param>
+    public void PlayHurtAnimation(THROW_TYPE type)
+    {
+        switch (type)
+        {
+            case THROW_TYPE.Normal:
+                _anim.SetTrigger(_hurtParamId);
+                break;
+
+            case THROW_TYPE.Giant:
+                _anim.SetTrigger(_hurt_GiantParamId);
+                break;
+
+            case THROW_TYPE.StrengthDamage:
+                _anim.SetTrigger(_hurt_StrengthDamageParamId);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 撥放死亡動畫
+    /// </summary>
+    public void PlayDeathAnimation()
+    {
+        _anim.SetTrigger(_deathParamId);
+    }
+}

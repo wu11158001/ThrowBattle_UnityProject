@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class CharacterView : BaseObject
 {
-    [SerializeField] private Animator _p1_Anim;
+    [SerializeField] private CharacterAnimControl _characterAnimControl;
     [SerializeField] private TextMeshPro _text_Nickname;
     [SerializeField] private GameObject _controlTip;
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -24,29 +24,33 @@ public class CharacterView : BaseObject
     private float _moveSpeed ;
     private Vector2 _moveRange;
 
-    // 動畫
-    private readonly int _isMovingParamId = Animator.StringToHash("IsMoving");
-    private readonly int _hurtParamId = Animator.StringToHash("Hurt");
-    private readonly int _hurt_GiantParamId = Animator.StringToHash("Hurt_Giant");
-    private readonly int _hurt_DoubleDamageParamId = Animator.StringToHash("Hurt_DoubleDamage");
-    private readonly int _normalAttackParamId = Animator.StringToHash("NormalAttack");
-    private readonly int _skill_DoubleDamageParamId = Animator.StringToHash("Skill_DoubleDamage");
-    private readonly int _skill_GiantParamId = Animator.StringToHash("Skill_Giant");
-    private readonly int _derideParamId = Animator.StringToHash("Deride");
+    // Hp屬性
+    public int MaxHp { get; private set; }
+    public int CurrentHp { get; private set; }
+
+    /// <summary>
+    /// 是否為本地玩家可控制的角色
+    /// </summary>
+    public bool IsLocalPlayer { get; set; }
+
+    // 紀錄強化攻擊瞬移初始位置
+    private Vector3 _teleportInitPos;
+    // 紀錄強化攻擊瞬移位置
+    private Vector3 _teleportTargetPos;
+
+    private GameplayContext _context;
+    private DataConfig _dataConfig;
 
     private void Start()
     {
+        _context = GameplayManager.CurrentContext;
+        _dataConfig = StaticDataManager.DataConfig;
+
         _throwStrengthCanvas.worldCamera = Camera.main;
         CloseThrowStrength();
 
-        var config = StaticDataManager.DataConfig;
-        _moveSpeed = config.CharacterMoveSpeed;
-        _moveRange = config.CharacterMoveRange;
-    }
-
-    public override void SetData(AssetReferenceGameObject myRef)
-    {
-        base.SetData(myRef);
+        _moveSpeed = _dataConfig.CharacterMoveSpeed;
+        _moveRange = _dataConfig.CharacterMoveRange;
 
         _controlTip.SetActive(false);
     }
@@ -58,12 +62,11 @@ public class CharacterView : BaseObject
     public void SetCharacter(bool isPlayer1)
     {
         // 設置初始位置(預設在最遠處, player1在右側)
-        transform.position =
-            isPlayer1 ?
-            new(StaticDataManager.DataConfig.CharacterMoveRange.y, StaticDataManager.DataConfig.CharacterPosY, 0) :
-            new(-StaticDataManager.DataConfig.CharacterMoveRange.y, StaticDataManager.DataConfig.CharacterPosY, 0);
+        transform.position = isPlayer1 ?
+            new(_dataConfig.CharacterMoveRange.y, _dataConfig.CharacterPosY, 0) :
+            new(-_dataConfig.CharacterMoveRange.y, _dataConfig.CharacterPosY, 0);
 
-        // 設置角色暱稱
+        // 設置角色暱稱與 IsLocalPlayer
         switch (StaticDataManager.PlayType)
         {
             // 連線配對
@@ -72,26 +75,31 @@ public class CharacterView : BaseObject
                 string localPlayerNickname = StaticDataManager.RegisterPlayerData.Nickname;
                 string opponentPlayerNickname = matchData.opponentNickname;
 
-                _text_Nickname.text = isPlayer1 && matchData.isCreator ? 
-                    localPlayerNickname : 
-                    opponentPlayerNickname;
+                bool isMine = isPlayer1 == matchData.isCreator;
+
+                _text_Nickname.text = isMine ? localPlayerNickname : opponentPlayerNickname;
+                IsLocalPlayer = isMine;
                 break;
 
             // AI對戰
             case PLAY_TYPE.WithAi:
                 _text_Nickname.text = isPlayer1 ? $"{StaticDataManager.RegisterPlayerData.Nickname}" : "AI";
+
+                IsLocalPlayer = isPlayer1;
                 break;
 
-            // 兩名玩家
+            // 兩名玩家 (單機雙人)
             case PLAY_TYPE.TwoPlayer:
                 _text_Nickname.text = isPlayer1 ? "Player1" : "Player2";
+
+                IsLocalPlayer = true;
                 break;
         }
 
         // 設置角色顏色
         string colorHtml = isPlayer1 ?
-            $"#{StaticDataManager.DataConfig.CharacterColor_P1}" :
-            $"#{StaticDataManager.DataConfig.CharacterColor_P2}";
+            $"#{_dataConfig.CharacterColor_P1}" :
+            $"#{_dataConfig.CharacterColor_P2}";
 
         if (ColorUtility.TryParseHtmlString(colorHtml, out Color customColor))
         {
@@ -99,8 +107,12 @@ public class CharacterView : BaseObject
         }
 
         // 設置角色面向方向
-        _initFillX = isPlayer1 ? true : false;
+        _initFillX = isPlayer1;
         _spriteRenderer.flipX = _initFillX;
+
+        // Hp
+        MaxHp = _dataConfig.CharacterMaxHp;
+        CurrentHp = MaxHp;
     }
 
     /// <summary>
@@ -158,22 +170,96 @@ public class CharacterView : BaseObject
         transform.position = newPos;
 
         // 播放動畫
-        if (_p1_Anim != null)
-        {
-            _p1_Anim.SetBool(_isMovingParamId, Mathf.Abs(direction) > 0);
+        _characterAnimControl.MoveAnimationControl(Mathf.Abs(direction) > 0);
 
-            // 角色面向
-            if(Mathf.Abs(direction) > 0)
-            {
-                _spriteRenderer.flipX =
-                    direction < 0 ?
-                    true :
-                    false;
-            }
-            else
-            {
-                _spriteRenderer.flipX = _initFillX;
-            }
+        // 角色面向
+        if (Mathf.Abs(direction) > 0)
+        {
+            _spriteRenderer.flipX = direction < 0 ? true : false;
         }
+        else
+        {
+            _spriteRenderer.flipX = _initFillX;
+        }
+    }
+
+    /// <summary>
+    /// 技能_強化攻擊瞬移位置設置
+    /// </summary>
+    /// <param name="isToAttackPoint">是否瞬移置攻擊點</param>
+    public void TeleportToPos(bool isToAttackPoint)
+    {
+        if(isToAttackPoint)
+        {
+            float height = _dataConfig.SkillStrengthDamagePosHeight;
+            _teleportTargetPos.y = height;
+            transform.position = _teleportTargetPos;
+        }
+        else
+        {
+            transform.position = _teleportInitPos;
+        }
+    }
+
+    /// <summary>
+    /// 撥放投擲動畫
+    /// </summary>
+    /// <param name="type"></param>
+    public void PlayThrowAnimation(THROW_TYPE type, Vector3 throwTargetPos)
+    {
+        if(type == THROW_TYPE.StrengthDamage)
+        {
+            _teleportInitPos = transform.position;
+            _teleportTargetPos = throwTargetPos;
+        }
+
+        _characterAnimControl.PlayThrowAnimation(type);
+    }
+
+    /// <summary>
+    /// 撥放嘲諷動畫
+    /// </summary>
+    public void PlayDerideAnimation() => _characterAnimControl.PlayDerideAnimation();
+
+    /// <summary>
+    /// 受到傷害
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="type"></param>
+    /// <returns></returns>
+    public int TakeDamage(int damage, THROW_TYPE type)
+    {
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+        {
+
+        }
+        else
+        {
+            CurrentHp = Mathf.Max(0, CurrentHp - damage);
+        }
+
+        // 撥放動畫
+        if(CurrentHp > 0)
+        {
+            _characterAnimControl.PlayHurtAnimation(type);
+        }
+        else
+        {
+            _characterAnimControl.PlayDeathAnimation();
+        }
+
+        return CurrentHp;
+    }
+
+    /// <summary>
+    /// 伺服器回傳HP
+    /// </summary>
+    public void SyncHPFromServer(int serverHP)
+    {
+        CurrentHp = serverHP;
+
+        // 更新血條 UI
+        bool isP1 = (this == _context.P1_CharacterView);
+        _context.GameView.UpdateHpBar(isP1, CurrentHp, MaxHp);
     }
 }

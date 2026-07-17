@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 022797f27223f804d84a5d536986654e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7195384065375884579
+    second: PassiveSkillIcon_0
+  - first:
+      213: 7455952627863186085
+    second: PassiveSkillIcon_1
+  - first:
+      213: 7677048284982793680
+    second: PassiveSkillIcon_2
+  - first:
+      213: -1446941940426918284
+    second: PassiveSkillIcon_3
+  - first:
+      213: -104982242589006232
+    second: PassiveSkillIcon_4
+  - first:
+      213: -6290221921668447333
+    second: PassiveSkillIcon_5
+  - first:
+      213: 5285128600366993709
+    second: PassiveSkillIcon_6
+  - first:
+      213: -4784300389579447234
+    second: PassiveSkillIcon_7
+  - first:
+      213: 4061176697422781824
+    second: PassiveSkillIcon_8
+  - first:
+      213: -4140236065301718648
+    second: PassiveSkillIcon_9
+  - first:
+      213: -8213641326503620833
+    second: PassiveSkillIcon_10
+  - first:
+      213: 644469089405563900
+    second: PassiveSkillIcon_11
+  - first:
+      213: -8830210234958195498
+    second: PassiveSkillIcon_12
+  - first:
+      213: 5370046056177902730
+    second: PassiveSkillIcon_13
+  - first:
+      213: -1067423411738233159
+    second: PassiveSkillIcon_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PassiveSkillIcon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 5
+        height: 322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3255c374fa32bd360800000000000000
+      internalID: 7195384065375884579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 273
+        width: 99
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aaece5696dd87760800000000000000
+      internalID: 7455952627863186085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_2
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 273
+        width: 106
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5dbed8dba5a8a60800000000000000
+      internalID: 7677048284982793680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_3
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 273
+        width: 101
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4763d3ea8fd6bebe0800000000000000
+      internalID: -1446941940426918284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_4
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 272
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86622c2e4370b8ef0800000000000000
+      internalID: -104982242589006232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_5
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 148
+        width: 99
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b93c3904d74a4b8a0800000000000000
+      internalID: -6290221921668447333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_6
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 148
+        width: 100
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21d121d57c885940800000000000000
+      internalID: 5285128600366993709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_7
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 148
+        width: 101
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e34aa5cd420ca9db0800000000000000
+      internalID: -4784300389579447234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_8
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 148
+        width: 101
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d9af370b23c5830800000000000000
+      internalID: 4061176697422781824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_9
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 148
+        width: 98
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8891e690c3dea86c0800000000000000
+      internalID: -4140236065301718648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_10
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 20
+        width: 102
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1f88453bb8430e80800000000000000
+      internalID: -8213641326503620833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_11
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 20
+        width: 101
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf3fcb6e83d91f800800000000000000
+      internalID: 644469089405563900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_12
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 20
+        width: 101
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d45c45639ac47580800000000000000
+      internalID: -8830210234958195498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_13
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 20
+        width: 101
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a84a8f5bf6c368a40800000000000000
+      internalID: 5370046056177902730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillIcon_14
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 20
+        width: 99
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6386eff00cf21f0800000000000000
+      internalID: -1067423411738233159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PassiveSkillIcon_0: 7195384065375884579
+      PassiveSkillIcon_1: 7455952627863186085
+      PassiveSkillIcon_10: -8213641326503620833
+      PassiveSkillIcon_11: 644469089405563900
+      PassiveSkillIcon_12: -8830210234958195498
+      PassiveSkillIcon_13: 5370046056177902730
+      PassiveSkillIcon_14: -1067423411738233159
+      PassiveSkillIcon_2: 7677048284982793680
+      PassiveSkillIcon_3: -1446941940426918284
+      PassiveSkillIcon_4: -104982242589006232
+      PassiveSkillIcon_5: -6290221921668447333
+      PassiveSkillIcon_6: 5285128600366993709
+      PassiveSkillIcon_7: -4784300389579447234
+      PassiveSkillIcon_8: 4061176697422781824
+      PassiveSkillIcon_9: -4140236065301718648
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
