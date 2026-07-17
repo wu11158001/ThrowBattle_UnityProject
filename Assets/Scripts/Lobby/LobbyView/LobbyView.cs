@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UniRx;
 using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 
 /// <summary>
 /// 對戰模式
@@ -31,8 +32,10 @@ public class LobbyView : BaseView
 
     private LobbyViewModel _viewModel = new();
 
-    private void Start()
+    public override void SetData(AssetReferenceGameObject myRef)
     {
+        base.SetData(myRef);
+
         _text_Nickname.text = "";
         _text_BtnMatch.text = "玩家配對";
 

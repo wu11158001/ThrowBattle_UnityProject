@@ -2,7 +2,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 /// <summary>
-/// 大廳入口
+/// 大廳場景入口
 /// </summary>
 public class LobbyEntry : MonoBehaviour
 {

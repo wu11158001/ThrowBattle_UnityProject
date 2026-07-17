@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UnityEngine.AddressableAssets;
 
 /// <summary>
 /// 配對中介面
@@ -12,8 +13,10 @@ public class MatchingView : BaseView
 
     private MatchingViewModel _viewModel = new();
 
-    private void Start()
+    public override void SetData(AssetReferenceGameObject myRef)
     {
+        base.SetData(myRef);
+
         Bind();
     }
 

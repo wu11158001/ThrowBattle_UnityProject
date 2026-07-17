@@ -15,3 +15,4 @@ MonoBehaviour:
   ViewConfig: {fileID: 11400000, guid: 71ef26ccbc6899e4bac866dc708b7e73, type: 2}
   AudioConfig: {fileID: 11400000, guid: 8ebc78651eb11ed43a8916743a89a40b, type: 2}
   DataConfig: {fileID: 11400000, guid: 7e5abab8383a36d4d8f202fc94ea4380, type: 2}
+  ObjectPrefabConfig: {fileID: 11400000, guid: 0a69f4c10bfe0d8408f4f9042fc0d07f, type: 2}

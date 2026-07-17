@@ -4,6 +4,7 @@ using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine.InputSystem;
+using UnityEngine.AddressableAssets;
 
 /// <summary>
 /// 註冊成功訊息
@@ -26,8 +27,10 @@ public class SetNicknameView : BaseView
 
     private SetNicknameViewModel _viewModel = new();
 
-    private void Start()
+    public override void SetData(AssetReferenceGameObject myRef)
     {
+        base.SetData(myRef);
+
         _text_Error.gameObject.SetActive(false);
         _text_BtnRegister.text = "註冊";
         if_Nickname.ActivateInputField();

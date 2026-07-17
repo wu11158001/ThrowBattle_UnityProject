@@ -12,4 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4644a16d312b3d48a948fb307e79b02, type: 3}
   m_Name: ObjectPrefabConfig
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPrefabConfig
-  Mappings: []
+  Mappings:
+  - Type: 0
+    PrefabRef:
+      m_AssetGUID: 58ea838449ca67e4da5646f41e9feeff
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - Type: 1
+    PrefabRef:
+      m_AssetGUID: 2a767190df0a627479de3baf8d7a72ae
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - Type: 2
+    PrefabRef:
+      m_AssetGUID: 4dd9f97d352d23d448e3d6326df88a9c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0

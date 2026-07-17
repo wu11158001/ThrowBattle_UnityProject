@@ -8,15 +8,19 @@ using UnityEngine.AddressableAssets;
 /// </summary>
 public enum OBJECT_PREFAB_TYPE
 {
-    /// <summary> 遊戲內容 </summary>
-    GameContentView,
+    /// <summary> 遊戲背景物件 </summary>
+    GameBgPrefab,
+    /// <summary> 角色物件 </summary>
+    CharacterPrefab,
+    /// <summary> 投擲物件 </summary>
+    ThrowPrefab,
 }
 
 /// <summary>
 /// 遊戲物件配置檔
 /// </summary>
 [CreateAssetMenu(fileName = "ObjectPrefabConfig", menuName = "SO Config/ObjectPrefabConfig")]
-public class ObjectPrefabConfig : ScriptableObject
+public class ObjectPrefabConfig : ScriptableObject, ISerializationCallbackReceiver
 {
     public List<ObjectMapping> Mappings;
 

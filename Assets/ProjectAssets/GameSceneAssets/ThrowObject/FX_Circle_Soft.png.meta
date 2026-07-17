@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: a728ed822c81dca468b7aba698e6ea65
+AssetOrigin:
+  serializedVersion: 1
+  productId: 346746
+  packageName: FREE - Bold VFX Pack DEMO
+  packageVersion: 1.0
+  assetPath: Assets/BoldVFXPackDemo/Content/Atlas/Sprites/FX_Circle_Soft.png
+  uploadId: 824408
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -109,6 +116,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -154,10 +174,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 346746
-  packageName: FREE - Bold VFX Pack DEMO
-  packageVersion: 1.0
-  assetPath: Assets/BoldVFXPackDemo/Content/Atlas/Sprites/FX_Circle_Soft.png
-  uploadId: 824408
