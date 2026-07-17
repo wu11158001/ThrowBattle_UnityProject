@@ -14,29 +14,22 @@ public class GameEntry : MonoBehaviour
         {
             _context = new GameplayContext();
 
-            // 開啟遊戲介面
-            ViewManager.Instance.OpenView<GameView>(
-                viewType: VIEW_TYPE.GameView,
-                canvasType: CANVAS_TYPE.Canvas_HUD,
-                callback: (view) =>
-                {
-
-                }).Forget();
-
             // 遊戲管理中心
             var manager = gameObject.AddComponent<GameplayManager>();
-            manager.Setup(_context);
+            manager.SetData(_context);
 
             // 遊戲控制器
             GameObject obj = new("GameController");
-            _context.GameController = obj.AddComponent<GameController>();
+            var gameController = obj.AddComponent<GameController>();
+            _context.GameController = gameController;
 
             // 遊戲背景
             GameObject bgObject = await CreateObject(OBJECT_PREFAB_TYPE.GameBgPrefab);
 
             // 角色1(Player1)
             GameObject p1_Object = await CreateObject(OBJECT_PREFAB_TYPE.CharacterPrefab);
-            if(p1_Object.TryGetComponent(out CharacterView p1_characterView))
+            p1_Object.name = "Player1";
+            if (p1_Object.TryGetComponent(out CharacterView p1_characterView))
             {
                 p1_characterView.SetCharacter(true);
                 _context.P1_CharacterView = p1_characterView;
@@ -44,6 +37,7 @@ public class GameEntry : MonoBehaviour
 
             // 角色2(Player2)
             GameObject p2_Object = await CreateObject(OBJECT_PREFAB_TYPE.CharacterPrefab);
+            p2_Object.name = "Player2";
             if (p2_Object.TryGetComponent(out CharacterView p2_characterView))
             {
                 p2_characterView.SetCharacter(false);
@@ -52,10 +46,20 @@ public class GameEntry : MonoBehaviour
 
             // 投擲物件
             GameObject throwObject = await CreateObject(OBJECT_PREFAB_TYPE.ThrowPrefab);
-            if (p2_Object.TryGetComponent(out ThrowObjectView throwObjectView))
+            throwObject.name = "ThrowObject";
+            if (throwObject.TryGetComponent(out ThrowObjectView throwObjectView))
             {
                 _context.ThrowObjectView = throwObjectView;
             }
+
+            // 開啟遊戲介面
+            ViewManager.Instance.OpenView<GameView>(
+                viewType: VIEW_TYPE.GameView,
+                canvasType: CANVAS_TYPE.Canvas_HUD,
+                callback: (view) =>
+                {
+                    _context.GameView = view;
+                }).Forget();
         }
         catch (System.Exception e)
         {

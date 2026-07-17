@@ -146,6 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4439530477180513689}
+  - component: {fileID: 7112959989763202558}
   - component: {fileID: 2865637293087821872}
   - component: {fileID: 3735167447100750150}
   - component: {fileID: 6665565739016310281}
@@ -176,6 +177,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7112959989763202558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740032631896870760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e240537ebf7c5418b9c232fd41d0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEventHandler
 --- !u!222 &2865637293087821872
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -841,6 +854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3312198334754196067}
+  - component: {fileID: 2912032885309374207}
   - component: {fileID: 3599819764521110068}
   - component: {fileID: 6377177260337244303}
   - component: {fileID: 2376901891811719724}
@@ -871,6 +885,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2912032885309374207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658128979598331914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e240537ebf7c5418b9c232fd41d0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEventHandler
 --- !u!222 &3599819764521110068
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -965,7 +991,7 @@ GameObject:
   - component: {fileID: 6995505089567159626}
   - component: {fileID: 5345345805172110606}
   m_Layer: 0
-  m_Name: MoveControllBtns
+  m_Name: MoveControlPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,7 +1379,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.448
+  m_FillAmount: 0.31
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -1570,6 +1596,94 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &4282109348931616751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491199545016349026}
+  - component: {fileID: 3461013260197762531}
+  - component: {fileID: 3606501080075895286}
+  - component: {fileID: 6135942812006491101}
+  m_Layer: 0
+  m_Name: ThrowInputPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1491199545016349026
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282109348931616751}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5920777604563296009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3461013260197762531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282109348931616751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e240537ebf7c5418b9c232fd41d0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEventHandler
+--- !u!222 &3606501080075895286
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282109348931616751}
+  m_CullTransparentMesh: 1
+--- !u!114 &6135942812006491101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282109348931616751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4861994827110784436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,6 +2939,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1491199545016349026}
   - {fileID: 4618242004315256254}
   - {fileID: 8393328023751827221}
   - {fileID: 8836212304553707085}
@@ -2855,8 +2970,14 @@ MonoBehaviour:
   _popupObj: {fileID: 0}
   _popupType: 0
   _text_Battle: {fileID: 884281761712627836}
-  _btn_LeftMove: {fileID: 2376901891811719724}
-  _btn_RightMove: {fileID: 6665565739016310281}
+  _moveControlPanel: {fileID: 1820074429883483413}
+  _leftHandler: {fileID: 2912032885309374207}
+  _rightHandler: {fileID: 7112959989763202558}
+  _throwHandler: {fileID: 3461013260197762531}
+  _wind_LeftArror: {fileID: 5201823658533859080}
+  _wind_RightArror: {fileID: 3954793071683960857}
+  _img_Wind_Left: {fileID: 7866417791389425847}
+  _img_Wind_Right: {fileID: 5795409434832273198}
 --- !u!1 &8031335279064753623
 GameObject:
   m_ObjectHideFlags: 0
