@@ -23,6 +23,7 @@ public class DataConfig : ScriptableObject
     [Label("投擲最遠距離")] public float ThrowMaxDistance = 20f;
     [Label("投擲最大高度")] public float ThrowMaxHeight = 3.8f;
     [Label("投擲移動時間")] public float ThrowMoveDuration = 1f;
+    [Label("射線半徑")] public float RaycastRadius = 0.35f;
 
     [Header("風力")]
     [Label("風力最大強度")] public float WindMaxStrength = 5f;

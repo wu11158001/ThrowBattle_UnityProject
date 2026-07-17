@@ -126,7 +126,12 @@ public class CharacterThrowController
         var throwView = _context.ThrowObjectView;
         var attacker = _context.CurrentTurnCharacter;
 
-        if (throwView == null || attacker == null) return;
+        // 找出防守方
+        var defenseCharacter = (attacker == _context.P1_CharacterView)
+            ? _context.P2_CharacterView
+            : _context.P1_CharacterView;
+
+        if (throwView == null || attacker == null || defenseCharacter == null) return;
 
         // 計算拋物線軌跡參數
         Vector3 startPos = attacker.transform.position + new Vector3(0, 0.5f, 0);
@@ -151,21 +156,91 @@ public class CharacterThrowController
 
         // 啟動投擲物件
         throwView.UpdatePosition(startPos);
-        throwView.SetActiveState(true);
+        throwView.OnThrow();
+
+        // 記錄上一幀的座標，用來計算射線方向與距離
+        Vector3 lastPos = startPos;
+        bool hasHit = false;
+        // 移動時間
+        float duration = config.ThrowMoveDuration;
+        // 圓形射線參數設定
+        float castRadius = config.RaycastRadius;
 
         // 拋物線模擬
-        float duration = config.ThrowMoveDuration;
-        DOVirtual.Float(0f, 1f, duration, (t) =>
+        Tween throwTween = null;
+        throwTween = DOVirtual.Float(0f, 1f, duration, (t) =>
         {
+            if (hasHit) return;
+
+            // 計算這一幀的新座標
             float x = Mathf.Lerp(startPos.x, targetPos.x, t);
             float y = Mathf.Lerp(startPos.y, targetPos.y, t) + (4f * peakHeight * t * (1f - t));
-            throwView.UpdatePosition(new Vector3(x, y, 0));
+            Vector3 nextPos = new(x, y, 0);
+
+            // 更新 Debug 用的射線資訊
+            throwView.UpdateDebugCastInfo(lastPos, nextPos, castRadius);
+
+            // 計算移動向量
+            Vector3 moveDirection = nextPos - lastPos;
+            float moveDistance = moveDirection.magnitude;
+
+            // 避免第一幀或未移動時（距離太小）做無效偵測
+            if (moveDistance > 0.001f)
+            {
+                // 發射圓形射線：從「上一幀位置」往「移動方向」發射，距離為「這幀移動的長度」
+                RaycastHit2D hit = Physics2D.CircleCast(lastPos, castRadius, moveDirection.normalized, moveDistance);
+
+                // 檢查是否有打中防守方角色
+                if (hit.collider != null && hit.collider.gameObject == defenseCharacter.gameObject)
+                {
+                    hasHit = true;
+                    throwTween.Kill();
+                    throwView.UpdatePosition(hit.point);
+
+                    HandleHit(throwView, defenseCharacter, isHitCharacter: true);
+                    return;
+                }
+            }
+
+            throwView.UpdatePosition(nextPos);
+            lastPos = nextPos;
         })
         .SetEase(Ease.Linear)
         .OnComplete(() =>
         {
-            throwView.SetActiveState(false);
-            _context.GameController.OnThrowComplete();
+            // 正常落地（未擊中角色）
+            if (!hasHit)
+            {
+                HandleHit(throwView, defenseCharacter, isHitCharacter: false);
+            }
         });
+    }
+
+    /// <summary>
+    /// 處理擊中
+    /// </summary>
+    private void HandleHit(ThrowObjectView throwView, CharacterView defenseCharacter, bool isHitCharacter)
+    {
+        throwView.OnHit();
+
+        if (isHitCharacter)
+        {
+            // 擊中
+            if(defenseCharacter != null)
+            {
+                Debug.Log($"[圓形射線偵測] 成功擊中角色: {defenseCharacter.name}！");
+            }
+        }
+        else
+        {
+            // 未擊中
+            if (defenseCharacter != null)
+            {
+                Debug.Log("[圓形射線偵測] 未擊中角色，正常落到地面。");
+            }
+        }
+
+        // 通知回合結束
+        _context.GameController.OnThrowComplete();
     }
 }

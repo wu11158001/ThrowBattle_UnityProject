@@ -132,7 +132,6 @@ public class GameView : BaseView
         }
     }
 
-
     /// <summary>
     /// 設置風力強度
     /// </summary>
