@@ -10,12 +10,14 @@ public enum VIEW_TYPE
 {
     BackgroundView = 0,
     MessagePopupView,
+    AskView,
 
     LobbyView = 100,
     SetNicknameView,
     MatchingView,
 
     GameView = 200,
+    GameOverView,
 }
 
 /// <summary>

@@ -13,34 +13,6 @@ public class GameController : MonoBehaviour
     private CharacterMoveController _moveController;
     private CharacterThrowController _throwController;
 
-    /// <summary>
-    /// 是否遊戲結束
-    /// </summary>
-    public ReactiveProperty<bool> IsGameOver = new ReactiveProperty<bool>(false);
-
-    /// <summary>
-    /// 移動輸入方向接收
-    /// </summary>
-    /// <param name="direction"></param>
-    public void SetInputDirection(float direction) => _moveController.SetInputDirection(direction);
-
-    /// <summary>
-    /// 設置投擲蓄力狀態
-    /// </summary>
-    /// <param name="isPressing"></param>
-    public void SetThrowPressState(bool isPressing) => _throwController.SetThrowPressState(isPressing);
-
-    /// <summary>
-    /// 設置下次投擲的類型
-    /// </summary>
-    /// <param name="type"></param>
-    public void SetNextThrowType(THROW_TYPE type) => _throwController.SetNextThrowType(type);
-
-    /// <summary>
-    /// 執行投擲
-    /// </summary>
-    public void ExecuteThrow() => _throwController.ExecuteThrow();
-
     private void Start()
     {
         _context = GameplayManager.CurrentContext;
@@ -79,6 +51,34 @@ public class GameController : MonoBehaviour
             })
             .AddTo(this);
     }
+
+    /// <summary>
+    /// 是否遊戲結束
+    /// </summary>
+    public ReactiveProperty<bool> IsGameOver = new ReactiveProperty<bool>(false);
+
+    /// <summary>
+    /// 移動輸入方向接收
+    /// </summary>
+    /// <param name="direction"></param>
+    public void SetInputDirection(float direction) => _moveController.SetInputDirection(direction);
+
+    /// <summary>
+    /// 設置投擲蓄力狀態
+    /// </summary>
+    /// <param name="isPressing"></param>
+    public void SetThrowPressState(bool isPressing) => _throwController.SetThrowPressState(isPressing);
+
+    /// <summary>
+    /// 設置下次投擲的類型
+    /// </summary>
+    /// <param name="type"></param>
+    public void SetNextThrowType(THROW_TYPE type) => _throwController.SetNextThrowType(type);
+
+    /// <summary>
+    /// 執行投擲
+    /// </summary>
+    public void ExecuteThrow() => _throwController.ExecuteThrow();
 
     /// <summary>
     /// 遊戲開始
@@ -147,6 +147,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void SwitchTurn()
     {
+        if (_context.GameController.IsGameOver.Value) return;
+
         if (StaticDataManager.PlayType == PLAY_TYPE.TwoPlayer)
         {
             var nextCharacter = (_context.CurrentTurnCharacter == _context.P1_CharacterView)

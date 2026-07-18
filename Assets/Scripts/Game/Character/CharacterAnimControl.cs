@@ -119,4 +119,41 @@ public class CharacterAnimControl : MonoBehaviour
     {
         _anim.SetTrigger(_deathParamId);
     }
+
+    /// <summary>
+    /// 開啟遊戲結束介面(影格觸發)
+    /// </summary>
+    public void OpenGameOverView()
+    {
+        string winner = "";
+
+        bool isP1 = (_context.CurrentTurnCharacter == _context.P1_CharacterView);
+        string localPlayer = StaticDataManager.RegisterPlayerData.Nickname;
+
+        switch (StaticDataManager.PlayType)
+        {
+            case PLAY_TYPE.Match:
+                winner = _context.CurrentTurnCharacter.IsLocalPlayer ?
+                    StaticDataManager.MatchData.opponentNickname :
+                    localPlayer;
+                break;
+
+            case PLAY_TYPE.WithAi:
+                winner = isP1 ? localPlayer : "AI";
+                break;
+
+            case PLAY_TYPE.TwoPlayer:
+                
+                winner = isP1 ? "Player1" : "Player2";
+                break;
+        }
+
+        ViewManager.Instance.OpenView<GameOverView>(
+            viewType: VIEW_TYPE.GameOverView,
+            canvasType: CANVAS_TYPE.Canvas_Highest,
+            callback: (view) =>
+            {
+                view.SetResult(winner);
+            }).Forget();
+    }
 }

@@ -6,6 +6,7 @@ using DG.Tweening;
 using UniRx;
 using UniRx.Triggers;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// 遊戲介面
@@ -38,6 +39,9 @@ public class GameView : BaseView
     [SerializeField] private RectTransform _skillBtnParent_p2;
     [SerializeField] private SkillBtn _skillBtnPrefab;
 
+    [Header("退出")]
+    [SerializeField] private Button _btn_Exit;
+
     // 目前按壓狀態
     private bool _isPressingLeft = false;
     private bool _isPressingRight = false;
@@ -47,8 +51,21 @@ public class GameView : BaseView
     private List<SkillBtn> _p1SkillButtons = new();
     private List<SkillBtn> _p2SkillButtons = new();
 
+    // 開場動畫
+    private Sequence _openingAnimationSeq;
+
     private GameplayContext _context;
     private DataConfig _dataConfig;
+
+    public override void OnDestroy()
+    {
+        if (_openingAnimationSeq != null && _openingAnimationSeq.IsActive())
+        {
+            _openingAnimationSeq.Kill();
+        }
+
+        base.OnDestroy();
+    }
 
     private void Initialize()
     {
@@ -92,6 +109,25 @@ public class GameView : BaseView
         _rightHandler.DownAction = (eventData) => { _isPressingRight = true; };
         _rightHandler.UpAction = (eventData) => { _isPressingRight = false; };
         _rightHandler.ExitAction = (eventData) => { _isPressingRight = false; };
+
+        // 退出按鈕
+        _btn_Exit.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                ViewManager.Instance.OpenView<AskView>(
+                    viewType: VIEW_TYPE.AskView,
+                    canvasType: CANVAS_TYPE.Canvas_Highest,
+                    callback: (view) =>
+                    {
+                        view.SetContent(
+                            content: "是否退出遊戲?",
+                            confirmAction: () =>
+                            {
+                                SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.LobbyScene).Forget();
+                            });
+                    }).Forget();
+            })
+            .AddTo(this);
 
         // 每幀驅動
         this.UpdateAsObservable()
@@ -206,10 +242,11 @@ public class GameView : BaseView
 
         _text_Battle.fontSize = 0;
         _text_Battle.gameObject.SetActive(true);
-        
+
         // 文字放大
-        Sequence textSeq = DOTween.Sequence();
-        textSeq.Append(DOTween.To(
+        _openingAnimationSeq?.Kill();
+        _openingAnimationSeq = DOTween.Sequence();
+        _openingAnimationSeq.Append(DOTween.To(
             () => _text_Battle.fontSize,
             x => _text_Battle.fontSize = x,
             150f,
@@ -217,10 +254,10 @@ public class GameView : BaseView
         ).SetEase(Ease.OutQuad));
 
         // 停留
-        textSeq.AppendInterval(2f);
+        _openingAnimationSeq.AppendInterval(2f);
 
         // 結束
-        textSeq.OnComplete(() =>
+        _openingAnimationSeq.OnComplete(() =>
         {
             _text_Battle.gameObject.SetActive(false);
 
