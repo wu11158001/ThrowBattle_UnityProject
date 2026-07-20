@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.AddressableAssets;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine.UI;
 
 /// <summary>
@@ -23,6 +24,11 @@ public class CharacterView : BaseObject
     // 移動屬性
     private float _moveSpeed ;
     private Vector2 _moveRange;
+
+    // 同步移動屬性
+    private float _peerTargetX;
+    private float _peerInputDir;
+    private bool _isPeerSyncing = false;
 
     // Hp屬性
     public int MaxHp { get; private set; }
@@ -53,6 +59,20 @@ public class CharacterView : BaseObject
         _moveRange = _dataConfig.CharacterMoveRange;
 
         _controlTip.SetActive(false);
+
+        Bind();
+    }
+
+    private void Bind()
+    {
+        // 每幀驅動
+        this.UpdateAsObservable()
+            .Where(_ => IsLocalPlayer == false)
+            .Subscribe(_ =>
+            {
+                UpdatePeerMovement();
+            })
+            .AddTo(this); ;
     }
 
     /// <summary>
@@ -186,6 +206,59 @@ public class CharacterView : BaseObject
         {
             _spriteRenderer.flipX = _initFillX;
         }
+    }
+
+    /// <summary>
+    /// 收到伺服器對手位移封包時呼叫
+    /// </summary>
+    public void OnReceivePeerMove(MoveData data)
+    {
+        _peerTargetX = data.posX;
+        _peerInputDir = data.inputDir;
+        _isPeerSyncing = true;
+    }
+
+    /// <summary>
+    /// 理對手平滑移動
+    /// </summary>
+    private void UpdatePeerMovement()
+    {
+        if (!_isPeerSyncing) return;
+
+        // 先播放對手的動畫與轉向
+        Move(_peerInputDir, isPeerSync: true);
+
+        // 如果對手停止移動，且位置已經很接近目標，就關閉同步
+        if (_peerInputDir == 0f && Mathf.Abs(transform.position.x - _peerTargetX) < 0.01f)
+        {
+            Vector3 pos = transform.position;
+            pos.x = _peerTargetX;
+            transform.position = pos;
+            _isPeerSyncing = false;
+            return;
+        }
+
+        // 預測移動：根據對手的 inputDir 持續移動
+        Vector3 currentPos = transform.position;
+        float predictedX = currentPos.x + (_peerInputDir * _moveSpeed * Time.deltaTime);
+
+        // 使用 Lerp 平滑修正與伺服器封包真實位置
+        float smoothedX = Mathf.Lerp(predictedX, _peerTargetX, Time.deltaTime * 15f);
+
+        // 限制移動範圍
+        if (_initFillX)
+        {
+            // 角色在右側
+            smoothedX = Mathf.Clamp(smoothedX, _moveRange.x, _moveRange.y);
+        }
+        else
+        {
+            // 角色在左側
+            smoothedX = Mathf.Clamp(smoothedX, -_moveRange.y, -_moveRange.x);
+        }
+
+        currentPos.x = smoothedX;
+        transform.position = currentPos;
     }
 
     /// <summary>

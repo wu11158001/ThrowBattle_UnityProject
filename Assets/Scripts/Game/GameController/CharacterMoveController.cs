@@ -47,60 +47,58 @@ public class CharacterMoveController
     {
         if (_context.CurrentTurnCharacter == null) return;
 
-        // 連線模式:對手的回合跳過
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
-        {
-            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-            if (!isMyTurn) return;
-        }
+        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
 
-        // 本地角色移動
-        if (_currentInputDir != 0f)
+        if (isMyTurn)
         {
-            _context.CurrentTurnCharacter.Move(_currentInputDir);
-            _hasStopped = false;
-
-            // 連線模式:發送位置
-            if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+            // 本地角色移動
+            if (_currentInputDir != 0f)
             {
-                _syncTimer += Time.deltaTime;
-                if (_syncTimer >= SYNC_INTERVAL)
-                {
-                    _syncTimer = 0f;
+                _context.CurrentTurnCharacter.Move(_currentInputDir, isPeerSync: false);
+                _hasStopped = false;
 
-                    MoveData data = new MoveData()
-                    {
-                        roomId = StaticDataManager.MatchData.roomId,
-                        posX = _context.CurrentTurnCharacter.transform.position.x,
-                        inputDir = _currentInputDir
-                    };
-
-                    SocketManager.Instance.SendSyncMove(data);
-                }
-            }
-        }
-        else
-        {
-            // 速度0時只呼叫1次
-            if (!_hasStopped)
-            {
-                _context.CurrentTurnCharacter.Move(0f);
-                _hasStopped = true;
-
-                // 連線模式:發送位置
+                // 連線模式: 定時發送位置
                 if (StaticDataManager.PlayType == PLAY_TYPE.Match)
                 {
-                    MoveData data = new MoveData()
+                    _syncTimer += Time.deltaTime;
+                    if (_syncTimer >= SYNC_INTERVAL)
                     {
-                        roomId = StaticDataManager.MatchData.roomId,
-                        posX = _context.CurrentTurnCharacter.transform.position.x,
-                        inputDir = 0
-                    };
+                        _syncTimer = 0f;
+                        SendMovePacket(_currentInputDir);
+                    }
+                }
+            }
+            else
+            {
+                // 速度 0 時只呼叫 1 次
+                if (!_hasStopped)
+                {
+                    _context.CurrentTurnCharacter.Move(0f, isPeerSync: false);
+                    _hasStopped = true;
 
-                    SocketManager.Instance.SendSyncMove(data);
+                    if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+                    {
+                        SendMovePacket(0f);
+                    }
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// 發送:移動同步
+    /// </summary>
+    /// <param name="dir"></param>
+    private void SendMovePacket(float dir)
+    {
+        MoveData data = new MoveData()
+        {
+            roomId = StaticDataManager.MatchData.roomId,
+            posX = _context.CurrentTurnCharacter.transform.position.x,
+            inputDir = dir
+        };
+
+        SocketManager.Instance.SendSyncMove(data);
     }
 
     /// <summary>

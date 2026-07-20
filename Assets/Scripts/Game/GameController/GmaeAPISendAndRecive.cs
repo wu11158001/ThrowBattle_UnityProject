@@ -57,14 +57,7 @@ public class GmaeAPISendAndRecive
     public void OnPeerMove(MoveData data)
     {
         if (_context.CurrentTurnCharacter == null) return;
-
-        // 同步對手的動畫
-        _context.CurrentTurnCharacter.Move(data.inputDir, true);
-
-        // 直接校正對手的 X 軸位置
-        Vector3 currentPos = _context.CurrentTurnCharacter.transform.position;
-        currentPos.x = data.posX;
-        _context.CurrentTurnCharacter.transform.position = currentPos;
+        _context.CurrentTurnCharacter.OnReceivePeerMove(data);
     }
 
     /// <summary>

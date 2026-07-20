@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UnityEngine.AddressableAssets;
+using System;
 
 /// <summary>
 /// 配對中介面
@@ -11,6 +12,8 @@ public class MatchingView : BaseView
     [Header("配對中介面")]
     [SerializeField] private Button _btn_Cancel;
 
+    private Action _cancelAcrion;
+
     private MatchingViewModel _viewModel = new();
 
     public override void SetData(AssetReferenceGameObject myRef)
@@ -18,6 +21,15 @@ public class MatchingView : BaseView
         base.SetData(myRef);
 
         Bind();
+    }
+
+    /// <summary>
+    /// 設置取消事件
+    /// </summary>
+    /// <param name="cancalAction"></param>
+    public void SetCancelAction(Action cancalAction)
+    {
+        _cancelAcrion = cancalAction;
     }
 
     private void Bind()
@@ -32,5 +44,11 @@ public class MatchingView : BaseView
                     failCallback: (errorCode) => Close());
             })
             .AddTo(this);
+    }
+
+    public override void Close()
+    {
+        _cancelAcrion?.Invoke();
+        base.Close();
     }
 }

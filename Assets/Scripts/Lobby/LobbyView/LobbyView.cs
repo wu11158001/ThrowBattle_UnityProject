@@ -36,8 +36,12 @@ public class LobbyView : BaseView
     {
         base.SetData(myRef);
 
-        _text_Nickname.text = "";
         _text_BtnMatch.text = "玩家配對";
+
+        if (StaticDataManager.RegisterPlayerData != null)
+        {
+            _text_Nickname.text = StaticDataManager.RegisterPlayerData.Nickname;
+        }
 
         Bind();
     }
@@ -87,7 +91,11 @@ public class LobbyView : BaseView
                         // 開啟配對中介面
                         ViewManager.Instance.OpenView<MatchingView>(
                             viewType: VIEW_TYPE.MatchingView,
-                            canvasType: CANVAS_TYPE.Canvas_Highest).Forget();
+                            canvasType: CANVAS_TYPE.Canvas_Highest,
+                            callback: (view) =>
+                            {
+                                view.SetCancelAction(() => _text_BtnMatch.text = "玩家配對");
+                            }).Forget();
                     },
                     failCallback: (errorCode) =>
                     {

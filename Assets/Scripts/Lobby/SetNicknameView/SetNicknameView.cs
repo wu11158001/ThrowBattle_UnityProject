@@ -32,6 +32,7 @@ public class SetNicknameView : BaseView
         base.SetData(myRef);
 
         _text_Error.gameObject.SetActive(false);
+        _btn_Register.interactable = false;
         _text_BtnRegister.text = "註冊";
         if_Nickname.ActivateInputField();
 
@@ -55,7 +56,7 @@ public class SetNicknameView : BaseView
             .AddTo(this);
 
         // 輸入框
-        if_Nickname.onValueChanged.AddListener((value) => _btn_Register.interactable = value.Length >= 2);
+        if_Nickname.onValueChanged.AddListener((value) => _btn_Register.interactable = value.Length > 0);
 
         // 註冊按紐
         _btn_Register.OnClickAsObservable()

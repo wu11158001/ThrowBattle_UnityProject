@@ -94,6 +94,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
         socket = new SocketIOUnity(uri, options);
 
+        // 指定全域序列化器為 Newtonsoft
+        socket.JsonSerializer = new SocketIOClient.Newtonsoft.Json.NewtonsoftJsonSerializer();
+
         // 連線成功
         socket.OnConnected += (sender, e) => { SendJoinEventAsync().Forget(); };
         // 連線中斷
@@ -270,8 +273,8 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     public void SendSyncMove(MoveData data)
     {
-        string json = JsonConvert.SerializeObject(data);
 #if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
         EmitSyncMoveJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("sync_move", data);
@@ -283,8 +286,8 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     public void SendSyncAim(AimData data)
     {
-        string json = JsonConvert.SerializeObject(data);
 #if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
         EmitSyncAimJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("sync_aim", data);
@@ -296,9 +299,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     public void SendExecuteThrow(ThrowData data)
     {
-        string json = JsonConvert.SerializeObject(data);
 #if UNITY_WEBGL && !UNITY_EDITOR
-        EmitExecuteThrowJS(json);
+        string json = JsonConvert.SerializeObject(data);
+        EmitSyncAimJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("execute_throw", data);
 #endif
@@ -309,9 +312,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     public void SendExecuteHit(HitData data)
     {
-        string json = JsonConvert.SerializeObject(data);
 #if UNITY_WEBGL && !UNITY_EDITOR
-        EmitExecuteHitJS(json);
+        string json = JsonConvert.SerializeObject(data);
+        EmitSyncAimJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("execute_hit", data);
 #endif
@@ -322,9 +325,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// </summary>
     public void SendTurnEnd(TurnEndData data)
     {
-        string json = JsonConvert.SerializeObject(data);
 #if UNITY_WEBGL && !UNITY_EDITOR
-        EmitTurnEndJS(json);
+        string json = JsonConvert.SerializeObject(data);
+        EmitSyncAimJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("turn_end", data);
 #endif

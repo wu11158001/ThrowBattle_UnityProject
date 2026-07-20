@@ -5,6 +5,11 @@ using System;
 /// </summary>
 public class MatchingViewModel
 {
+    /// <summary>
+    /// 發送:取消配對
+    /// </summary>
+    /// <param name="successCallback"></param>
+    /// <param name="failCallback"></param>
     public void SendCancelMatchRequest(Action successCallback, Action<long> failCallback)
     {
         CancelMatchRequest req = new()
