@@ -15,12 +15,14 @@ public static class StaticDataManager
     #endregion
 
     #region API URL
-    /// <summary> 註冊 URL </summary>
+    /// <summary> 註冊 API </summary>
     public static readonly string RegisterSubUrl = "/api/lobby/register";
-    /// <summary> 玩家配對 URL </summary>
+    /// <summary> 玩家配對 API </summary>
     public static readonly string MatchSubUrl = "/api/lobby/match";
-    /// <summary> 取消玩家配對 URL </summary>
+    /// <summary> 取消玩家配對 API </summary>
     public static readonly string CancelMatchSubUrl = "/api/lobby/cancel-match";
+    /// <summary> 主動退出遊戲 API </summary>
+    public static readonly string LeaveBattleSubUrl = "/api/lobby/leave-battle";
     #endregion
 
     #region 資料

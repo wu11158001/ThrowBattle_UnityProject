@@ -1,26 +1,41 @@
 using System;
-using System.Runtime.InteropServices; // 💡 引入執行 JS 橋接所需的命名空間
+using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using UnityEngine;
 using SocketIOClient;
 using Newtonsoft.Json;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 public class SocketManager : SingletonMonoBehaviour<SocketManager>
 {
 #if UNITY_WEBGL && !UNITY_EDITOR
-    [DllImport("__Internal")]
-    private static extern void ConnectToSocketJS(string url);
-
-    [DllImport("__Internal")]
-    private static extern void EmitJoinEventJS(string playerId);
+    [DllImport("__Internal")] private static extern void ConnectToSocketJS(string url);
+    [DllImport("__Internal")] private static extern void EmitJoinEventJS(string playerId);
+    [DllImport("__Internal")] private static extern void EmitJoinBattleRoomJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitSyncMoveJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitSyncAimJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitExecuteThrowJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitExecuteHitJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitTurnEndJS(string jsonStr);
 #endif
 
     private SocketIOUnity socket;
     private DataConfig _dataConfig;
-
-    // 暫存 PlayerID，供 JS 連線成功後使用
     private string savedPlayerId;
+
+    /// <summary> 接收事件:角色位置 </summary>
+    public Action<MoveData> OnPeerMoveReceived;
+    /// <summary> 接收事件:對手畜力狀態 </summary>
+    public Action<AimData> OnPeerAimReceived;
+    /// <summary> 接收事件:投擲 </summary>
+    public Action<ThrowData> OnPeerThrowReceived;
+    /// <summary> 接收事件:擊中 </summary>
+    public Action<HitData> OnPeerHitReceived;
+    /// <summary> 接收事件:新回合 </summary>
+    public Action<NewTurnData> OnNewTurnReceived;
+    /// <summary> 接收事件:遊戲結束 </summary>
+    public Action<GameOverData> OnGameOverReceived;
 
     protected override void OnDestroy()
     {
@@ -37,14 +52,13 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     protected override void Awake()
     {
         base.Awake();
-
         _dataConfig = StaticDataManager.DataConfig;
     }
 
     public void Disconnect()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-            // WebGL 端由瀏覽器自行處理
+        // WebGL 端由瀏覽器自行處理
 #else
         if (socket != null && socket.Connected)
         {
@@ -55,20 +69,18 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     }
 
     /// <summary>
-    /// 開始連線至 Socket 伺服器
+    /// Server連線
     /// </summary>
+    /// <param name="playerId"></param>
     public void ConnectToServer(string playerId)
     {
         savedPlayerId = playerId;
         string cleanUrl = _dataConfig.BaseUrl;
 
-        // 判斷運行平台
 #if UNITY_WEBGL && !UNITY_EDITOR
-            // WebGL：呼叫 JS 橋接器
-            Debug.Log("[Socket] WebGL 環境：啟動瀏覽器原生 WebSocket 連線...");
-            ConnectToSocketJS(cleanUrl);
+        Debug.Log("[Socket] WebGL 環境：啟動瀏覽器原生 WebSocket 連線...");
+        ConnectToSocketJS(cleanUrl);
 #else
-        // 編輯器測試
         if (socket != null && socket.Connected) return;
 
         Debug.Log("[Socket] 編輯器環境：啟動 C# SocketIOUnity 連線...");
@@ -82,42 +94,109 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
         socket = new SocketIOUnity(uri, options);
 
-        socket.OnConnected += (sender, e) => { SendJoinEventAsync(playerId).Forget(); };
-        socket.OnDisconnected += (sender, e) => { Debug.LogWarning($"[Socket] 與伺服器連線中斷：{e}"); };
-        socket.OnError += (sender, e) => { Debug.LogError($"[Socket] 連線發生錯誤: {e}"); };
+        // 連線成功
+        socket.OnConnected += (sender, e) => { SendJoinEventAsync().Forget(); };
+        // 連線中斷
+        socket.OnDisconnected += (sender, e) => { Debug.LogWarning($"[Socket] 連線中斷：{e}"); };
+        // 連線錯誤
+        socket.OnError += (sender, e) => { Debug.LogError($"[Socket] 連線錯誤: {e}"); };
 
-        socket.On("match_success", (response) =>
+        // 監聽:配對成功
+        socket.On("match_success", (res) =>
         {
-            string jsonText = response.ToString();
-            MatchSuccessData matchData = JsonConvert.DeserializeObject<MatchSuccessData>(jsonText);
-            HandleMatchSuccessAsync(matchData).Forget();
+            var data = JsonConvertData<MatchSuccessData>(res);
+            HandleMatchSuccessAsync(data).Forget();
+        });
+
+        // 監聽:角色位置
+        socket.On("on_peer_move_synced", (res) => {
+            var data = JsonConvertData<MoveData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerMoveReceived?.Invoke(data); });
+        });
+
+        // 監聽:蓄力狀態
+        socket.On("on_peer_aim_synced", (res) => {
+            var data = JsonConvertData<AimData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerAimReceived?.Invoke(data); });
+        });
+
+        // 監聽:執行投擲
+        socket.On("on_peer_execute_throw", (res) => {
+            var data = JsonConvertData<ThrowData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerThrowReceived?.Invoke(data); });
+        });
+
+        // 監聽:擊中
+        socket.On("on_peer_hit_synced", (res) => {
+            var data = JsonConvertData<HitData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerHitReceived?.Invoke(data); });
+        });
+
+        // 監聽:回合切換
+        socket.On("new_turn", (res) => {
+            var data = JsonConvertData<NewTurnData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnNewTurnReceived?.Invoke(data); });
+        });
+
+        // 監聽:遊戲結束
+        socket.On("game_over", (res) => {
+            var data = JsonConvertData<GameOverData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnGameOverReceived?.Invoke(data); });
         });
 
         socket.ConnectAsync();
 #endif
     }
 
-    private async UniTaskVoid SendJoinEventAsync(string playerId)
+    /// <summary>
+    /// 解析資料
+    /// <returns>
+    private T JsonConvertData<T>(SocketIOResponse response) where T : class
     {
-        Debug.Log("[Socket] 編輯器連線成功！準備發送 join 驗證...");
-        var joinData = new Dictionary<string, string> { { "playerId", playerId } };
-        await socket.EmitAsync("join", joinData);
+        try
+        {
+            var jArray = JArray.Parse(response.ToString());
+
+            if (jArray == null || jArray.Count == 0) return null;
+
+            var firstElement = jArray[0];
+            string rawJson = firstElement.Type == JTokenType.String
+                ? firstElement.Value<string>()
+                : firstElement.ToString();
+
+            return JsonConvert.DeserializeObject<T>(rawJson);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[Socket] 解析失敗: {ex.Message} | 原始回應: {response}");
+            return null;
+        }
     }
 
     /// <summary>
-    ///  Socket 連線成功
+    /// 發送join 驗證
+    /// </summary>
+    private async UniTaskVoid SendJoinEventAsync()
+    {
+        Debug.Log("[Socket] 編輯器連線成功！準備發送 join 驗證...");
+        await socket.EmitAsync("join", new { playerId = savedPlayerId });
+    }
+
+    /// <summary>
+    /// 網頁端連線成功
     /// </summary>
     public void OnSocketConnectedJS()
     {
         Debug.Log("[Socket] 網頁端連線成功！準備發送 join 驗證身分...");
 #if UNITY_WEBGL && !UNITY_EDITOR
-            EmitJoinEventJS(savedPlayerId);
+        EmitJoinEventJS(savedPlayerId);
 #endif
     }
 
     /// <summary>
     /// 配對成功
     /// </summary>
+    /// <param name="jsonText"></param>
     public void OnMatchSuccessJS(string jsonText)
     {
         Debug.Log($"[Socket] 網頁端收到配對成功！ 原始 JSON: {jsonText}");
@@ -128,11 +207,127 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary>
     /// 處理配對成功
     /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
     private async UniTaskVoid HandleMatchSuccessAsync(MatchSuccessData data)
     {
         await UniTask.SwitchToMainThread();
         Debug.Log($"進入房間: {data.roomId} | 對手: {data.opponentNickname}");
         StaticDataManager.MatchData = data;
-        SceneLoader.Instance.LoadSceneAsync(sceneType: SCENE_TYPE.GameScene).Forget();
+
+        // 先切換場景，並 await 等待場景完全載入完成
+        await SceneLoader.Instance.LoadSceneAsync(sceneType: SCENE_TYPE.GameScene);
+
+        // 確定新場景的物件、Socket 監聽都到位了，再加入戰鬥房間
+        Debug.Log($"[Socket] 場景載入完成，正式加入戰鬥房間: {data.roomId}");
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
+        EmitJoinBattleRoomJS(json);
+#else
+        if (socket != null && socket.Connected)
+        {
+            await socket.EmitAsync("join_battle_room", new { roomId = data.roomId });
+        }
+#endif
     }
+
+    #region WebGL 橋接器回傳資料
+    /// <summary>
+    /// 角色位置
+    /// </summary>
+    public void OnPeerMoveSyncedJS(string jsonText) => OnPeerMoveReceived?.Invoke(JsonConvert.DeserializeObject<MoveData>(jsonText));
+
+    /// <summary>
+    /// 畜力狀態
+    /// </summary>
+    public void OnPeerAimSyncedJS(string jsonText) => OnPeerAimReceived?.Invoke(JsonConvert.DeserializeObject<AimData>(jsonText));
+
+    /// <summary>
+    /// 執行投擲
+    /// </summary>
+    public void OnPeerExecuteThrowJS(string jsonText) => OnPeerThrowReceived?.Invoke(JsonConvert.DeserializeObject<ThrowData>(jsonText));
+
+    /// <summary>
+    /// 執行擊中
+    /// </summary>
+    public void OnPeerExecuteHitJS(string jsonText) => OnPeerHitReceived?.Invoke(JsonConvert.DeserializeObject<HitData>(jsonText));
+
+    /// <summary>
+    /// 回合切換
+    /// </summary>
+    public void OnNewTurnJS(string jsonText) => OnNewTurnReceived?.Invoke(JsonConvert.DeserializeObject<NewTurnData>(jsonText));
+
+    /// <summary>
+    /// 遊戲結束
+    /// </summary>
+    public void OnGameOverJS(string jsonText) => OnGameOverReceived?.Invoke(JsonConvert.DeserializeObject<GameOverData>(jsonText));
+    #endregion
+
+    #region 發送資料API
+    /// <summary>
+    /// 發送:同步角色位置
+    /// </summary>
+    public void SendSyncMove(MoveData data)
+    {
+        string json = JsonConvert.SerializeObject(data);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        EmitSyncMoveJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("sync_move", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:畜力狀態
+    /// </summary>
+    public void SendSyncAim(AimData data)
+    {
+        string json = JsonConvert.SerializeObject(data);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        EmitSyncAimJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("sync_aim", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:執行投擲
+    /// </summary>
+    public void SendExecuteThrow(ThrowData data)
+    {
+        string json = JsonConvert.SerializeObject(data);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        EmitExecuteThrowJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("execute_throw", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:擊中
+    /// </summary>
+    public void SendExecuteHit(HitData data)
+    {
+        string json = JsonConvert.SerializeObject(data);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        EmitExecuteHitJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("execute_hit", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:回合結束
+    /// </summary>
+    public void SendTurnEnd(TurnEndData data)
+    {
+        string json = JsonConvert.SerializeObject(data);
+#if UNITY_WEBGL && !UNITY_EDITOR
+        EmitTurnEndJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("turn_end", data);
+#endif
+    }
+    #endregion
 }

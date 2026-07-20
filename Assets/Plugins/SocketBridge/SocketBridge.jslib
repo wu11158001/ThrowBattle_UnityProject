@@ -1,10 +1,9 @@
 mergeInto(LibraryManager.library, {
 
-    // 開始連線
+    // Socket 開始連線
     ConnectToSocketJS: function (url) {
         var connectionUrl = UTF8ToString(url);
         
-        // 確保網頁有載入 socket.io.js
         if (typeof io === 'undefined') {
             console.error("[JS Bridge] 找不到 Socket.IO 函式庫！請檢查 index.html 是否有引入。");
             return;
@@ -12,27 +11,61 @@ mergeInto(LibraryManager.library, {
 
         console.log("[JS Bridge] 正在連線至: " + connectionUrl);
 
-        // 建立連線
         window.webglSocket = io(connectionUrl, {
             path: "/socket.io/",
-            transports: ['websocket'] // 強制使用 WebSocket
+            transports: ['websocket']
         });
 
-        // 監聽連線成功
+        // Socket 連線成功
         window.webglSocket.on('connect', function () {
             console.log("[JS Bridge] Socket 連線成功！");
-            // 呼叫 Unity 內名為 "SocketManager" 的 GameObject 上的 "OnSocketConnectedJS" 函數
             SendMessage('SocketManager', 'OnSocketConnectedJS');
         });
 
-        // 監聽配對成功
+        // 配對成功
         window.webglSocket.on('match_success', function (data) {
             console.log("[JS Bridge] 收到配對成功！", data);
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
             SendMessage('SocketManager', 'OnMatchSuccessJS', jsonStr);
         });
 
-        // 監聽斷線
+        // 監聽:角色位置
+        window.webglSocket.on('on_peer_move_synced', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnPeerMoveSyncedJS', jsonStr);
+        });
+
+        // 監聽:畜力狀態
+        window.webglSocket.on('on_peer_aim_synced', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnPeerAimSyncedJS', jsonStr);
+        });
+
+        // 監聽:執行投擲
+        window.webglSocket.on('on_peer_execute_throw', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnPeerExecuteThrowJS', jsonStr);
+        });
+
+        // 監聽:執行擊中
+        window.webglSocket.on('on_peer_hit_synced', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnPeerExecuteHitJS', jsonStr);
+        });
+
+        // 監聽:回合切換
+        window.webglSocket.on('new_turn', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnNewTurnJS', jsonStr);
+        });
+
+        // 監聽:遊戲結束
+        window.webglSocket.on('game_over', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnGameOverJS', jsonStr);
+        });
+
+        // 監聽:Socket 連線斷開
         window.webglSocket.on('disconnect', function () {
             console.log("[JS Bridge] Socket 連線斷開");
         });
@@ -44,6 +77,54 @@ mergeInto(LibraryManager.library, {
         if (window.webglSocket) {
             window.webglSocket.emit('join', { playerId: id });
             console.log("[JS Bridge] 已發送 join 事件: " + id);
+        }
+    },
+
+    // 發送:加入戰鬥房間
+    EmitJoinBattleRoomJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('join_battle_room', JSON.parse(rawJson));
+        }
+    },
+
+    // 發送:同步角色位置
+    EmitSyncMoveJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('sync_move', JSON.parse(rawJson));
+        }
+    },
+
+    // 發送:畜力狀態
+    EmitSyncAimJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('sync_aim', JSON.parse(rawJson));
+        }
+    },
+
+    // 發送:執行投擲
+    EmitExecuteThrowJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('execute_throw', JSON.parse(rawJson));
+        }
+    },
+
+    // 發送:擊中
+    EmitExecuteHitJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('execute_hit', JSON.parse(rawJson));
+        }
+    },
+
+    // 發送:回合結束
+    EmitTurnEndJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('turn_end', JSON.parse(rawJson));
         }
     }
 });

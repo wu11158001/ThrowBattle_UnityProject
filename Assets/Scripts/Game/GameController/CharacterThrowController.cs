@@ -27,22 +27,38 @@ public class CharacterThrowController
     private bool _isThrowed;
     // 是否已開始畜力
     private bool _isPressingThrow = false;
-    // 畜力程度(0~1)
-    private float _throwStrength = 0f;
     // 是否需要先放開按鍵才能進行下一次蓄力
     private bool _needRelease = false;
 
-    // 風力強度
-    private float _windStrength = 0f;
-    // 下次投擲類型
-    private THROW_TYPE _throwType;
-    // 下次投擲目標位置
-    private Vector3 _throwTargetPos;
+    // Server 同步的計時時間
+    private float _syncTimer = 0f;
+    // 多少秒同步一次
+    private const float SYNC_INTERVAL = 0.05f; 
 
     /// <summary>
     ///是否正處於蓄力狀態
     /// </summary>
     public bool IsCharging { get; private set; } = false;
+
+    /// <summary>
+    /// 畜力程度(0~1)
+    /// </summary>
+    public float ThrowStrength { get; set; }
+
+    /// <summary>
+    /// 風力強度
+    /// </summary>
+    public float WindStrength { get; set; }
+
+    /// <summary>
+    /// 投擲類型
+    /// </summary>
+    public THROW_TYPE ThrowType { get; set; }
+
+    /// <summary>
+    /// 投擲目標位置
+    /// </summary>
+    public Vector3 ThrowTargetPos { get; set; }
 
     public CharacterThrowController(CharacterMoveController characterMoveController)
     {
@@ -58,45 +74,58 @@ public class CharacterThrowController
     {
         _isThrowed = false;
         IsCharging = false;
-        _throwStrength = 0f;
+        ThrowStrength = 0f;
     }
 
-    /// <summary>
-    /// 每幀驅動
-    /// </summary>
     public void Tick()
     {
         if (_context.CurrentTurnCharacter == null) return;
 
-        if(!_isThrowed)
+        // 連線模式:對手的回合跳過
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+        {
+            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+            if (!isMyTurn) return; 
+        }
+
+        if (!_isThrowed)
         {
             if (_isPressingThrow)
             {
-                // 如果安全鎖啟動中（上一次投擲完還沒放開手），直接攔截不處理
                 if (_needRelease) return;
 
-                // 剛按下的第一幀
                 if (!IsCharging)
                 {
                     IsCharging = true;
-
-                    // 強制控制角色停止移動
                     _characterMoveController1.ForceStop();
-
-                    // 移動面板關閉
                     _context.GameView.SetControlPanelActive(false);
                 }
 
-                // 蓄力數值計算
                 float chargeSpeed = 1f / _dataConfig.ThrowChargeSpeed;
-                _throwStrength += chargeSpeed * Time.deltaTime;
-                _throwStrength = Mathf.Clamp01(_throwStrength);
+                ThrowStrength += chargeSpeed * Time.deltaTime;
+                ThrowStrength = Mathf.Clamp01(ThrowStrength);
 
-                // 顯示蓄力條
-                _context.CurrentTurnCharacter.ShowThrowStrength(_throwStrength);
+                _context.CurrentTurnCharacter.ShowThrowStrength(ThrowStrength);
 
-                // 滿力判定
-                if (_throwStrength >= 1f)
+                // 連線模式:定時發送「蓄力即時資料」給 Server
+                if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+                {
+                    _syncTimer += Time.deltaTime;
+                    if (_syncTimer >= SYNC_INTERVAL)
+                    {
+                        _syncTimer = 0f;
+
+                        AimData data = new AimData()
+                        {
+                            roomId = StaticDataManager.MatchData.roomId,
+                            force = ThrowStrength,
+                        };
+
+                        SocketManager.Instance.SendSyncAim(data);
+                    }
+                }
+
+                if (ThrowStrength >= 1f)
                 {
                     _needRelease = true;
                     StartThrow();
@@ -104,7 +133,6 @@ public class CharacterThrowController
             }
             else
             {
-                // 蓄力中途放開按鍵
                 if (IsCharging)
                 {
                     StartThrow();
@@ -129,27 +157,42 @@ public class CharacterThrowController
     }
 
     /// <summary>
-    /// 設置下次投擲的類型
+    /// 開始投擲
     /// </summary>
-    /// <param name="type"></param>
-    public void SetNextThrowType(THROW_TYPE type)
+    private void StartThrow()
     {
-        _throwType = type;
+        _isThrowed = true;
+        // 進入投擲飛行階段，解除按壓與蓄力標記，防止 Tick 重複觸發
+        IsCharging = false;
+
+        // 關閉投擲力道
+        _context.CurrentTurnCharacter.CloseThrowStrength();
+
+        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        {
+            ThrowData data = new()
+            {
+                roomId = StaticDataManager.MatchData.roomId,
+                throwType = (int)ThrowType,
+                force = ThrowStrength
+            };
+
+            SocketManager.Instance.SendExecuteThrow(data);
+        }
+        else
+        {
+            // 獲取下一次投擲位置
+            ThrowTargetPos = GetNextThrowTargetPos(ThrowStrength);
+            // 撥放投擲動畫
+            _context.CurrentTurnCharacter.PlayThrowAnimation(ThrowType, ThrowTargetPos);
+        }
     }
 
     /// <summary>
-    /// 設置風力強度
+    /// 獲取下一次投擲位置
     /// </summary>
-    /// <param name="value"></param>
-    public void SetWindStrength(float value)
-    {
-        _windStrength = value;
-    }
-
-    /// <summary>
-    /// 設置下一次投擲位置
-    /// </summary>
-    private void SetNextThrowTargetPos()
+    public Vector3 GetNextThrowTargetPos(float throwStrength)
     {
         var throwView = _context.ThrowObjectView;
         var attacker = _context.CurrentTurnCharacter;
@@ -159,21 +202,21 @@ public class CharacterThrowController
             ? _context.P2_CharacterView
             : _context.P1_CharacterView;
 
-        if (throwView == null || attacker == null || defenseCharacter == null) return;
+        if (throwView == null || attacker == null || defenseCharacter == null) return Vector3.zero;
 
         // 計算拋物線軌跡參數
         Vector3 startPos = attacker.transform.position + new Vector3(0, 0.5f, 0);
         float throwDirection = (attacker == _context.P1_CharacterView) ? -1f : 1f;
 
         // 風向與風力判斷
-        float windStrength = (attacker == _context.P1_CharacterView) ? -_windStrength : _windStrength;
+        float windStrength = (attacker == _context.P1_CharacterView) ? -WindStrength : WindStrength;
 
         // 最大投擲距離
-        float maxDistance = _dataConfig.ThrowMaxDistance + windStrength;
-        float actualDistance = maxDistance * _throwStrength;
+        float maxDistance = Mathf.Max(1, _dataConfig.ThrowMaxDistance + windStrength);
+        float actualDistance = maxDistance * throwStrength;
 
         // 目標位置
-        _throwTargetPos = new Vector3(
+        return new Vector3(
             startPos.x + (throwDirection * actualDistance),
             _dataConfig.ThrowGroundJudgeY,
             0
@@ -181,29 +224,11 @@ public class CharacterThrowController
     }
 
     /// <summary>
-    /// 開始投擲
-    /// </summary>
-    private void StartThrow()
-    {
-        _isThrowed = true;
-        // 進入投擲飛行階段，解除按壓與蓄力標記，防止 Tick 重複觸發
-        IsCharging = false;
-
-        // 設置下一次投擲位置
-        SetNextThrowTargetPos();
-
-        // 關閉投擲力道
-        _context.CurrentTurnCharacter.CloseThrowStrength();
-        // 撥放投擲動畫
-        _context.CurrentTurnCharacter.PlayThrowAnimation(_throwType, _throwTargetPos);
-    }
-
-    /// <summary>
     /// 執行投擲
     /// </summary>
     public void ExecuteThrow()
     {
-        switch (_throwType)
+        switch (ThrowType)
         {
             case THROW_TYPE.Normal:
                 ExecuteParabolaThrow();
@@ -238,9 +263,9 @@ public class CharacterThrowController
         Vector3 startPos = attacker.transform.position + new Vector3(0, 0.5f, 0);
 
         // 投擲高度
-        float peakHeight = _dataConfig.ThrowMaxHeight * _throwStrength;
+        float peakHeight = _dataConfig.ThrowMaxHeight * ThrowStrength;
         // 投擲物件大小
-        float size = _throwType == THROW_TYPE.Giant ? _dataConfig.SkillGiantSize : 1;
+        float size = ThrowType == THROW_TYPE.Giant ? _dataConfig.SkillGiantSize : 1;
 
         // 啟動投擲物件
         throwView.UpdatePosition(startPos);
@@ -262,8 +287,8 @@ public class CharacterThrowController
             if (hasHit) return;
 
             // 計算這一幀的新座標
-            float x = Mathf.Lerp(startPos.x, _throwTargetPos.x, t);
-            float y = Mathf.Lerp(startPos.y, _throwTargetPos.y, t) + (4f * peakHeight * t * (1f - t));
+            float x = Mathf.Lerp(startPos.x, ThrowTargetPos.x, t);
+            float y = Mathf.Lerp(startPos.y, ThrowTargetPos.y, t) + (4f * peakHeight * t * (1f - t));
             Vector3 nextPos = new(x, y, 0);
 
             // 更新 Debug 用的射線資訊
@@ -286,7 +311,7 @@ public class CharacterThrowController
                     throwTween.Kill();
                     throwView.UpdatePosition(hit.point);
 
-                    HandleHit(throwView, defenseCharacter, isHitCharacter: true);
+                    HandleHit(defenseCharacter, isHitCharacter: true);
                     return;
                 }
             }
@@ -300,7 +325,7 @@ public class CharacterThrowController
             // 正常落地(未擊中角色)
             if (!hasHit)
             {
-                HandleHit(throwView, defenseCharacter, isHitCharacter: false);
+                HandleHit(defenseCharacter, isHitCharacter: false);
             }
         });
     }
@@ -375,7 +400,7 @@ public class CharacterThrowController
                     throwTween.Kill();
                     throwView.UpdatePosition(hit.point);
 
-                    HandleHit(throwView, defenseCharacter, isHitCharacter: true);
+                    HandleHit(defenseCharacter, isHitCharacter: true);
                     return;
                 }
             }
@@ -389,7 +414,7 @@ public class CharacterThrowController
             // 正常落地(未擊中角色)
             if (!hasHit)
             {
-                HandleHit(throwView, defenseCharacter, isHitCharacter: false);
+                HandleHit(defenseCharacter, isHitCharacter: false);
             }
         });
     }
@@ -397,11 +422,47 @@ public class CharacterThrowController
     /// <summary>
     /// 處理擊中
     /// </summary>
-    private void HandleHit(ThrowObjectView throwView, CharacterView hitCharacter, bool isHitCharacter)
+    private void HandleHit(CharacterView hitCharacter, bool isHitCharacter)
     {
+        // 傷害
+        int damage = ThrowType == THROW_TYPE.StrengthDamage ?
+            Mathf.CeilToInt(_dataConfig.ThrowDamage * _dataConfig.SkillStrengthDamageMultiplier) :
+            _dataConfig.ThrowDamage;
+
+        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        {
+            bool isP1 = (hitCharacter == _context.P1_CharacterView);
+
+            HitData data = new()
+            {
+                roomId = StaticDataManager.MatchData.roomId,
+                targetSeat = isP1 ? 0 : 1,
+                throwType = (int)ThrowType,
+                damage = isHitCharacter ? damage : 0
+            };
+
+            SocketManager.Instance.SendExecuteHit(data);
+        }
+        else
+        {
+            ExecuteHit(hitCharacter, damage, isHitCharacter);
+        }
+    }
+
+    /// <summary>
+    /// 執行擊中
+    /// </summary>
+    /// <param name="hitCharacter"></param>
+    /// <param name="damage"></param>
+    /// <param name="isHitCharacter"></param>
+    public void ExecuteHit( CharacterView hitCharacter, int damage, bool isHitCharacter)
+    {
+        var throwView = _context.ThrowObjectView;
+
         throwView.OnHit();
 
-        if(hitCharacter == null)
+        if (hitCharacter == null)
         {
             Debug.LogError("找不到防守方角色");
             return;
@@ -409,21 +470,15 @@ public class CharacterThrowController
 
         if (isHitCharacter)
         {
-            // 傷害
-            int damage = _throwType == THROW_TYPE.StrengthDamage ?
-                Mathf.CeilToInt(_dataConfig.ThrowDamage * _dataConfig.SkillStrengthDamageMultiplier) :
-                _dataConfig.ThrowDamage;
-
-            int remainingHp = hitCharacter.TakeDamage(damage, _throwType);
+            int remainingHp = hitCharacter.TakeDamage(damage, ThrowType);
 
             // 判斷被擊中的是 P1 還是 P2，並更新對應的血條 UI
             bool isP1 = (hitCharacter == _context.P1_CharacterView);
-            _context.GameView.UpdateHpBar(isP1, remainingHp, hitCharacter.MaxHp);
+            _context.GameView.UpdateHpBar(isP1, remainingHp);
 
             // 檢查遊戲是否結束
             if (remainingHp <= 0)
             {
-                Debug.Log($"【遊戲結束】 {hitCharacter.name} 倒下了！");
                 _context.GameController.IsGameOver.Value = true;
                 return;
             }

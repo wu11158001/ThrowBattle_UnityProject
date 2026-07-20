@@ -81,6 +81,26 @@ public class CancelMatchResponse
 }
 #endregion
 
+#region 主動退出遊戲
+/// <summary>
+/// 主動退出遊戲請求
+/// </summary>
+[Serializable]
+public class LeaveBattleRequest
+{
+    /// <summary> 玩家專屬ID </summary>
+    public string playerId;
+}
+/// <summary>
+/// 主動退出遊戲回傳
+/// </summary>
+[Serializable]
+public class LeaveBattleResponse
+{
+
+}
+#endregion
+
 #region 配對成功
 /// <summary>
 /// 配對成功資料
@@ -92,7 +112,109 @@ public class MatchSuccessData
     public string roomId;
     /// <summary> 是否為房主(Player1) </summary>
     public bool isCreator;
+    /// <summary> 本地玩家編號(0 = Player1, 1 = Player2) </summary>
+    public int mySeat;
     /// <summary> 對手暱稱 </summary>
     public string opponentNickname;
+}
+#endregion
+
+#region 遊戲
+/// <summary>
+/// 角色位置同步資料
+/// </summary>
+[Serializable]
+public class MoveData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 角色當前最新的 X 軸位置 </summary>
+    public float posX;
+    /// <summary> 移動方向（1、-1 或 0） </summary>
+    public float inputDir;
+}
+
+/// <summary>
+/// 畜力狀態資料
+/// </summary>
+[Serializable]
+public class AimData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 畜力程度(0~1) </summary>
+    public float force;
+}
+
+/// <summary>
+/// 投擲資料
+/// </summary>
+[Serializable]
+public class ThrowData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 投擲類型 </summary>
+    public int throwType;
+    /// <summary> 力道 </summary>
+    public float force;
+}
+
+/// <summary>
+/// 擊中資料
+/// </summary>
+[Serializable]
+public class HitData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 擊中對象(0 = Player1, 1 = Player2) </summary>
+    public int targetSeat;
+    /// <summary> 投擲類型 </summary>
+    public int throwType;
+    /// <summary> 造成傷害 </summary>
+    public int damage;
+    /// <summary> 玩家1Hp </summary>
+    public int p1Hp;
+    /// <summary> 玩家2Hp </summary>
+    public int p2Hp;
+}
+
+/// <summary>
+/// 回合結束資料
+/// </summary>
+[Serializable]
+public class TurnEndData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+}
+
+/// <summary>
+/// 回合切換資料
+/// </summary>
+[Serializable]
+public class NewTurnData
+{
+    /// <summary> 當前回合操作玩家(0 = Player1, 1= Player2) </summary>
+    public int currentTurnSeat;
+    /// <summary> 玩家1Hp </summary>
+    public int p1Hp;
+    /// <summary> 玩家2Hp </summary>
+    public int p2Hp;
+    /// <summary> 當前回合風力 </summary>
+    public float windStrength;
+}
+
+/// <summary>
+/// 遊戲結束
+/// </summary>
+[Serializable]
+public class GameOverData
+{
+    /// <summary> 獲勝玩家(0 = Player1, 1= Player2) </summary>
+    public int winnerSeat;
+    /// <summary> 若對手中斷連線這會收到內容 </summary>
+    public string message;
 }
 #endregion

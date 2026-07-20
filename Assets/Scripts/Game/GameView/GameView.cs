@@ -42,11 +42,6 @@ public class GameView : BaseView
     [Header("退出")]
     [SerializeField] private Button _btn_Exit;
 
-    // 目前按壓狀態
-    private bool _isPressingLeft = false;
-    private bool _isPressingRight = false;
-    private bool _isPressingThrow = false;
-
     // 技能按鈕
     private List<SkillBtn> _p1SkillButtons = new();
     private List<SkillBtn> _p2SkillButtons = new();
@@ -67,7 +62,7 @@ public class GameView : BaseView
         base.OnDestroy();
     }
 
-    private void Initialize()
+    private void Awake()
     {
         _moveControlPanel.SetActive(false);
         _wind_LeftArror.SetActive(false);
@@ -86,7 +81,6 @@ public class GameView : BaseView
         _context = GameplayManager.CurrentContext;
         _dataConfig = StaticDataManager.DataConfig;
 
-        Initialize();
         CreateSkillBtn();
         Bind();
         PlayOpeningAnimation();
@@ -96,19 +90,19 @@ public class GameView : BaseView
     private void Bind()
     {
         // 投擲控制
-        _throwHandler.DownAction = (eventData) => { _isPressingThrow = true; };
-        _throwHandler.UpAction = (eventData) => { _isPressingThrow = false; };
-        _throwHandler.ExitAction = (eventData) => { _isPressingThrow = false; };
+        _throwHandler.DownAction = (eventData) => { _context.GameController.SetThrowPressState(true); };
+        _throwHandler.UpAction = (eventData) => { _context.GameController.SetThrowPressState(false); };
+        _throwHandler.ExitAction = (eventData) => { _context.GameController.SetThrowPressState(false); };
 
         // 移動控制:左
-        _leftHandler.DownAction = (eventData) => { _isPressingLeft = true; };
-        _leftHandler.UpAction = (eventData) => { _isPressingLeft = false; };
-        _leftHandler.ExitAction = (eventData) => { _isPressingLeft = false; };
+        _leftHandler.DownAction = (eventData) => { _context.GameController.SetInputDirection(-1); };
+        _leftHandler.UpAction = (eventData) => { _context.GameController.SetInputDirection(0); };
+        _leftHandler.ExitAction = (eventData) => { _context.GameController.SetInputDirection(0); };
 
         // 移動控制:右
-        _rightHandler.DownAction = (eventData) => { _isPressingRight = true; };
-        _rightHandler.UpAction = (eventData) => { _isPressingRight = false; };
-        _rightHandler.ExitAction = (eventData) => { _isPressingRight = false; };
+        _rightHandler.DownAction = (eventData) => { _context.GameController.SetInputDirection(1); };
+        _rightHandler.UpAction = (eventData) => { _context.GameController.SetInputDirection(0); };
+        _rightHandler.ExitAction = (eventData) => { _context.GameController.SetInputDirection(0); };
 
         // 退出按鈕
         _btn_Exit.OnClickAsObservable()
@@ -123,24 +117,10 @@ public class GameView : BaseView
                             content: "是否退出遊戲?",
                             confirmAction: () =>
                             {
+                                HttpManager.Instance.SendLeaveBattle();
                                 SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.LobbyScene).Forget();
                             });
                     }).Forget();
-            })
-            .AddTo(this);
-
-        // 每幀驅動
-        this.UpdateAsObservable()
-            .Subscribe(_ =>
-            {
-                // 移動控制
-                float inputDir = 0f;
-                if (_isPressingLeft) inputDir = -1f;
-                else if (_isPressingRight) inputDir = 1f;
-                _context.GameController.SetInputDirection(inputDir);
-
-                // 投擲控制
-                _context.GameController.SetThrowPressState(_isPressingThrow);
             })
             .AddTo(this);
     }
@@ -222,7 +202,7 @@ public class GameView : BaseView
     /// </summary>
     private void OnSkillClick(THROW_TYPE type)
     {
-        _context.GameController.SetNextThrowType(type);
+        _context.GameController.SetThrowType(type);
 
         // 一旦點擊了任何一個技能，這一回合「該玩家的所有技能」都關閉互動
         bool isP1 = (_context.CurrentTurnCharacter == _context.P1_CharacterView);
@@ -290,7 +270,7 @@ public class GameView : BaseView
     public void SetIsLocalTurn(bool isLocalTurn)
     {
         // 預設使用「一般投擲」類型
-        _context.GameController.SetNextThrowType(THROW_TYPE.Normal);
+        _context.GameController.SetThrowType(THROW_TYPE.Normal);
 
         SetControlPanelActive(isLocalTurn);
 
@@ -339,9 +319,11 @@ public class GameView : BaseView
     /// <summary>
     /// 更新特定角色的血條 UI
     /// </summary>
-    public void UpdateHpBar(bool isPlayer1, int currentHp, int maxHp)
+    /// <param name="isPlayer1"></param>
+    /// <param name="currentHp"></param>
+    public void UpdateHpBar(bool isPlayer1, int currentHp)
     {
-        float fillValue = (float)currentHp / maxHp;
+        float fillValue = (float)currentHp / _dataConfig.CharacterMaxHp;
 
         if (isPlayer1)
         {

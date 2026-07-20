@@ -17,6 +17,7 @@ public class CharacterAnimControl : MonoBehaviour
     private readonly int _skill_GiantParamId = Animator.StringToHash("Skill_Giant");
     private readonly int _derideParamId = Animator.StringToHash("Deride");
     private readonly int _deathParamId = Animator.StringToHash("Death");
+    private readonly int _aimParamId = Animator.StringToHash("Aim");
 
     private GameplayContext _context;
 
@@ -38,7 +39,20 @@ public class CharacterAnimControl : MonoBehaviour
     /// </summary>
     public void OnThisTurnFinish()
     {
-        SwitchTurnAsync().Forget();
+        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        {
+            TurnEndData data = new()
+            {
+                roomId = StaticDataManager.MatchData.roomId
+            };
+
+            SocketManager.Instance.SendTurnEnd(data);
+        }
+        else
+        {
+            SwitchTurnAsync().Forget();
+        }        
     }
 
     /// <summary>
@@ -58,6 +72,25 @@ public class CharacterAnimControl : MonoBehaviour
     public void MoveAnimationControl(bool isMove)
     {
         _anim.SetBool(_isMovingParamId, isMove);
+    }
+
+    /// <summary>
+    /// 撥放蓄力動畫
+    /// </summary>
+    public void PlayAimAnimation()
+    {
+        AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(0);
+
+        //當前是否已經在播
+        bool isPlaying = stateInfo.IsName("Aim");
+
+        // 檢查是否「正在轉換」
+        bool isTransitioning = _anim.IsInTransition(0);
+
+        if (!isPlaying && !isTransitioning)
+        {
+            _anim.SetTrigger(_aimParamId);
+        }
     }
 
     /// <summary>
@@ -125,6 +158,8 @@ public class CharacterAnimControl : MonoBehaviour
     /// </summary>
     public void OpenGameOverView()
     {
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match) return;
+
         string winner = "";
 
         bool isP1 = (_context.CurrentTurnCharacter == _context.P1_CharacterView);
@@ -132,12 +167,6 @@ public class CharacterAnimControl : MonoBehaviour
 
         switch (StaticDataManager.PlayType)
         {
-            case PLAY_TYPE.Match:
-                winner = _context.CurrentTurnCharacter.IsLocalPlayer ?
-                    StaticDataManager.MatchData.opponentNickname :
-                    localPlayer;
-                break;
-
             case PLAY_TYPE.WithAi:
                 winner = isP1 ? localPlayer : "AI";
                 break;
@@ -153,7 +182,7 @@ public class CharacterAnimControl : MonoBehaviour
             canvasType: CANVAS_TYPE.Canvas_Highest,
             callback: (view) =>
             {
-                view.SetResult(winner);
+                view.SetResult($"Winner: {winner}");
             }).Forget();
     }
 }

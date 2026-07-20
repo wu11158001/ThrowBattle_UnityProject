@@ -75,7 +75,7 @@ public class CharacterView : BaseObject
                 string localPlayerNickname = StaticDataManager.RegisterPlayerData.Nickname;
                 string opponentPlayerNickname = matchData.opponentNickname;
 
-                bool isMine = isPlayer1 == matchData.isCreator;
+                bool isMine = (isPlayer1 && matchData.mySeat == 0) || (!isPlayer1 && matchData.mySeat == 1);
 
                 _text_Nickname.text = isMine ? localPlayerNickname : opponentPlayerNickname;
                 IsLocalPlayer = isMine;
@@ -124,6 +124,7 @@ public class CharacterView : BaseObject
         if (!_throwStrengthCanvas.gameObject.activeSelf) _throwStrengthCanvas.gameObject.SetActive(true);
 
         _img_ThrowStrength.fillAmount = value;
+        _context.CurrentTurnCharacter.PlayAimAnimation();
     }
 
     /// <summary>
@@ -147,27 +148,31 @@ public class CharacterView : BaseObject
     }
 
     /// <summary>
-    /// 角色移動
+    /// 控制角色移動、動畫與面向
     /// </summary>
-    /// <param name="direction">-1 表示向左，1 表示向右</param>
-    public void Move(float direction)
+    /// <param name="direction">移動方向</param>
+    /// <param name="isPeerSync">是否為對手連線同步</param>
+    public void Move(float direction, bool isPeerSync = false)
     {
-        // 計算新位置
-        Vector3 newPos = transform.position + new Vector3(direction * _moveSpeed * Time.deltaTime, 0, 0);
-
-        // 限制移動範圍
-        if(_initFillX)
+        if (!isPeerSync)
         {
-            // 角色在右側
-            newPos.x = Mathf.Clamp(newPos.x, _moveRange.x, _moveRange.y);
-        }
-        else
-        {
-            // 角色在左側
-            newPos.x = Mathf.Clamp(newPos.x, -_moveRange.y, -_moveRange.x);
-        }
+            // 計算新位置
+            Vector3 newPos = transform.position + new Vector3(direction * _moveSpeed * Time.deltaTime, 0, 0);
 
-        transform.position = newPos;
+            // 限制移動範圍
+            if (_initFillX)
+            {
+                // 角色在右側
+                newPos.x = Mathf.Clamp(newPos.x, _moveRange.x, _moveRange.y);
+            }
+            else
+            {
+                // 角色在左側
+                newPos.x = Mathf.Clamp(newPos.x, -_moveRange.y, -_moveRange.x);
+            }
+
+            transform.position = newPos;
+        }
 
         // 播放動畫
         _characterAnimControl.MoveAnimationControl(Mathf.Abs(direction) > 0);
@@ -217,9 +222,25 @@ public class CharacterView : BaseObject
     }
 
     /// <summary>
+    /// 撥放蓄力動畫
+    /// </summary>
+    public void PlayAimAnimation() => _characterAnimControl.PlayAimAnimation();
+
+    /// <summary>
     /// 撥放嘲諷動畫
     /// </summary>
     public void PlayDerideAnimation() => _characterAnimControl.PlayDerideAnimation();
+
+    /// <summary>
+    /// 撥放受擊動畫
+    /// </summary>
+    /// <param name="type"></param>
+    public void PlayHurtAnimation(THROW_TYPE type) => _characterAnimControl.PlayHurtAnimation(type);
+
+    /// <summary>
+    /// 撥放死亡動畫
+    /// </summary>
+    public void PlayDeathAnimation() => _characterAnimControl.PlayDeathAnimation();
 
     /// <summary>
     /// 受到傷害
@@ -229,23 +250,16 @@ public class CharacterView : BaseObject
     /// <returns></returns>
     public int TakeDamage(int damage, THROW_TYPE type)
     {
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
-        {
-
-        }
-        else
-        {
-            CurrentHp = Mathf.Max(0, CurrentHp - damage);
-        }
+        CurrentHp = Mathf.Max(0, CurrentHp - damage);
 
         // 撥放動畫
-        if(CurrentHp > 0)
+        if (CurrentHp > 0)
         {
-            _characterAnimControl.PlayHurtAnimation(type);
+            PlayHurtAnimation(type);
         }
         else
         {
-            _characterAnimControl.PlayDeathAnimation();
+            PlayDeathAnimation();
         }
 
         return CurrentHp;
@@ -260,6 +274,6 @@ public class CharacterView : BaseObject
 
         // 更新血條 UI
         bool isP1 = (this == _context.P1_CharacterView);
-        _context.GameView.UpdateHpBar(isP1, CurrentHp, MaxHp);
+        _context.GameView.UpdateHpBar(isP1, CurrentHp);
     }
 }

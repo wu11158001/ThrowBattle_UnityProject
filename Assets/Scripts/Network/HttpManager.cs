@@ -132,4 +132,31 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
             }
         }
     }
+
+    /// <summary>
+    /// 發送:退出遊戲
+    /// </summary>
+    public void SendLeaveBattle()
+    {
+        LeaveBattleRequest req = new()
+        {
+            playerId = StaticDataManager.RegisterPlayerData.PlayerId
+        };
+
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+        {
+            _ = SendPostAsync<LeaveBattleRequest, LeaveBattleResponse>(
+                subUrl: StaticDataManager.LeaveBattleSubUrl,
+                requestData: req,
+                onSuccess: (res) =>
+                {
+
+                },
+                onFailure: (errorCode, err) =>
+                {
+
+                }
+            );
+        }
+    }
 }

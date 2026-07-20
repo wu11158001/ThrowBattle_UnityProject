@@ -26,6 +26,7 @@ public class GameOverView : BaseView
             .First()
             .Subscribe(_ =>
             {
+                HttpManager.Instance.SendLeaveBattle();
                 SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.LobbyScene).Forget();
             })
             .AddTo(this);
@@ -34,9 +35,9 @@ public class GameOverView : BaseView
     /// <summary>
     /// 設置遊戲結果
     /// </summary>
-    /// <param name="winPlayer"></param>
-    public void SetResult(string winPlayer)
+    /// <param name="winMessage"></param>
+    public void SetResult(string winMessage)
     {
-        _text_Result.text = $"Winner: {winPlayer}";
+        _text_Result.text = winMessage;
     }
 }
