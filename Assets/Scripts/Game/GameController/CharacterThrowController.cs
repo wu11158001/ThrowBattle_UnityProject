@@ -98,6 +98,9 @@ public class CharacterThrowController
     {
         if (_isThrowed) return;
 
+        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+        if (!isMyTurn) return;
+
         if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
             ChargingData data = new()
