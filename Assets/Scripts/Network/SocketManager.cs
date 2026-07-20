@@ -301,7 +301,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         string json = JsonConvert.SerializeObject(data);
-        EmitSyncAimJS(json);
+        EmitExecuteThrowJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("execute_throw", data);
 #endif
@@ -314,7 +314,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         string json = JsonConvert.SerializeObject(data);
-        EmitSyncAimJS(json);
+        EmitExecuteHitJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("execute_hit", data);
 #endif
@@ -327,7 +327,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         string json = JsonConvert.SerializeObject(data);
-        EmitSyncAimJS(json);
+        EmitTurnEndJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("turn_end", data);
 #endif

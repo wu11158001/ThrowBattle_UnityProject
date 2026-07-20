@@ -38,13 +38,9 @@ public class GameController : MonoBehaviour
             .Where(_ => _context.CurrentTurnCharacter != null)
             .Subscribe(_ =>
             {
-                // 連線權限檢查
-                if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+                bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+                if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
                 {
-                    bool isMyTurn = StaticDataManager.MatchData.isCreator
-                        ? _context.CurrentTurnCharacter == _context.P1_CharacterView
-                        : _context.CurrentTurnCharacter == _context.P2_CharacterView;
-
                     if (!isMyTurn) return;
                 }
 

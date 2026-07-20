@@ -23,7 +23,7 @@ public class GmaeAPISendAndRecive
     /// </summary>
     public void RemoveListenServerEvent()
     {
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match && SocketManager.Instance != null)
         {
             SocketManager.Instance.OnPeerMoveReceived -= OnPeerMove;
             SocketManager.Instance.OnNewTurnReceived -= OnServerNewTurn;
