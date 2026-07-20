@@ -214,6 +214,8 @@ public class GameOverData
 {
     /// <summary> 獲勝玩家(0 = Player1, 1= Player2) </summary>
     public int winnerSeat;
+    /// <summary> 獲勝暱稱 </summary>
+    public int winnerNickname;
     /// <summary> 若對手中斷連線這會收到內容 </summary>
     public string message;
 }

@@ -167,12 +167,7 @@ public class GmaeAPISendAndRecive
         string winMessage = "";
         if (string.IsNullOrEmpty(data.message))
         {
-            string localPlayer = StaticDataManager.RegisterPlayerData.Nickname;
-            string winner = data.winnerSeat == 0 ?
-                StaticDataManager.MatchData.opponentNickname :
-                localPlayer;
-
-            winMessage = $"Winner: {winner}";
+            winMessage = $"Winner: {data.winnerNickname}";
         }
         else
         {
