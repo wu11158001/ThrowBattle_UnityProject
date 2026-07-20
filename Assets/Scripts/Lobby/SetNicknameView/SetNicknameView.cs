@@ -74,6 +74,8 @@ public class SetNicknameView : BaseView
     {
         string inputName = if_Nickname.text;
 
+        if (string.IsNullOrEmpty(inputName)) return;
+
         _text_Error.gameObject.SetActive(false);
         _text_BtnRegister.text = "註冊中...";
         _btn_Register.interactable = false;

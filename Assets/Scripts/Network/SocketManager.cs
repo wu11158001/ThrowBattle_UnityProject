@@ -14,7 +14,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     [DllImport("__Internal")] private static extern void EmitJoinEventJS(string playerId);
     [DllImport("__Internal")] private static extern void EmitJoinBattleRoomJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitSyncMoveJS(string jsonStr);
-    [DllImport("__Internal")] private static extern void EmitSyncAimJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitSyncChargingJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitExecuteThrowJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitExecuteHitJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitTurnEndJS(string jsonStr);
@@ -27,7 +27,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary> 接收事件:角色位置 </summary>
     public Action<MoveData> OnPeerMoveReceived;
     /// <summary> 接收事件:對手畜力狀態 </summary>
-    public Action<AimData> OnPeerAimReceived;
+    public Action<ChargingData> OnPeerChargingReceived;
     /// <summary> 接收事件:投擲 </summary>
     public Action<ThrowData> OnPeerThrowReceived;
     /// <summary> 接收事件:擊中 </summary>
@@ -111,16 +111,16 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
             HandleMatchSuccessAsync(data).Forget();
         });
 
-        // 監聽:角色位置
+        // 監聽:角色移動
         socket.On("on_peer_move_synced", (res) => {
             var data = JsonConvertData<MoveData>(res);
             UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerMoveReceived?.Invoke(data); });
         });
 
         // 監聽:蓄力狀態
-        socket.On("on_peer_aim_synced", (res) => {
-            var data = JsonConvertData<AimData>(res);
-            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerAimReceived?.Invoke(data); });
+        socket.On("on_peer_charging_synced", (res) => {
+            var data = JsonConvertData<ChargingData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnPeerChargingReceived?.Invoke(data); });
         });
 
         // 監聽:執行投擲
@@ -244,7 +244,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary>
     /// 畜力狀態
     /// </summary>
-    public void OnPeerAimSyncedJS(string jsonText) => OnPeerAimReceived?.Invoke(JsonConvert.DeserializeObject<AimData>(jsonText));
+    public void OnPeerChargingSyncedJS(string jsonText) => OnPeerChargingReceived?.Invoke(JsonConvert.DeserializeObject<ChargingData>(jsonText));
 
     /// <summary>
     /// 執行投擲
@@ -269,7 +269,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
     #region 發送資料API
     /// <summary>
-    /// 發送:同步角色位置
+    /// 發送:角色移動
     /// </summary>
     public void SendSyncMove(MoveData data)
     {
@@ -284,13 +284,13 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary>
     /// 發送:畜力狀態
     /// </summary>
-    public void SendSyncAim(AimData data)
+    public void SendSyncCharging(ChargingData data)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         string json = JsonConvert.SerializeObject(data);
-        EmitSyncAimJS(json);
+        EmitSyncChargingJS(json);
 #else
-        if (socket != null && socket.Connected) socket.EmitAsync("sync_aim", data);
+        if (socket != null && socket.Connected) socket.EmitAsync("sync_charging", data);
 #endif
     }
 

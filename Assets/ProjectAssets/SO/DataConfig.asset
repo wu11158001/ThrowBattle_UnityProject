@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataConfig
   BaseUrl: https://throwbattle-server.onrender.com
   CharacterPosY: -2.6
-  CharacterMoveRange: {x: 3, y: 6}
-  CharacterMoveSpeed: 2
+  CharacterMoveRange: {x: 3, y: 7}
+  CharacterMoveSpeed: 2.5
   CharacterColor_P1: E2FF5D
   CharacterColor_P2: FFFFFF
   CharacterMaxHp: 100
   ThrowChargeSpeed: 1.5
   ThrowGroundJudgeY: -3.5
-  ThrowMaxDistance: 20
+  ThrowMaxDistance: 23
   ThrowMaxHeight: 3.8
   ThrowMoveDuration: 1
   ThrowRaycastRadius: 0.35
-  ThrowDamage: 30
+  ThrowDamage: 15
   WindMaxStrength: 5
   SkillGiantIcon: {fileID: 7677048284982793680, guid: 022797f27223f804d84a5d536986654e, type: 3}
   SkillStrengthDamageIcon: {fileID: 7455952627863186085, guid: 022797f27223f804d84a5d536986654e, type: 3}

@@ -25,23 +25,12 @@ public class CharacterThrowController
 
     // 本回合是否已投擲
     private bool _isThrowed;
-    // 是否已開始畜力
-    private bool _isPressingThrow = false;
-    // 是否需要先放開按鍵才能進行下一次蓄力
-    private bool _needRelease = false;
 
-    // Server 同步的計時時間
-    private float _syncTimer = 0f;
-    // 多少秒同步一次
-    private const float SYNC_INTERVAL = 0.05f; 
+    // 是否正處於蓄力狀態
+    private bool _isCharging = false;
 
     /// <summary>
-    ///是否正處於蓄力狀態
-    /// </summary>
-    public bool IsCharging { get; private set; } = false;
-
-    /// <summary>
-    /// 畜力程度(0~1)
+    ///  畜力程度(0~1)
     /// </summary>
     public float ThrowStrength { get; set; }
 
@@ -73,67 +62,27 @@ public class CharacterThrowController
     public void ResetState()
     {
         _isThrowed = false;
-        IsCharging = false;
-        ThrowStrength = 0f;
+        _isCharging = false;
+        ThrowStrength = 0;
     }
 
     public void Tick()
     {
         if (_context.CurrentTurnCharacter == null) return;
 
-        // 連線模式:對手的回合跳過
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
-        {
-            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-            if (!isMyTurn) return; 
-        }
-
         if (!_isThrowed)
         {
-            if (_isPressingThrow)
+            // 開始蓄力
+            if (_isCharging)
             {
-                if (_needRelease) return;
-
-                if (!IsCharging)
-                {
-                    IsCharging = true;
-                    _characterMoveController1.ForceStop();
-                    _context.GameView.SetControlPanelActive(false);
-                }
-
                 float chargeSpeed = 1f / _dataConfig.ThrowChargeSpeed;
                 ThrowStrength += chargeSpeed * Time.deltaTime;
                 ThrowStrength = Mathf.Clamp01(ThrowStrength);
 
-                _context.CurrentTurnCharacter.ShowThrowStrength(ThrowStrength);
+                _context.CurrentTurnCharacter.UpdateCharging(ThrowStrength);
 
-                // 連線模式:定時發送「蓄力即時資料」給 Server
-                if (StaticDataManager.PlayType == PLAY_TYPE.Match)
-                {
-                    _syncTimer += Time.deltaTime;
-                    if (_syncTimer >= SYNC_INTERVAL)
-                    {
-                        _syncTimer = 0f;
-
-                        AimData data = new AimData()
-                        {
-                            roomId = StaticDataManager.MatchData.roomId,
-                            force = ThrowStrength,
-                        };
-
-                        SocketManager.Instance.SendSyncAim(data);
-                    }
-                }
-
+                // 蓄力值滿直接投擲
                 if (ThrowStrength >= 1f)
-                {
-                    _needRelease = true;
-                    StartThrow();
-                }
-            }
-            else
-            {
-                if (IsCharging)
                 {
                     StartThrow();
                 }
@@ -142,57 +91,79 @@ public class CharacterThrowController
     }
 
     /// <summary>
-    /// 設置投擲蓄力狀態
+    /// 設置輸入蓄力狀態
     /// </summary>
-    /// <param name="isPressing"></param>
-    public void SetThrowPressState(bool isPressing)
+    /// <param name="isCharging"></param>
+    public void SetInputCharging(bool isCharging)
     {
-        _isPressingThrow = isPressing;
+        if (_isThrowed) return;
 
-        // 如果放開了按鍵，解除安全鎖
-        if (!_isPressingThrow)
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
-            _needRelease = false;
+            ChargingData data = new()
+            {
+                roomId = StaticDataManager.MatchData.roomId,
+                isCharging = isCharging,
+                force = ThrowStrength
+            };
+
+            SocketManager.Instance.SendSyncCharging(data);
         }
+        else
+        {
+            if (isCharging) SetChargingState();
+            else StartThrow();
+        }  
+    }
+
+    /// <summary>
+    /// 設置蓄力狀態
+    /// </summary>
+    public void SetChargingState()
+    {
+        _isCharging = true;
+        _context.CurrentTurnCharacter.PlayChargingAnimation();
+        _context.GameView.SetControlPanelActive(false);
     }
 
     /// <summary>
     /// 開始投擲
     /// </summary>
-    private void StartThrow()
+    public void StartThrow()
     {
         _isThrowed = true;
-        // 進入投擲飛行階段，解除按壓與蓄力標記，防止 Tick 重複觸發
-        IsCharging = false;
+        _isCharging = false;
 
-        // 關閉投擲力道
-        _context.CurrentTurnCharacter.CloseThrowStrength();
-
-        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
-            ThrowData data = new()
+            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+            if (isMyTurn)
             {
-                roomId = StaticDataManager.MatchData.roomId,
-                throwType = (int)ThrowType,
-                force = ThrowStrength
-            };
+                ThrowData data = new()
+                {
+                    roomId = StaticDataManager.MatchData.roomId,
+                    throwType = (int)ThrowType,
+                    force = ThrowStrength
+                };
 
-            SocketManager.Instance.SendExecuteThrow(data);
+                SocketManager.Instance.SendExecuteThrow(data);
+            }
         }
         else
         {
-            // 獲取下一次投擲位置
-            ThrowTargetPos = GetNextThrowTargetPos(ThrowStrength);
+            // 關閉投擲力道
+            _context.CurrentTurnCharacter.CloseThrowStrength();
+            // 獲取投擲位置
+            ThrowTargetPos = GetThrowTargetPos(ThrowStrength);
             // 撥放投擲動畫
             _context.CurrentTurnCharacter.PlayThrowAnimation(ThrowType, ThrowTargetPos);
         }
     }
 
     /// <summary>
-    /// 獲取下一次投擲位置
+    /// 獲取投擲位置
     /// </summary>
-    public Vector3 GetNextThrowTargetPos(float throwStrength)
+    public Vector3 GetThrowTargetPos(float throwStrength)
     {
         var throwView = _context.ThrowObjectView;
         var attacker = _context.CurrentTurnCharacter;

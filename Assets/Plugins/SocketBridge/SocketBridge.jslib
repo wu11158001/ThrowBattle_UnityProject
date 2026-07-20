@@ -29,16 +29,16 @@ mergeInto(LibraryManager.library, {
             SendMessage('SocketManager', 'OnMatchSuccessJS', jsonStr);
         });
 
-        // 監聽:角色位置
+        // 監聽:角色移動
         window.webglSocket.on('on_peer_move_synced', function (data) {
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
             SendMessage('SocketManager', 'OnPeerMoveSyncedJS', jsonStr);
         });
 
         // 監聽:畜力狀態
-        window.webglSocket.on('on_peer_aim_synced', function (data) {
+        window.webglSocket.on('on_peer_charging_synced', function (data) {
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
-            SendMessage('SocketManager', 'OnPeerAimSyncedJS', jsonStr);
+            SendMessage('SocketManager', 'OnPeerChargingSyncedJS', jsonStr);
         });
 
         // 監聽:執行投擲
@@ -88,7 +88,7 @@ mergeInto(LibraryManager.library, {
         }
     },
 
-    // 發送:同步角色位置
+    // 發送:角色移動
     EmitSyncMoveJS: function (jsonStr) {
         var rawJson = UTF8ToString(jsonStr);
         if (window.webglSocket) {
@@ -97,10 +97,10 @@ mergeInto(LibraryManager.library, {
     },
 
     // 發送:畜力狀態
-    EmitSyncAimJS: function (jsonStr) {
+    EmitSyncChargingJS: function (jsonStr) {
         var rawJson = UTF8ToString(jsonStr);
         if (window.webglSocket) {
-            window.webglSocket.emit('sync_aim', JSON.parse(rawJson));
+            window.webglSocket.emit('sync_charging', JSON.parse(rawJson));
         }
     },
 

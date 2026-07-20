@@ -17,7 +17,7 @@ public class CharacterAnimControl : MonoBehaviour
     private readonly int _skill_GiantParamId = Animator.StringToHash("Skill_Giant");
     private readonly int _derideParamId = Animator.StringToHash("Deride");
     private readonly int _deathParamId = Animator.StringToHash("Death");
-    private readonly int _aimParamId = Animator.StringToHash("Aim");
+    private readonly int _chargingParamId = Animator.StringToHash("Charging");
 
     private GameplayContext _context;
 
@@ -77,20 +77,9 @@ public class CharacterAnimControl : MonoBehaviour
     /// <summary>
     /// 撥放蓄力動畫
     /// </summary>
-    public void PlayAimAnimation()
+    public void PlayChargingAnimation()
     {
-        AnimatorStateInfo stateInfo = _anim.GetCurrentAnimatorStateInfo(0);
-
-        //當前是否已經在播
-        bool isPlaying = stateInfo.IsName("Aim");
-
-        // 檢查是否「正在轉換」
-        bool isTransitioning = _anim.IsInTransition(0);
-
-        if (!isPlaying && !isTransitioning)
-        {
-            _anim.SetTrigger(_aimParamId);
-        }
+        _anim.SetTrigger(_chargingParamId);
     }
 
     /// <summary>

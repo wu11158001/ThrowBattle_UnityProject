@@ -27,14 +27,14 @@ body {
     height: 100%; 
 }
 
-/* --- 關鍵修改：強制 Canvas 遵循 1792:768 縮放 --- */
+/* --- 關鍵修改：強制 Canvas 遵循 1920:911 縮放 --- */
 #unity-canvas { 
     background: {{{ BACKGROUND_COLOR }}}; 
     width: 100% !important; 
     height: 100% !important; 
-    max-width: calc(100vh * (1792 / 768)); 
-    max-height: calc(100vw * (768 / 1792)); 
-    aspect-ratio: 1792 / 768; /* 鎖定 1792:768 比例 */
+    max-width: calc(100vh * (1920 / 911)); 
+    max-height: calc(100vw * (911 / 1920)); 
+    aspect-ratio: 1920 / 911; /* 鎖定 1920:911 比例 */
     object-fit: contain; 
 }
 
@@ -42,9 +42,9 @@ body {
 .unity-mobile #unity-canvas { 
     width: 100% !important; 
     height: 100% !important; 
-    max-width: calc(100vh * (1792 / 768)); 
-    max-height: calc(100vw * (768 / 1792)); 
-    aspect-ratio: 1792 / 768;
+    max-width: calc(100vh * (1920 / 911)); 
+    max-height: calc(100vw * (911 / 1920)); 
+    aspect-ratio: 1920 / 911;
 }
 
 /* 載入條置中 */

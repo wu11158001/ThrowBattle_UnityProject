@@ -25,11 +25,6 @@ public class CharacterView : BaseObject
     private float _moveSpeed ;
     private Vector2 _moveRange;
 
-    // 同步移動屬性
-    private float _peerTargetX;
-    private float _peerInputDir;
-    private bool _isPeerSyncing = false;
-
     // Hp屬性
     public int MaxHp { get; private set; }
     public int CurrentHp { get; private set; }
@@ -43,6 +38,9 @@ public class CharacterView : BaseObject
     private Vector3 _teleportInitPos;
     // 紀錄強化攻擊瞬移位置
     private Vector3 _teleportTargetPos;
+
+    // 移動輸入值
+    private float _inputDir = 0;
 
     private GameplayContext _context;
     private DataConfig _dataConfig;
@@ -67,10 +65,9 @@ public class CharacterView : BaseObject
     {
         // 每幀驅動
         this.UpdateAsObservable()
-            .Where(_ => IsLocalPlayer == false)
             .Subscribe(_ =>
             {
-                UpdatePeerMovement();
+                UpdateMovement();
             })
             .AddTo(this); ;
     }
@@ -136,15 +133,73 @@ public class CharacterView : BaseObject
     }
 
     /// <summary>
-    /// 顯示投擲力道
+    /// 設置移動
+    /// </summary>
+    /// <param name="inputDir">0 = 停止, -1 = 向左, 1=向右</param>
+    /// <param name="targetPosX">同步使用(停止時的位置)</param>
+    public void SetMove(float inputDir, float targetPosX)
+    {
+        _inputDir = inputDir;
+
+        // 停止移動時更新位置
+        if (_inputDir == 0)
+        {
+            Vector3 pos = transform.position;
+            pos.x = targetPosX;
+            transform.position = pos;
+        }
+
+        // 播放動畫
+        _characterAnimControl.MoveAnimationControl(Mathf.Abs(_inputDir) > 0);
+
+        // 角色面向
+        if (Mathf.Abs(_inputDir) > 0)
+        {
+            _spriteRenderer.flipX = _inputDir < 0 ? true : false;
+        }
+        else
+        {
+            _spriteRenderer.flipX = _initFillX;
+        }
+    }
+
+    /// <summary>
+    /// 移動更新
+    /// </summary>
+    private void UpdateMovement()
+    {
+        if (_inputDir == 0) return;
+
+        // 計算新位置
+        Vector3 newPos = transform.position + new Vector3(_inputDir * _moveSpeed * Time.deltaTime, 0, 0);
+
+        // 限制移動範圍
+        if (_initFillX)
+        {
+            // 角色在右側
+            newPos.x = Mathf.Clamp(newPos.x, _moveRange.x, _moveRange.y);
+        }
+        else
+        {
+            // 角色在左側
+            newPos.x = Mathf.Clamp(newPos.x, -_moveRange.y, -_moveRange.x);
+        }
+
+        transform.position = newPos;
+    }
+
+    /// <summary>
+    /// 更新蓄力值
     /// </summary>
     /// <param name="value">投擲力道(0~1)</param>
-    public void ShowThrowStrength(float value)
+    public void UpdateCharging(float value)
     {
-        if (!_throwStrengthCanvas.gameObject.activeSelf) _throwStrengthCanvas.gameObject.SetActive(true);
+        if (!_throwStrengthCanvas.gameObject.activeSelf)
+        {
+            _throwStrengthCanvas.gameObject.SetActive(true);
+        }
 
         _img_ThrowStrength.fillAmount = value;
-        _context.CurrentTurnCharacter.PlayAimAnimation();
     }
 
     /// <summary>
@@ -165,100 +220,6 @@ public class CharacterView : BaseObject
         {
             _controlTip.SetActive(isActive);
         }
-    }
-
-    /// <summary>
-    /// 控制角色移動、動畫與面向
-    /// </summary>
-    /// <param name="direction">移動方向</param>
-    /// <param name="isPeerSync">是否為對手連線同步</param>
-    public void Move(float direction, bool isPeerSync = false)
-    {
-        if (!isPeerSync)
-        {
-            // 計算新位置
-            Vector3 newPos = transform.position + new Vector3(direction * _moveSpeed * Time.deltaTime, 0, 0);
-
-            // 限制移動範圍
-            if (_initFillX)
-            {
-                // 角色在右側
-                newPos.x = Mathf.Clamp(newPos.x, _moveRange.x, _moveRange.y);
-            }
-            else
-            {
-                // 角色在左側
-                newPos.x = Mathf.Clamp(newPos.x, -_moveRange.y, -_moveRange.x);
-            }
-
-            transform.position = newPos;
-        }
-
-        // 播放動畫
-        _characterAnimControl.MoveAnimationControl(Mathf.Abs(direction) > 0);
-
-        // 角色面向
-        if (Mathf.Abs(direction) > 0)
-        {
-            _spriteRenderer.flipX = direction < 0 ? true : false;
-        }
-        else
-        {
-            _spriteRenderer.flipX = _initFillX;
-        }
-    }
-
-    /// <summary>
-    /// 收到伺服器對手位移封包時呼叫
-    /// </summary>
-    public void OnReceivePeerMove(MoveData data)
-    {
-        _peerTargetX = data.posX;
-        _peerInputDir = data.inputDir;
-        _isPeerSyncing = true;
-    }
-
-    /// <summary>
-    /// 理對手平滑移動
-    /// </summary>
-    private void UpdatePeerMovement()
-    {
-        if (!_isPeerSyncing) return;
-
-        // 先播放對手的動畫與轉向
-        Move(_peerInputDir, isPeerSync: true);
-
-        // 如果對手停止移動，且位置已經很接近目標，就關閉同步
-        if (_peerInputDir == 0f && Mathf.Abs(transform.position.x - _peerTargetX) < 0.01f)
-        {
-            Vector3 pos = transform.position;
-            pos.x = _peerTargetX;
-            transform.position = pos;
-            _isPeerSyncing = false;
-            return;
-        }
-
-        // 預測移動：根據對手的 inputDir 持續移動
-        Vector3 currentPos = transform.position;
-        float predictedX = currentPos.x + (_peerInputDir * _moveSpeed * Time.deltaTime);
-
-        // 使用 Lerp 平滑修正與伺服器封包真實位置
-        float smoothedX = Mathf.Lerp(predictedX, _peerTargetX, Time.deltaTime * 15f);
-
-        // 限制移動範圍
-        if (_initFillX)
-        {
-            // 角色在右側
-            smoothedX = Mathf.Clamp(smoothedX, _moveRange.x, _moveRange.y);
-        }
-        else
-        {
-            // 角色在左側
-            smoothedX = Mathf.Clamp(smoothedX, -_moveRange.y, -_moveRange.x);
-        }
-
-        currentPos.x = smoothedX;
-        transform.position = currentPos;
     }
 
     /// <summary>
@@ -297,7 +258,7 @@ public class CharacterView : BaseObject
     /// <summary>
     /// 撥放蓄力動畫
     /// </summary>
-    public void PlayAimAnimation() => _characterAnimControl.PlayAimAnimation();
+    public void PlayChargingAnimation() => _characterAnimControl.PlayChargingAnimation();
 
     /// <summary>
     /// 撥放嘲諷動畫

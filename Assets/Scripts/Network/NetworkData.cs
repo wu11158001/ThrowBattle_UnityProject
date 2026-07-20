@@ -138,10 +138,12 @@ public class MoveData
 /// 畜力狀態資料
 /// </summary>
 [Serializable]
-public class AimData
+public class ChargingData
 {
     /// <summary> 房間ID </summary>
     public string roomId;
+    /// <summary> 是否開始蓄力 </summary>
+    public bool isCharging;
     /// <summary> 畜力程度(0~1) </summary>
     public float force;
 }

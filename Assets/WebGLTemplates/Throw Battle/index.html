@@ -25,17 +25,17 @@
         width: 100vw;
       }
       
-      /* 核心修正：讓容器本身就鎖定 1792:768 比例 */
+      /* 核心修正：讓容器本身就鎖定 1920:911 比例 */
       #unity-container {
         position: relative;
         /* 寬度最大為 100%，高度最大為 100% 可視高度 */
         width: 100%;
         height: 100%;
-        max-width: calc(calc(var(--vh, 1vh) * 100) * 2.33333333); /* 100vh * 1792 / 768 */
-        max-height: calc(100vw * 0.42857143); /* 100vw * 768 / 1792 */
+        max-width: calc(calc(var(--vh, 1vh) * 100) * 2.10757409); /* 100vh * 1920 / 911 */
+        max-height: calc(100vw * 0.47447917); /* 100vw * 911 / 1920 */
         
-        /* 鎖定 1792:768 比例 */
-        aspect-ratio: 1792 / 768; 
+        /* 鎖定 1920:911 比例 */
+        aspect-ratio: 1920 / 911; 
         
         display: flex;
         justify-content: center;
@@ -158,9 +158,9 @@
         // 高 DPI (Retina) 模糊修復
         const dpr = window.devicePixelRatio || 1;
         
-        // 鎖定 Unity 內部渲染分辨率為 1792 x 768
-        const baseWidth = 1792;
-        const baseHeight = 768;
+        // 鎖定 Unity 內部渲染分辨率為 1920 x 911
+        const baseWidth = 1920;
+        const baseHeight = 911;
         
         canvas.width = baseWidth * dpr;
         canvas.height = baseHeight * dpr;

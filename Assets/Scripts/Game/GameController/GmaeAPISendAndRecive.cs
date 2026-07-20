@@ -27,7 +27,7 @@ public class GmaeAPISendAndRecive
         {
             SocketManager.Instance.OnPeerMoveReceived -= OnPeerMove;
             SocketManager.Instance.OnNewTurnReceived -= OnServerNewTurn;
-            SocketManager.Instance.OnPeerAimReceived -= OnPeerAim;
+            SocketManager.Instance.OnPeerChargingReceived -= OnPeerCharging;
             SocketManager.Instance.OnPeerThrowReceived -= OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived -= OnPeerHit;
             SocketManager.Instance.OnGameOverReceived -= OnGameOver;
@@ -43,7 +43,7 @@ public class GmaeAPISendAndRecive
         {
             SocketManager.Instance.OnPeerMoveReceived += OnPeerMove;
             SocketManager.Instance.OnNewTurnReceived += OnServerNewTurn;
-            SocketManager.Instance.OnPeerAimReceived += OnPeerAim;
+            SocketManager.Instance.OnPeerChargingReceived += OnPeerCharging;
             SocketManager.Instance.OnPeerThrowReceived += OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived += OnPeerHit;
             SocketManager.Instance.OnGameOverReceived += OnGameOver;
@@ -51,15 +51,6 @@ public class GmaeAPISendAndRecive
     }
 
     #region 接收 Server 事件
-    /// <summary>
-    /// 接收:對手的位置同步
-    /// </summary>
-    public void OnPeerMove(MoveData data)
-    {
-        if (_context.CurrentTurnCharacter == null) return;
-        _context.CurrentTurnCharacter.OnReceivePeerMove(data);
-    }
-
     /// <summary>
     /// 接收:新回合通知
     /// </summary>
@@ -74,8 +65,6 @@ public class GmaeAPISendAndRecive
             ? _context.P1_CharacterView
             : _context.P2_CharacterView;
 
-        Debug.Log($"收到 Server 回合切換通知！當前玩家編號(0 = P1, 1 = P2): {data.currentTurnSeat}");
-
         _context.GameController.SetTurn(targetCharacter);
 
         // 當前回合風力
@@ -85,11 +74,27 @@ public class GmaeAPISendAndRecive
     }
 
     /// <summary>
-    /// 接收:對手畜力狀態
+    /// 接收:角色移動
     /// </summary>
-    private void OnPeerAim(AimData data)
+    public void OnPeerMove(MoveData data)
     {
-        _context.CurrentTurnCharacter.ShowThrowStrength(data.force);
+        if (_context.CurrentTurnCharacter == null) return;
+        _context.CurrentTurnCharacter.SetMove(data.inputDir, data.posX);
+    }
+
+    /// <summary>
+    /// 接收:畜力狀態
+    /// </summary>
+    private void OnPeerCharging(ChargingData data)
+    {
+        if(data.isCharging)
+        {
+            _throwController.SetChargingState();
+        }
+        else
+        {
+            _throwController.StartThrow();
+        }
     }
 
     /// <summary>
@@ -101,13 +106,11 @@ public class GmaeAPISendAndRecive
         _throwController.ThrowType = (THROW_TYPE)data.throwType;
         _throwController.ThrowStrength = data.force;
 
-        // 計算投擲位置
-        Vector3 throwTargetPos = _throwController.GetNextThrowTargetPos(data.force);
-        _throwController.ThrowTargetPos = throwTargetPos;
-
-        // 關閉投擲力道顯示
+        // 關閉投擲力道
         _context.CurrentTurnCharacter.CloseThrowStrength();
-
+        // 計算投擲位置
+        Vector3 throwTargetPos = _throwController.GetThrowTargetPos(data.force);
+        _throwController.ThrowTargetPos = throwTargetPos;
         // 撥放投擲動畫
         _context.CurrentTurnCharacter.PlayThrowAnimation((THROW_TYPE)data.throwType, throwTargetPos);
     }

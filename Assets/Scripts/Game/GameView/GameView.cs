@@ -89,20 +89,17 @@ public class GameView : BaseView
 
     private void Bind()
     {
-        // 投擲控制
-        _throwHandler.DownAction = (eventData) => { _context.GameController.SetThrowPressState(true); };
-        _throwHandler.UpAction = (eventData) => { _context.GameController.SetThrowPressState(false); };
-        _throwHandler.ExitAction = (eventData) => { _context.GameController.SetThrowPressState(false); };
+        // 控制:蓄力 & 投擲
+        _throwHandler.DownAction = (eventData) => { _context.GameController.SetChargingState(true); };
+        _throwHandler.UpAction = (eventData) => { _context.GameController.SetChargingState(false); };
 
         // 移動控制:左
         _leftHandler.DownAction = (eventData) => { _context.GameController.SetInputDirection(-1); };
         _leftHandler.UpAction = (eventData) => { _context.GameController.SetInputDirection(0); };
-        _leftHandler.ExitAction = (eventData) => { _context.GameController.SetInputDirection(0); };
 
         // 移動控制:右
         _rightHandler.DownAction = (eventData) => { _context.GameController.SetInputDirection(1); };
         _rightHandler.UpAction = (eventData) => { _context.GameController.SetInputDirection(0); };
-        _rightHandler.ExitAction = (eventData) => { _context.GameController.SetInputDirection(0); };
 
         // 退出按鈕
         _btn_Exit.OnClickAsObservable()

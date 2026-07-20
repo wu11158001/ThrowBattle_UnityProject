@@ -37,21 +37,8 @@ public class GameController : MonoBehaviour
         this.UpdateAsObservable()
             .Where(_ => _context.CurrentTurnCharacter != null)
             .Subscribe(_ =>
-            {
-                bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-                if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
-                {
-                    if (!isMyTurn) return;
-                }
-
-                // 驅動子控制器（投擲優先級高於移動）
+            {                
                 ThrowController.Tick();
-
-                // 只有在沒有蓄力時，才驅動移動邏輯
-                if (!ThrowController.IsCharging)
-                {
-                    MoveController.Tick();
-                }
             })
             .AddTo(this);
     }
@@ -104,8 +91,6 @@ public class GameController : MonoBehaviour
             _context.GameView.SetIsLocalTurn(false);
         }
 
-        // 通知子控制器重置當前狀態
-        MoveController.ResetState();
         ThrowController.ResetState();
 
         // 設置風力強度與方向
@@ -147,7 +132,7 @@ public class GameController : MonoBehaviour
     /// 設置投擲蓄力狀態
     /// </summary>
     /// <param name="isPressing"></param>
-    public void SetThrowPressState(bool isPressing) => ThrowController.SetThrowPressState(isPressing);
+    public void SetChargingState(bool isCharging) => ThrowController.SetInputCharging(isCharging);
 
     /// <summary>
     /// 設置投擲的類型
