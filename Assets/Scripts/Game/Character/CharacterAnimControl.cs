@@ -158,8 +158,6 @@ public class CharacterAnimControl : MonoBehaviour
     /// </summary>
     public void OpenGameOverView()
     {
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match) return;
-
         string winner = "";
 
         bool isP1 = (_context.CurrentTurnCharacter == _context.P1_CharacterView);
@@ -167,6 +165,11 @@ public class CharacterAnimControl : MonoBehaviour
 
         switch (StaticDataManager.PlayType)
         {
+            case PLAY_TYPE.Match:
+                // 發送:回合結束判斷勝負
+                OnThisTurnFinish();
+                return;
+
             case PLAY_TYPE.WithAi:
                 winner = isP1 ? localPlayer : "AI";
                 break;
