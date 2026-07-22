@@ -14,8 +14,19 @@ public class AIDifficultyBtn : MonoBehaviour
 
     private Action _clickAction;
 
-    public void SetData()
+    public void SetData(AIDifficultyData data, Action clickAction)
     {
+        _clickAction = clickAction;
 
+        _text_BtnText.text = data.BtnString;
+
+        Bind();
+    }
+
+    private void Bind()
+    {
+        _btn_Main.OnClickAsObservable()
+            .Subscribe(_ => _clickAction?.Invoke())
+            .AddTo(this);
     }
 }

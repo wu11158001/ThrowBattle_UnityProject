@@ -101,8 +101,7 @@ public class GameController : MonoBehaviour
             // 如果是 AI 的回合，觸發 AI 的大腦驅動
             if (StaticDataManager.PlayType == PLAY_TYPE.WithAi && !isLocalPlayer)
             {
-                Debug.Log($"開始獲取AI資料");
-                StartCoroutine(_aIBrain.RequestAIDecision());
+                _aIBrain.RequestAIDecision();
             }
         }
         else

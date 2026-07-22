@@ -21,7 +21,6 @@ public class CharacterThrowController
 {
     private GameplayContext _context;
     private DataConfig _dataConfig;
-    private CharacterMoveController _characterMoveController1;
 
     // 本回合是否已投擲
     private bool _isThrowed;
@@ -53,7 +52,6 @@ public class CharacterThrowController
     {
         _context = GameplayManager.CurrentContext;
         _dataConfig = StaticDataManager.DataConfig;
-        _characterMoveController1 = _context.GameController.MoveController;
     }
 
     /// <summary>

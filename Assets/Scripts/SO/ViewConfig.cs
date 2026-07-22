@@ -15,6 +15,7 @@ public enum VIEW_TYPE
     LobbyView = 100,
     SetNicknameView,
     MatchingView,
+    AIDifficultyView,
 
     GameView = 200,
     GameOverView,

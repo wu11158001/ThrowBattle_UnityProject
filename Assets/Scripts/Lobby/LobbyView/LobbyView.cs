@@ -60,8 +60,10 @@ public class LobbyView : BaseView
         _btn_WithAi.OnClickAsObservable()
             .Subscribe(_ =>
             {
-                StaticDataManager.PlayType = PLAY_TYPE.WithAi;
-                SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.GameScene).Forget();
+                ViewManager.Instance.OpenView<AIDifficultyView>(
+                    viewType: VIEW_TYPE.AIDifficultyView,
+                    canvasType: CANVAS_TYPE.Canvas_Highest)
+                .Forget();
             })
             .AddTo(this);
 

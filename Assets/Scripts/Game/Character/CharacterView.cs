@@ -3,6 +3,7 @@ using TMPro;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine.UI;
+using DG.Tweening;
 
 /// <summary>
 /// 角色
@@ -17,6 +18,11 @@ public class CharacterView : BaseObject
     [Header("投擲力道")]
     [SerializeField] private Canvas _throwStrengthCanvas;
     [SerializeField] private Image _img_ThrowStrength;
+
+    [Header("文字泡泡")]
+    [SerializeField] private Canvas _textBubbleCanvas;
+    [SerializeField] private CanvasGroup _textBubbleCanvasGroup;
+    [SerializeField] private TextMeshProUGUI _text_Bubble;
 
     // 初始面向方向
     private bool _initFillX;
@@ -45,6 +51,14 @@ public class CharacterView : BaseObject
     private GameplayContext _context;
     private DataConfig _dataConfig;
 
+    public override void OnDestroy()
+    {
+        _textBubbleCanvasGroup.DOKill();
+        transform.DOKill();
+
+        base.OnDestroy();
+    }
+
     private void Start()
     {
         _context = GameplayManager.CurrentContext;
@@ -52,6 +66,9 @@ public class CharacterView : BaseObject
 
         _throwStrengthCanvas.worldCamera = Camera.main;
         CloseThrowStrength();
+
+        _textBubbleCanvas.worldCamera = Camera.main;
+        CloseTextBubble();
 
         _moveSpeed = _dataConfig.CharacterMoveSpeed;
         _moveRange = _dataConfig.CharacterMoveRange;
@@ -186,6 +203,44 @@ public class CharacterView : BaseObject
         }
 
         transform.position = newPos;
+    }
+
+    /// <summary>
+    /// 顯示文字泡泡
+    /// </summary>
+    /// <param name="message"></param>
+    public void ShowTextBubble(string message)
+    {
+        if(!_textBubbleCanvas.gameObject.activeSelf)
+        {
+            _textBubbleCanvas.gameObject.SetActive(true);
+        }
+
+        _text_Bubble.text = message;
+
+
+        _textBubbleCanvasGroup.DOKill();
+        _textBubbleCanvasGroup.alpha = 0f;
+
+        // 建立動畫序列
+        DOTween.Sequence()
+            .Append(_textBubbleCanvasGroup.DOFade(1f, 0.5f)) // 淡入
+            .AppendInterval(3f)                              // 停留
+            .Append(_textBubbleCanvasGroup.DOFade(0f, 0.5f)) // 淡出 
+            .OnComplete(() =>
+            {
+                    _textBubbleCanvas.gameObject.SetActive(false);
+            })
+            .SetLink(gameObject)
+            .SetTarget(_textBubbleCanvasGroup);
+    }
+
+    /// <summary>
+    /// 關閉文字泡泡
+    /// </summary>
+    private void CloseTextBubble()
+    {
+        _textBubbleCanvas.gameObject.SetActive(false);
     }
 
     /// <summary>

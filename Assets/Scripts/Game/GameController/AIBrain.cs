@@ -30,8 +30,6 @@ public class AIDecisionData
     public float moveDistance;
     /// <summary> 投擲類型 </summary>
     public int throwType;
-    /// <summary> 蓄力強度 </summary>
-    public float chargeForce;
     /// <summary> 嘲諷語 </summary>
     public string tauntText;
 }
@@ -66,7 +64,12 @@ public class AIBrain : MonoBehaviour
     /// <summary>
     /// 發送API請求 AI 取得決策
     /// </summary>
-    public IEnumerator RequestAIDecision()
+    public void RequestAIDecision()
+    {
+        StartCoroutine(IRequestAIDecision()); ;
+    }
+
+    private IEnumerator IRequestAIDecision()
     {
         if (_isRequesting)
         {
@@ -76,6 +79,8 @@ public class AIBrain : MonoBehaviour
 
         _isRequesting = true;
 
+        // AI風格資料
+        AIStyleData aIStyleData = StaticDataManager.AIStyleData;
         // 風力
         float wind = _context.GameController.ThrowController.WindStrength;
         // 最大投擲距離
@@ -99,42 +104,39 @@ public class AIBrain : MonoBehaviour
 
         string prompt = $@"你是一個彈道投擲遊戲的 AI。請根據當前物理參數與局勢做出精準決策。
 
-            【當前戰局狀態】
-            - AI(你) 血量: {aiHp} / 玩家(敵方) 血量: {playerHp}
-            - AI(你) 的位置在 {aiPosX}，移動範圍為 {-moveRange.y} 到 {-moveRange.x}
-            - 敵方與你的當前距離: {distance} 單位
-            - 當前風力 (windStrength): {wind} (正數為順風拉長距離，負數為逆風縮短距離)
-            - AI 你處於左側，玩家處於右側
-            - 技能可使用就盡量使用，但不一定要使用
-            - 多移動走位 (moveDirection)
-            
-            【技能機制與物理公式】
-            所有技能皆採用【拋物線投擲】，實際投擲距離公式如下：
-            - 實際距離 = Max(1, {baseMaxDistance} + {wind}) * chargeForce
-            1. [throwType = 0 (普通攻擊)]: 無 CD，標準傷害。
-            2. [throwType = 1 (巨大化)] {giantStatus}: 命中範圍增大{_dataConfig.SkillGiantSize}倍，預設範圍是1。
-            3. [throwType = 2 (強化傷害)] {strengthStatus}: 命中後傷害大幅提升。
+            【AI 性格】
+            {aIStyleData.Describe}
 
-            【需求】
-            請根據你預計的走位 moveDirection 與當前距離，算出精準的 chargeForce (範圍 0.1 ~ 1.0)，使投擲物剛好命中距離 {distance} 的玩家！
-            公式參考：chargeForce = (目標距離 - 走位距離) / Max(1, {baseMaxDistance} + {wind})
+            【當前局勢】
+            - AI(你)血量: {aiHp} / 敵方血量: {playerHp}
+            - AI(你)位置: {aiPosX}，可移動範圍: {-moveRange.y} 到 {-moveRange.x}
+            - 敵方距離: {distance} 單位
+            - 技能狀態: 
+              1.[throwType = 0 (普通攻擊)]: 無 CD
+              2.[throwType = 1 (巨大化)]: {giantStatus}
+              3.[throwType = 2 (強化傷害)]: {strengthStatus}
 
             【約束條件】
-            1. 嚴禁選擇冷卻中 (CD > 0) 的技能！只能選擇【可用】或普通攻擊(0)。
-            2. chargeForce 絕不能為 0！範圍必須在 0.1 至 1.0 之間。
-            3. moveDirection 範圍為 -1 (往左) 到 1 (往右)。若不走位請填 0.0。
-            4. moveDistance 範圍為 0 到 {moveRange.y - moveRange.x}。若不走位請填 0.0。
-            5.移動走位 (moveDirection) AI(你) 的位置{aiPosX} 加上 moveDirection 乘上 moveDistance 不要小於 {-moveRange.y} 或是大於 {-moveRange.x}
-            6. tauntText 必須符合你的性格，且長度在 15 字以內，繁體中文。
-            7. 請嚴格僅輸出 JSON 格式：
-            {{""moveDirection"": 0.0, ""moveDistance"": 0.0, ""throwType"": 0, ""chargeForce"": 0.75, ""tauntText"": ""看招！""}}";
+            1. 嚴禁選擇冷卻中的技能 (CD > 0)。
+            2. moveDirection 範圍為 -1 (往左) 到 1 (往右)。
+            3. moveDistance 範圍為 0 到 {moveRange.y - moveRange.x}。
+            4. 走位後的 X 位置不可超越移動範圍 {-moveRange.y} 至 {-moveRange.x}。
+            5. tauntText 必須符合性格，長度 15 字以內繁體中文，避免俗套詞彙。
+            6. 請嚴格依據以下 JSON 格式輸出，絕對不能遺漏任何欄位名稱(Key)：
+            {{
+              ""moveDirection"": 0.0,
+              ""moveDistance"": 0.0,
+              ""throwType"": 0,
+              ""tauntText"": ""看招！""
+            }}";
 
         // 安全處理字串轉義
         string cleanPrompt = EscapeString(prompt);
 
-        // 嚴謹的 Groq / OpenAI JSON Body 結構
+        // 嚴謹的 Groq / OpenAI JSON Body 結構(llama-3.3-70b-versatile)
         string jsonRequestBody = "{" +
-            "\"model\": \"llama-3.3-70b-versatile\"," +
+            "\"model\": \"llama-3.1-8b-instant\"," +
+            "\"temperature\": 0.7," +
             "\"messages\": [" +
                 "{\"role\": \"system\", \"content\": \"You are a game AI. Always response in pure JSON format.\"}," +
                 "{\"role\": \"user\", \"content\": \"" + cleanPrompt + "\"}" +
@@ -167,14 +169,14 @@ public class AIBrain : MonoBehaviour
 
                     string prettyJson = JsonUtility.ToJson(responseData, true);
                     Debug.Log($"[API 獲取AI資料成功]: {prettyJson}");
-                    StartCoroutine(ExecuteAITurn(responseData));
+                    StartExecuteAITurn(wind, responseData);
                 }
                 else
                 {
                     Debug.LogWarning($"[Groq API] 請求內容 null");
 
                     AIDecisionData responseData = GetFailData();
-                    StartCoroutine(ExecuteAITurn(responseData));
+                    StartExecuteAITurn(wind, responseData);
                 }
             }
             else
@@ -182,7 +184,7 @@ public class AIBrain : MonoBehaviour
                 Debug.LogError($"[Groq API] 請求失敗 ({request.responseCode}): {request.error}\n內文: {request.downloadHandler?.text}");
 
                 AIDecisionData responseData = GetFailData();
-                StartCoroutine(ExecuteAITurn(responseData));
+                StartExecuteAITurn(wind, responseData);
             }
         }
 
@@ -196,16 +198,12 @@ public class AIBrain : MonoBehaviour
     {
         Debug.LogWarning("AI獲取失敗,保底給予數值");
 
-        // 移動範圍
-        Vector2 moveRange = _dataConfig.CharacterMoveRange;
-
         // 失敗保底
         AIDecisionData responseData = new()
         {
             moveDirection = 0,
             moveDistance = 0,
             throwType = 0,
-            chargeForce = UnityEngine.Random.Range(0.1f, 1.0f),
             tauntText = "看招！"
         };
 
@@ -213,14 +211,47 @@ public class AIBrain : MonoBehaviour
     }
 
     /// <summary>
+    /// 開始執行AI回合操作
+    /// </summary>
+    public void StartExecuteAITurn(float windStrength, AIDecisionData data)
+    {
+        float perfectForce = CalculateChargeForceForTarget(windStrength);
+        StartCoroutine(IExecuteAITurn(data, perfectForce));
+    }
+
+    /// <summary>
+    /// 根據目標位置反推需要的蓄力強度
+    /// </summary>
+    public float CalculateChargeForceForTarget(float windStrength)
+    {
+        // 玩家角色位置
+        float playerPosX = _context.P1_CharacterView.transform.position.x;
+        // AI角色位置
+        float aiPosX = _context.P2_CharacterView.transform.position.x;
+
+        float maxDistance = Mathf.Max(1f, _dataConfig.ThrowMaxDistance + windStrength);
+
+        // AI 在左邊往右投擲，距離為目標 X - 攻擊者 X
+        float distance = Mathf.Abs(playerPosX - aiPosX);
+
+        // 反推完美力道，並限制在 0.1 ~ 1.0 之間
+        float idealForce = distance / maxDistance;
+        return Mathf.Clamp(idealForce, 0.1f, 1.0f);
+    }
+
+    /// <summary>
     /// 執行AI回合操作
     /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    private IEnumerator ExecuteAITurn(AIDecisionData data)
+    private IEnumerator IExecuteAITurn(AIDecisionData data, float perfectForce)
     {
         CharacterView aiCharacter = _context.CurrentTurnCharacter;
         if (aiCharacter == null) yield break;
+
+        // 顯示嘲諷內容
+        if(!string.IsNullOrEmpty(data.tauntText))
+        {
+            aiCharacter.ShowTextBubble(data.tauntText);
+        }
 
         // 處理角色走位移動
         if (Mathf.Abs(data.moveDirection) > 0.01f)
@@ -261,10 +292,17 @@ public class AIBrain : MonoBehaviour
         // 開始蓄力
         _context.GameController.SetChargingState(true);
 
-        float targetForce = Mathf.Clamp(data.chargeForce, 0.1f, 1.0f);
+        // 根據 AI 困難度套用誤差
+        AIDifficultyData aIDifficultyData = StaticDataManager.AIDifficultyData;
+        float hitRateNormalized = aIDifficultyData.HitRate / 100f;
+        float maxError = (1f - hitRateNormalized) * 0.35f; // 最大誤差範圍
+
+        float error = UnityEngine.Random.Range(-maxError, maxError);
+        float finalTargetForce = Mathf.Clamp(perfectForce + error, 0.1f, 1.0f);
+
 
         // 持續蓄力，直到達到指定的力道
-        while (_throwController.ThrowStrength < targetForce)
+        while (_throwController.ThrowStrength < finalTargetForce)
         {
             yield return null;
         }
