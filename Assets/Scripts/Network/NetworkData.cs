@@ -209,6 +209,50 @@ public class NewTurnData
 }
 
 /// <summary>
+/// 發送聊天資料
+/// </summary>
+[Serializable]
+public class SendChatData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 聊天內容 </summary>
+    public string chatMessage;
+}
+
+    /// <summary>
+    /// 接收聊天資料
+    /// </summary>
+    [Serializable]
+public class ReciveChatData
+{
+    /// <summary> 發送者(0 = Player1, 1= Player2) </summary>
+    public int senderSeat;
+    /// <summary> 發送者暱稱 </summary>
+    public string senderNickname;
+    /// <summary> 聊天內容 </summary>
+    public string chatMessage;
+    /// <summary> 發送時間 </summary>
+    public string timestamp;
+
+    /// <summary> 自動轉換後的當地時間 (唯讀屬性) </summary>
+    public DateTime LocalTime
+    {
+        get
+        {
+            if (DateTime.TryParse(timestamp, null, System.Globalization.DateTimeStyles.RoundtripKind, out DateTime utcTime))
+            {
+                return utcTime.ToLocalTime();
+            }
+            return DateTime.Now;
+        }
+    }
+
+    /// <summary> 發送顯示時間字串 </summary>
+    public string DisplayTime => LocalTime.ToString("HH:mm");
+}
+
+/// <summary>
 /// 遊戲結束
 /// </summary>
 [Serializable]

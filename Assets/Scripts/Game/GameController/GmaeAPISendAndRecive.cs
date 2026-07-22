@@ -30,6 +30,7 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnPeerThrowReceived -= OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived -= OnPeerHit;
             SocketManager.Instance.OnGameOverReceived -= OnGameOver;
+            SocketManager.Instance.OnReciveCharReceived -= OnReciveChar;
         }
     }
 
@@ -46,10 +47,10 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnPeerThrowReceived += OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived += OnPeerHit;
             SocketManager.Instance.OnGameOverReceived += OnGameOver;
+            SocketManager.Instance.OnReciveCharReceived += OnReciveChar;
         }
     }
 
-    #region 接收 Server 事件
     /// <summary>
     /// 接收:新回合通知
     /// </summary>
@@ -185,5 +186,16 @@ public class GmaeAPISendAndRecive
                 view.SetResult(winMessage);
             }).Forget();
     }
-    #endregion
+
+    /// <summary>
+    /// 接收:聊天訊息
+    /// </summary>
+    private void OnReciveChar(ReciveChatData data)
+    {
+        CharacterView sendPlayer = data.senderSeat == 0 ? 
+            _context.P1_CharacterView : 
+            _context.P2_CharacterView;
+
+        sendPlayer.ShowTextBubble(data.chatMessage);
+    }
 }

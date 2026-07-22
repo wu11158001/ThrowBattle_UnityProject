@@ -18,6 +18,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     [DllImport("__Internal")] private static extern void EmitExecuteThrowJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitExecuteHitJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitTurnEndJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitSendChatJS(string jsonStr);
 #endif
 
     private SocketIOUnity socket;
@@ -34,6 +35,8 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     public Action<HitData> OnPeerHitReceived;
     /// <summary> 接收事件:新回合 </summary>
     public Action<NewTurnData> OnNewTurnReceived;
+    /// <summary> 接收事件:聊天訊息 </summary>
+    public Action<ReciveChatData> OnReciveCharReceived;
     /// <summary> 接收事件:遊戲結束 </summary>
     public Action<GameOverData> OnGameOverReceived;
 
@@ -141,6 +144,12 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
             UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnNewTurnReceived?.Invoke(data); });
         });
 
+        // 監聽:聊天訊息
+        socket.On("on_receive_chat", (res) => {
+            var data = JsonConvertData<ReciveChatData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveCharReceived?.Invoke(data); });
+        });
+
         // 監聽:遊戲結束
         socket.On("game_over", (res) => {
             var data = JsonConvertData<GameOverData>(res);
@@ -237,37 +246,42 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
     #region WebGL 橋接器回傳資料
     /// <summary>
-    /// 角色位置
+    /// 接收:角色位置
     /// </summary>
     public void OnPeerMoveSyncedJS(string jsonText) => OnPeerMoveReceived?.Invoke(JsonConvert.DeserializeObject<MoveData>(jsonText));
 
     /// <summary>
-    /// 畜力狀態
+    /// 接收:畜力狀態
     /// </summary>
     public void OnPeerChargingSyncedJS(string jsonText) => OnPeerChargingReceived?.Invoke(JsonConvert.DeserializeObject<ChargingData>(jsonText));
 
     /// <summary>
-    /// 執行投擲
+    /// 接收:執行投擲
     /// </summary>
     public void OnPeerExecuteThrowJS(string jsonText) => OnPeerThrowReceived?.Invoke(JsonConvert.DeserializeObject<ThrowData>(jsonText));
 
     /// <summary>
-    /// 執行擊中
+    /// 接收:執行擊中
     /// </summary>
     public void OnPeerExecuteHitJS(string jsonText) => OnPeerHitReceived?.Invoke(JsonConvert.DeserializeObject<HitData>(jsonText));
 
     /// <summary>
-    /// 回合切換
+    /// 接收:回合切換
     /// </summary>
     public void OnNewTurnJS(string jsonText) => OnNewTurnReceived?.Invoke(JsonConvert.DeserializeObject<NewTurnData>(jsonText));
 
     /// <summary>
-    /// 遊戲結束
+    /// 接收:聊天訊息
+    /// </summary>
+    public void OnReceiveChatJS(string jsonText) => OnReciveCharReceived?.Invoke(JsonConvert.DeserializeObject<ReciveChatData>(jsonText));
+
+    /// <summary>
+    /// 接收:遊戲結束
     /// </summary>
     public void OnGameOverJS(string jsonText) => OnGameOverReceived?.Invoke(JsonConvert.DeserializeObject<GameOverData>(jsonText));
     #endregion
 
-    #region 發送資料API
+    #region 發送資料
     /// <summary>
     /// 發送:角色移動
     /// </summary>
@@ -330,6 +344,19 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
         EmitTurnEndJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("turn_end", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:聊天訊息
+    /// </summary>
+    public void SendChat(SendChatData data)
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
+        EmitSendChatJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("send_chat", data);
 #endif
     }
     #endregion

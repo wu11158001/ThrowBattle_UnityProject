@@ -59,6 +59,12 @@ mergeInto(LibraryManager.library, {
             SendMessage('SocketManager', 'OnNewTurnJS', jsonStr);
         });
 
+        // 監聽:聊天訊息
+        window.webglSocket.on('on_receive_chat', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnReceiveChatJS', jsonStr);
+        });
+
         // 監聽:遊戲結束
         window.webglSocket.on('game_over', function (data) {
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
@@ -126,5 +132,13 @@ mergeInto(LibraryManager.library, {
         if (window.webglSocket) {
             window.webglSocket.emit('turn_end', JSON.parse(rawJson));
         }
-    }
+    },
+
+    // 發送:聊天訊息
+    EmitSendChatJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('send_chat', JSON.parse(rawJson));
+        }
+    },
 });

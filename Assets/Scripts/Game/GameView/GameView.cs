@@ -7,6 +7,7 @@ using UniRx;
 using UniRx.Triggers;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// 遊戲介面
@@ -39,6 +40,13 @@ public class GameView : BaseView
     [SerializeField] private RectTransform _skillBtnParent_p2;
     [SerializeField] private SkillBtn _skillBtnPrefab;
 
+    [Header("聊天")]
+    [SerializeField] private Button _btn_Chat;
+    [SerializeField] private GameObject _chatPanel;
+    [SerializeField] private TMP_InputField _if_Chat;
+    [SerializeField] private Button _btn_CloseChat;
+    [SerializeField] private Button _btn_SendChat;
+
     [Header("退出")]
     [SerializeField] private Button _btn_Exit;
 
@@ -48,6 +56,8 @@ public class GameView : BaseView
 
     // 開場動畫
     private Sequence _openingAnimationSeq;
+
+    private bool _isOpenChat;
 
     private GameplayContext _context;
     private DataConfig _dataConfig;
@@ -72,6 +82,10 @@ public class GameView : BaseView
 
         Img_P1_HpBar.fillAmount = 1;
         Img_P2_HpBar.fillAmount = 1;
+
+        _btn_Chat.gameObject.SetActive(StaticDataManager.PlayType == PLAY_TYPE.Match);
+        _isOpenChat = false;
+        _chatPanel.gameObject.SetActive(false);
     }
 
     public override void SetData(AssetReferenceGameObject myRef)
@@ -101,6 +115,30 @@ public class GameView : BaseView
         _rightHandler.DownAction = (eventData) => { _context.GameController.SetInputDirection(1); };
         _rightHandler.UpAction = (eventData) => { _context.GameController.SetInputDirection(0); };
 
+        // 聊天按鈕
+        _btn_Chat.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                SwitchChatPanel(true);
+            })
+            .AddTo(this);
+
+        // 關閉聊天按鈕
+        _btn_CloseChat.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                SwitchChatPanel(false);
+            })
+            .AddTo(this);
+
+        // 發送聊天
+        _btn_SendChat.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                SendChat();
+            })
+            .AddTo(this);
+
         // 退出按鈕
         _btn_Exit.OnClickAsObservable()
             .Subscribe(_ =>
@@ -118,6 +156,22 @@ public class GameView : BaseView
                                 SceneLoader.Instance.LoadSceneAsync(SCENE_TYPE.LobbyScene).Forget();
                             });
                     }).Forget();
+            })
+            .AddTo(this);
+
+        // 每帧驅動
+        this.UpdateAsObservable()
+            .Subscribe(_ =>
+            {
+                var keyboard = Keyboard.current;
+                if (keyboard == null) return;
+
+                // 開啟聊天 / 發送聊天訊息
+                if (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame)
+                {
+                    if(_isOpenChat) SendChat();
+                    else SwitchChatPanel(true);
+                }
             })
             .AddTo(this);
     }
@@ -342,5 +396,47 @@ public class GameView : BaseView
         {
             if (Img_P2_HpBar != null) Img_P2_HpBar.fillAmount = fillValue;
         }
+    }
+
+    /// <summary>
+    /// 聊天面板開關控制
+    /// </summary>
+    /// <param name="isOpen"></param>
+    private void SwitchChatPanel(bool isOpen)
+    {
+        _isOpenChat = isOpen;
+
+        if (_isOpenChat)
+        {
+            _btn_Chat.gameObject.SetActive(false);
+            _chatPanel.gameObject.SetActive(true);
+            _if_Chat.ActivateInputField();
+        }
+        else
+        {
+            _btn_Chat.gameObject.SetActive(true);
+            _chatPanel.gameObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// 發送聊天訊息
+    /// </summary>
+    private void SendChat()
+    {
+        SwitchChatPanel(false);
+
+        string message = _if_Chat.text;
+        if (string.IsNullOrEmpty(message)) return;
+
+        SendChatData data = new()
+        {
+            roomId = StaticDataManager.MatchData.roomId,
+            chatMessage = message
+        };
+
+        SocketManager.Instance.SendChat(data);
+
+        _if_Chat.text = "";
     }
 }
