@@ -49,11 +49,11 @@ public class CharacterThrowController
     /// </summary>
     public Vector3 ThrowTargetPos { get; set; }
 
-    public CharacterThrowController(CharacterMoveController characterMoveController)
+    public CharacterThrowController()
     {
         _context = GameplayManager.CurrentContext;
         _dataConfig = StaticDataManager.DataConfig;
-        _characterMoveController1 = characterMoveController;
+        _characterMoveController1 = _context.GameController.MoveController;
     }
 
     /// <summary>
@@ -98,11 +98,11 @@ public class CharacterThrowController
     {
         if (_isThrowed) return;
 
-        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-        if (!isMyTurn) return;
-
         if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
+            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
+            if (!isMyTurn) return;
+
             ChargingData data = new()
             {
                 roomId = StaticDataManager.MatchData.roomId,

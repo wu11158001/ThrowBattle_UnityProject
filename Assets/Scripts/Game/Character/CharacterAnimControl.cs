@@ -56,7 +56,7 @@ public class CharacterAnimControl : MonoBehaviour
     }
 
     /// <summary>
-    /// 切換回合
+    /// 切換回合(本地遊玩)
     /// </summary>
     /// <returns></returns>
     private async UniTaskVoid SwitchTurnAsync()

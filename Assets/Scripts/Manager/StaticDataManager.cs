@@ -25,13 +25,17 @@ public static class StaticDataManager
     public static readonly string LeaveBattleSubUrl = "/api/lobby/leave-battle";
     #endregion
 
-    #region 資料
+    #region 遊戲資料
     /// <summary> 註冊的玩家資料 </summary>
     public static PlayerData RegisterPlayerData;
     /// <summary> 配對成功資料 </summary>
     public static MatchSuccessData MatchData;
-    /// <summary> 對戰模式 </summary>
+    /// <summary> 選擇的對戰模式 </summary>
     public static PLAY_TYPE PlayType;
+    /// <summary> 選擇的AI困難度資料 </summary>
+    public static AIDifficultyData AIDifficultyData;
+    /// <summary> 選擇的AI風格資料 </summary>
+    public static AIStyleData AIStyleData;
     #endregion
 }
 

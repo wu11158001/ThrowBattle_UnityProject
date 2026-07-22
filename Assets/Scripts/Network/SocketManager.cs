@@ -75,7 +75,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     public void ConnectToServer(string playerId)
     {
         savedPlayerId = playerId;
-        string cleanUrl = _dataConfig.BaseUrl;
+        string cleanUrl = _dataConfig.ServerApiUrl;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         Debug.Log("[Socket] WebGL 環境：啟動瀏覽器原生 WebSocket 連線...");

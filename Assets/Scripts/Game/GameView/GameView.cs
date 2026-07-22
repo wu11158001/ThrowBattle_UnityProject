@@ -43,8 +43,8 @@ public class GameView : BaseView
     [SerializeField] private Button _btn_Exit;
 
     // 技能按鈕
-    private List<SkillBtn> _p1SkillButtons = new();
-    private List<SkillBtn> _p2SkillButtons = new();
+    public List<SkillBtn> _p1SkillButtons { get; private set; } = new();
+    public List<SkillBtn> _p2SkillButtons { get; private set; } = new();
 
     // 開場動畫
     private Sequence _openingAnimationSeq;
@@ -158,19 +158,31 @@ public class GameView : BaseView
     {
         RectTransform parent = isPlayer1 ? _skillBtnParent_p1 : _skillBtnParent_p2;
         List<SkillBtn> targetList = isPlayer1 ? _p1SkillButtons : _p2SkillButtons;
-
+        int belongIndex = isPlayer1 ? 0 : 1;
         if (parent == null) return;
 
         // 生成巨大化技能
         SkillBtn giantBtn = Instantiate(_skillBtnPrefab, parent);
         giantBtn.gameObject.SetActive(true);
-        giantBtn.SetData(THROW_TYPE.Giant, _dataConfig.SkillGiantCD, () => OnSkillClick(THROW_TYPE.Giant), _dataConfig.SkillGiantIcon);
+        giantBtn.SetData(
+            skillType: THROW_TYPE.Giant, 
+            maxCDTurns: _dataConfig.SkillGiantCD, 
+            clickEvent: () => OnSkillClick(THROW_TYPE.Giant), 
+            skillIcon: _dataConfig.SkillGiantIcon,
+            belongIndex: belongIndex);
+
         targetList.Add(giantBtn);
 
         // 生成強化傷害技能
         SkillBtn strengthBtn = Instantiate(_skillBtnPrefab, parent);
         strengthBtn.gameObject.SetActive(true);
-        strengthBtn.SetData(THROW_TYPE.StrengthDamage, _dataConfig.StrengthDamageCD, () => OnSkillClick(THROW_TYPE.StrengthDamage), _dataConfig.SkillStrengthDamageIcon);
+        strengthBtn.SetData(
+            skillType: THROW_TYPE.StrengthDamage,
+            maxCDTurns: _dataConfig.StrengthDamageCD,
+            clickEvent: () => OnSkillClick(THROW_TYPE.StrengthDamage),
+            skillIcon: _dataConfig.SkillStrengthDamageIcon,
+            belongIndex: belongIndex);
+
         targetList.Add(strengthBtn);
     }
 
@@ -239,7 +251,7 @@ public class GameView : BaseView
             _text_Battle.gameObject.SetActive(false);
 
             // 遊戲開始
-            _context.GameController.StartGameplay();
+            _context.GameController.StartGamePlay();
         });
     }
 

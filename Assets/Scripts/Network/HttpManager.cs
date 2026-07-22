@@ -56,7 +56,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
         Action<TResponse> onSuccess = null,
         Action<long, string> onFailure = null)
     {
-        if (_dataConfig == null || string.IsNullOrEmpty(_dataConfig.BaseUrl))
+        if (_dataConfig == null || string.IsNullOrEmpty(_dataConfig.ServerApiUrl))
         {
             string urlError = "請求 URL 錯誤：HttpBaseUrl 未初始化！";
             Debug.LogError(urlError);
@@ -64,7 +64,7 @@ public class HttpManager : SingletonMonoBehaviour<HttpManager>
             return default;
         }
 
-        string url = _dataConfig.BaseUrl + subUrl;
+        string url = _dataConfig.ServerApiUrl + subUrl;
         string jsonPayload = JsonUtility.ToJson(requestData);
 
         using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))

@@ -1,5 +1,7 @@
 using UnityEngine;
 using NaughtyAttributes;
+using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// 資料配置檔
@@ -8,7 +10,9 @@ using NaughtyAttributes;
 public class DataConfig : ScriptableObject
 {
     [Header("API")]
-    [Label("API URL")] public string BaseUrl = "http://localhost:3000";
+    [Label("Server API URL")] public string ServerApiUrl = "https://throwbattle-server.onrender.com";
+    [Label("AI API Key")] public string AiApiKey = "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";
+    [Label("AI API URL")] public string AiApiUrl = "https://api.groq.com/openai/v1/chat/completions";
 
     [Header("角色資料")]
     [Label("角色Y軸位置")] public float CharacterPosY = -2.6f;
@@ -38,4 +42,34 @@ public class DataConfig : ScriptableObject
     [Label("技能_巨大化CD回合")] public int SkillGiantCD = 2;
     [Label("技能_強化攻擊CD回合")] public int StrengthDamageCD = 3;
     [Label("技能_強化攻擊位置高度")] public float SkillStrengthDamagePosHeight = 2.8f;
+
+    [Header("AI設置")]
+    [BoxGroup("AI困難度資料")] public List<AIDifficultyData> AIDifficultyDatas;
+    [BoxGroup("AI風格資料資料")] public List<AIStyleData> AIStyleDatas;
+}
+
+/// <summary>
+/// AI困難度資料
+/// </summary>
+[Serializable]
+public class AIDifficultyData
+{
+    [AllowNesting]
+    [Label("按鈕文字")] public string BtnString;
+    [AllowNesting]
+    [Label("命中率")] [Range(0, 100)] public int HitRate;
+}
+
+/// <summary>
+/// AI風格資料
+/// </summary>
+[Serializable]
+public class AIStyleData
+{
+    [AllowNesting]
+    [Label("AI 風格")] public AIStyle Style;
+    [AllowNesting]
+    [Label("AI 風格文字")] public string StyleString;
+    [AllowNesting]
+    [Label("個性描述")] [TextArea] public string Describe;
 }

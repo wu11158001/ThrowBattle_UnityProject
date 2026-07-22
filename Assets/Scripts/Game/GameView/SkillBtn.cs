@@ -28,11 +28,17 @@ public class SkillBtn : MonoBehaviour
     /// </summary>
     public bool IsInCD => _currentCDTurns > 0;
 
-    public void SetData(THROW_TYPE skillType, int maxCDTurns, Action clickEvent, Sprite skillIcon)
+    /// <summary>
+    /// 歸屬角色(0 = P1, 1 = P2)
+    /// </summary>
+    public int BelongIndex { get; private set; }
+
+    public void SetData(THROW_TYPE skillType, int maxCDTurns, Action clickEvent, Sprite skillIcon, int belongIndex)
     {
         SkillType = skillType;
         _maxCDTurns = maxCDTurns;
         _clickEvent = clickEvent;
+        BelongIndex = belongIndex;
 
         _mainBtn.image.sprite = skillIcon;
         _cdMask.fillAmount = 0;

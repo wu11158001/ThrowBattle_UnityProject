@@ -1,6 +1,7 @@
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using System.Linq;
 
 /// <summary>
 /// 遊戲控制器
@@ -9,10 +10,13 @@ public class GameController : MonoBehaviour
 {
     private GameplayContext _context;
     public DataConfig _dataConfig;
+
     // 子控制器
     public CharacterMoveController MoveController { get; private set; }
     public CharacterThrowController ThrowController { get; private set; }
     public GmaeAPISendAndRecive GmaeAPISendAndRecive { get; private set; }
+    public AIBrain _aIBrain;
+
 
     private void OnDestroy()
     {
@@ -25,8 +29,13 @@ public class GameController : MonoBehaviour
         _dataConfig = StaticDataManager.DataConfig;
 
         MoveController = new();
-        ThrowController = new(MoveController);
-        GmaeAPISendAndRecive = new(ThrowController);
+        ThrowController = new();
+        GmaeAPISendAndRecive = new();
+
+        GameObject obj = new("AIBrain");
+        obj.transform.SetParent(transform);
+        AIBrain aIBrain = obj.AddComponent<AIBrain>();
+        _aIBrain = aIBrain;
 
         Bind();
     }
@@ -46,7 +55,7 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// 遊戲開始
     /// </summary>
-    public void StartGameplay()
+    public void StartGamePlay()
     {
         if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
@@ -54,6 +63,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            // 單機模式始終由Player1開始
             SetTurn(_context.P1_CharacterView);
         }
     }
@@ -63,6 +73,13 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void SetTurn(CharacterView targetCharacter)
     {
+        ThrowController.ResetState();
+
+        // 設置風力強度與方向
+        float windStrength = UnityEngine.Random.Range(-_dataConfig.WindMaxStrength, _dataConfig.WindMaxStrength);
+        ThrowController.WindStrength = windStrength;
+        _context.GameView.SetWindStrength(windStrength);
+
         // 舊操作者清理
         if (_context.CurrentTurnCharacter != null)
         {
@@ -74,52 +91,38 @@ public class GameController : MonoBehaviour
         // 新操作者初始化
         if (_context.CurrentTurnCharacter != null)
         {
+            bool isLocalPlayer = _context.CurrentTurnCharacter.IsLocalPlayer;
+
             // 本地顯示操作提示
             _context.CurrentTurnCharacter.SetControlTip(true);
-
             // 本地玩家的回合設置
-            _context.GameView.SetIsLocalTurn(_context.CurrentTurnCharacter.IsLocalPlayer);
+            _context.GameView.SetIsLocalTurn(isLocalPlayer);
 
             // 如果是 AI 的回合，觸發 AI 的大腦驅動
-            if (!_context.CurrentTurnCharacter.IsLocalPlayer)
+            if (StaticDataManager.PlayType == PLAY_TYPE.WithAi && !isLocalPlayer)
             {
-                
+                Debug.Log($"開始獲取AI資料");
+                StartCoroutine(_aIBrain.RequestAIDecision());
             }
         }
         else
         {
             _context.GameView.SetIsLocalTurn(false);
         }
-
-        ThrowController.ResetState();
-
-        // 設置風力強度與方向
-        float windStrength = UnityEngine.Random.Range(-_dataConfig.WindMaxStrength, _dataConfig.WindMaxStrength);
-        ThrowController.WindStrength = windStrength;
-        _context.GameView.SetWindStrength(windStrength);
     }
 
     /// <summary>
-    /// 切換回合
+    /// 切換回合(本地遊玩)
     /// </summary>
     public void SwitchTurn()
     {
         if (_context.GameController.IsGameOver.Value) return;
 
-        switch (StaticDataManager.PlayType)
-        {
-            case PLAY_TYPE.WithAi:
-                SetTurn(_context.P2_CharacterView);
-                break;
-
-            case PLAY_TYPE.TwoPlayer:
-                var nextCharacter = (_context.CurrentTurnCharacter == _context.P1_CharacterView)
+        var nextCharacter = (_context.CurrentTurnCharacter == _context.P1_CharacterView)
                     ? _context.P2_CharacterView
                     : _context.P1_CharacterView;
 
-                SetTurn(nextCharacter);
-                break;
-        }
+        SetTurn(nextCharacter);
     }
 
     /// <summary>

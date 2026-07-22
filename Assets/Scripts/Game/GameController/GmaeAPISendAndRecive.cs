@@ -9,11 +9,10 @@ public class GmaeAPISendAndRecive
     private GameplayContext _context;
     private CharacterThrowController _throwController;
 
-    public GmaeAPISendAndRecive(CharacterThrowController throwController)
+    public GmaeAPISendAndRecive()
     {
-        _throwController = throwController;
-
         _context = GameplayManager.CurrentContext;
+        _throwController = _context.GameController.ThrowController;
 
         ListenServerEvent();
     }
