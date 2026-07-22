@@ -8,6 +8,7 @@ using UniRx.Triggers;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
+using System;
 
 /// <summary>
 /// 遊戲介面
@@ -46,6 +47,13 @@ public class GameView : BaseView
     [SerializeField] private TMP_InputField _if_Chat;
     [SerializeField] private Button _btn_CloseChat;
     [SerializeField] private Button _btn_SendChat;
+
+    [Header("貼圖")]
+    [SerializeField] private Button _btn_Stick;
+    [SerializeField] private GameObject _stickPanel;
+    [SerializeField] private Button _btn_ClostStick;
+    [SerializeField] private RectTransform _stickGroup;
+    [SerializeField] private Button _btn_StickPrefab;
 
     [Header("退出")]
     [SerializeField] private Button _btn_Exit;
@@ -86,6 +94,9 @@ public class GameView : BaseView
         _btn_Chat.gameObject.SetActive(StaticDataManager.PlayType == PLAY_TYPE.Match);
         _isOpenChat = false;
         _chatPanel.gameObject.SetActive(false);
+
+        _btn_Stick.gameObject.SetActive(StaticDataManager.PlayType == PLAY_TYPE.Match);
+        _stickPanel.gameObject.SetActive(false);
     }
 
     public override void SetData(AssetReferenceGameObject myRef)
@@ -96,6 +107,7 @@ public class GameView : BaseView
         _dataConfig = StaticDataManager.DataConfig;
 
         CreateSkillBtn();
+        CreateStickBtns();
         Bind();
         PlayOpeningAnimation();
         RefreshAllSkillButtons(isP1Turn: false, isP2Turn: false);
@@ -139,6 +151,22 @@ public class GameView : BaseView
             })
             .AddTo(this);
 
+        // 貼圖按鈕
+        _btn_Stick.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                _stickPanel.gameObject.SetActive(true);
+            })
+            .AddTo(this);
+
+        // 關閉貼圖按鈕
+        _btn_ClostStick.OnClickAsObservable()
+            .Subscribe(_ =>
+            {
+                _stickPanel.gameObject.SetActive(false);
+            })
+            .AddTo(this);
+
         // 退出按鈕
         _btn_Exit.OnClickAsObservable()
             .Subscribe(_ =>
@@ -174,6 +202,40 @@ public class GameView : BaseView
                 }
             })
             .AddTo(this);
+    }
+
+    /// <summary>
+    /// 產生貼圖按鈕
+    /// </summary>
+    private void CreateStickBtns()
+    {
+        _btn_StickPrefab.gameObject.SetActive(false);
+        for (int i = 0; i < StaticDataManager.StickTextures.Count; i++)
+        {
+            int index = i;
+            GameObject obj = Instantiate(_btn_StickPrefab.gameObject, _stickGroup);
+            obj.SetActive(true);
+            
+            if(obj.TryGetComponent(out Button btn))
+            {
+                btn.image.sprite = StaticDataManager.StickTextures[index];
+
+                btn.OnClickAsObservable()
+                    .ThrottleFirst(TimeSpan.FromSeconds(1))
+                    .Subscribe(_ =>
+                    {
+                        // 發送:貼圖訊息
+                        SendStickData data = new()
+                        {
+                            roomId = StaticDataManager.MatchData.roomId,
+                            stickIndex = index
+                        };
+
+                        SocketManager.Instance.SendStick(data);
+                    })
+                    .AddTo(this);
+            }
+        }
     }
 
     /// <summary>

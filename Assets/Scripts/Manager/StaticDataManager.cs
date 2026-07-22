@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 /// <summary>
 /// 全域遊戲資料
 /// </summary>
@@ -12,6 +15,11 @@ public static class StaticDataManager
     public static DataConfig DataConfig { get; set; }
     /// <summary> 遊戲物件配置檔 </summary>
     public static ObjectPrefabConfig ObjectPrefabConfig { get; set; }
+    #endregion
+
+    #region 圖片
+    /// <summary> 貼圖 </summary>
+    public static List<Sprite> StickTextures { get; set; } = new();
     #endregion
 
     #region API URL

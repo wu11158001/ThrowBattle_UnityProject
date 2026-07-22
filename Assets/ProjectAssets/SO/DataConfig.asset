@@ -42,7 +42,7 @@ MonoBehaviour:
   - BtnString: "\u4E00\u822C\u822C"
     HitRate: 75
   - BtnString: "\u5509\u5466"
-    HitRate: 90
+    HitRate: 95
   AIStyleDatas:
   - Style: 0
     StyleString: "\u4E2D\u4E8C\u75C5\u98A8\u683C"

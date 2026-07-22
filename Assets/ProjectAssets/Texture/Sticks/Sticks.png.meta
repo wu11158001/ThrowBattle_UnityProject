@@ -1,0 +1,902 @@
+fileFormatVersion: 2
+guid: f185184021d08224badd745a3b183af4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7321586379003993781
+    second: Sticks_0
+  - first:
+      213: 5816632368361912052
+    second: Sticks_1
+  - first:
+      213: 8786766630228364830
+    second: Sticks_2
+  - first:
+      213: -2078178154487522780
+    second: Sticks_3
+  - first:
+      213: 1203758889246037268
+    second: Sticks_4
+  - first:
+      213: 2339948252438346552
+    second: Sticks_5
+  - first:
+      213: -2065835807160258218
+    second: Sticks_6
+  - first:
+      213: -6169326892473394669
+    second: Sticks_7
+  - first:
+      213: 968003345342649740
+    second: Sticks_8
+  - first:
+      213: 2987236024796251279
+    second: Sticks_9
+  - first:
+      213: 943077689777452254
+    second: Sticks_10
+  - first:
+      213: 2019841124549638144
+    second: Sticks_11
+  - first:
+      213: -857164761087083875
+    second: Sticks_12
+  - first:
+      213: 7820110680958061524
+    second: Sticks_13
+  - first:
+      213: 9002940620931351623
+    second: Sticks_14
+  - first:
+      213: 5931592101559207234
+    second: Sticks_15
+  - first:
+      213: -8372622532315554669
+    second: Sticks_16
+  - first:
+      213: 3976316209757676389
+    second: Sticks_17
+  - first:
+      213: -1365908383584680479
+    second: Sticks_18
+  - first:
+      213: 7091909944072956406
+    second: Sticks_19
+  - first:
+      213: 2211300038943900424
+    second: Sticks_20
+  - first:
+      213: -6887884936498776504
+    second: Sticks_21
+  - first:
+      213: 6869880285299973580
+    second: Sticks_22
+  - first:
+      213: 8397132653466546844
+    second: Sticks_23
+  - first:
+      213: 1155080228011939050
+    second: Sticks_24
+  - first:
+      213: 2772574893756224421
+    second: Sticks_25
+  - first:
+      213: -192352066082068973
+    second: Sticks_26
+  - first:
+      213: -4725051728463738685
+    second: Sticks_27
+  - first:
+      213: -5108999138719226216
+    second: Sticks_28
+  - first:
+      213: -2007043030791123951
+    second: Sticks_29
+  - first:
+      213: 686296877961704410
+    second: Sticks_30
+  - first:
+      213: -8471899151264319442
+    second: Sticks_31
+  - first:
+      213: 3656008830667440908
+    second: Sticks_32
+  - first:
+      213: -5318737252514738484
+    second: Sticks_33
+  - first:
+      213: -3134072295634682880
+    second: Sticks_34
+  - first:
+      213: 8213755203779202528
+    second: Sticks_35
+  - first:
+      213: 8778946332343610308
+    second: Sticks_36
+  - first:
+      213: 1721941850795692387
+    second: Sticks_37
+  - first:
+      213: 6954849755292666898
+    second: Sticks_38
+  - first:
+      213: 3732808611192061612
+    second: Sticks_39
+  - first:
+      213: -5705505499267832194
+    second: Sticks_40
+  - first:
+      213: 3936606182631201066
+    second: Sticks_41
+  - first:
+      213: -5462124110118709524
+    second: Sticks_42
+  - first:
+      213: -5444141189381254735
+    second: Sticks_43
+  - first:
+      213: -3006867568439171836
+    second: Sticks_44
+  - first:
+      213: 5282584972830088647
+    second: Sticks_45
+  - first:
+      213: 5384746288798334255
+    second: Sticks_46
+  - first:
+      213: 4190181376526077397
+    second: Sticks_47
+  - first:
+      213: -7431717910676693344
+    second: Sticks_48
+  - first:
+      213: -6361309178465614721
+    second: Sticks_49
+  - first:
+      213: 4951449471148166980
+    second: Sticks_50
+  - first:
+      213: -843850749460619373
+    second: Sticks_51
+  - first:
+      213: 5455130039766731891
+    second: Sticks_52
+  - first:
+      213: 6663751440111116406
+    second: Sticks_53
+  - first:
+      213: 1459531228551982558
+    second: Sticks_54
+  - first:
+      213: -3113137396772492701
+    second: Sticks_55
+  - first:
+      213: -6512850595552529998
+    second: Sticks_56
+  - first:
+      213: 2527307144465763559
+    second: Sticks_57
+  - first:
+      213: -7695290246039453740
+    second: Sticks_58
+  - first:
+      213: 2940880172721824532
+    second: Sticks_59
+  - first:
+      213: 4300579865522284541
+    second: Sticks_60
+  - first:
+      213: 9007286375568547740
+    second: Sticks_61
+  - first:
+      213: -4466380201096901299
+    second: Sticks_62
+  - first:
+      213: 3364324034838199855
+    second: Sticks_63
+  - first:
+      213: 5521038506182588666
+    second: Sticks_64
+  - first:
+      213: -804119872590699644
+    second: Sticks_65
+  - first:
+      213: 8990473615272837570
+    second: Sticks_66
+  - first:
+      213: 7832806131433904894
+    second: Sticks_67
+  - first:
+      213: 1605063441704454537
+    second: Sticks_68
+  - first:
+      213: -2534700730139295166
+    second: Sticks_69
+  - first:
+      213: -2656895906559102279
+    second: Sticks_70
+  - first:
+      213: 5306044588467699596
+    second: Sticks_71
+  - first:
+      213: 910790131567170474
+    second: Sticks_72
+  - first:
+      213: 5529202410207945957
+    second: Sticks_73
+  - first:
+      213: 3931295257128199748
+    second: Sticks_74
+  - first:
+      213: 4041594808626145537
+    second: Sticks_75
+  - first:
+      213: 4716987735367065238
+    second: Sticks_76
+  - first:
+      213: -7891241808581732218
+    second: Sticks_77
+  - first:
+      213: 6151958140965189015
+    second: Sticks_78
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sticks_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 349
+        width: 88
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be1fd035008b9560800000000000000
+      internalID: 7321586379003993781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_1
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 347
+        width: 112
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f630493254d8b050800000000000000
+      internalID: 5816632368361912052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_2
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 349
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1e840722bdd0f970800000000000000
+      internalID: 8786766630228364830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_3
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 347
+        width: 82
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42a5bc9aaf3d823e0800000000000000
+      internalID: -2078178154487522780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_4
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 348
+        width: 91
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4159abcf45c94b010800000000000000
+      internalID: 1203758889246037268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_5
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 236
+        width: 79
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b326bb98a297020800000000000000
+      internalID: 2339948252438346552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_6
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 236
+        width: 100
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6513ee5574da453e0800000000000000
+      internalID: -2065835807160258218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_7
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 235
+        width: 93
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31adbd6b0e5226aa0800000000000000
+      internalID: -6169326892473394669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_8
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 232
+        width: 86
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c85d984f9e90f6d00800000000000000
+      internalID: 968003345342649740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_9
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 233
+        width: 82
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f840b36665bc47920800000000000000
+      internalID: 2987236024796251279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_10
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 126
+        width: 87
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed4f7c6892c761d00800000000000000
+      internalID: 943077689777452254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_11
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 121
+        width: 97
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 008b18b1dcae70c10800000000000000
+      internalID: 2019841124549638144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_12
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 118
+        width: 88
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9afb65f03dba14f0800000000000000
+      internalID: -857164761087083875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_13
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 119
+        width: 98
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4db4eba4b3d968c60800000000000000
+      internalID: 7820110680958061524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_14
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 120
+        width: 88
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7444c8c8bced0fc70800000000000000
+      internalID: 9002940620931351623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_15
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 11
+        width: 83
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24503f5e69f315250800000000000000
+      internalID: 5931592101559207234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_16
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 9
+        width: 92
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39c56eaba287ecb80800000000000000
+      internalID: -8372622532315554669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_17
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 9
+        width: 87
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 563eb3d7686be2730800000000000000
+      internalID: 3976316209757676389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_18
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 9
+        width: 99
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e505b0ef815b0de0800000000000000
+      internalID: -1365908383584680479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sticks_19
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 10
+        width: 94
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f9678305868b6260800000000000000
+      internalID: 7091909944072956406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e9cc6caf475ac844db5b048289dc2f28
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":101.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Sticks_0: 7321586379003993781
+      Sticks_1: 5816632368361912052
+      Sticks_10: 943077689777452254
+      Sticks_11: 2019841124549638144
+      Sticks_12: -857164761087083875
+      Sticks_13: 7820110680958061524
+      Sticks_14: 9002940620931351623
+      Sticks_15: 5931592101559207234
+      Sticks_16: -8372622532315554669
+      Sticks_17: 3976316209757676389
+      Sticks_18: -1365908383584680479
+      Sticks_19: 7091909944072956406
+      Sticks_2: 8786766630228364830
+      Sticks_20: 2211300038943900424
+      Sticks_21: -6887884936498776504
+      Sticks_22: 6869880285299973580
+      Sticks_23: 8397132653466546844
+      Sticks_24: 1155080228011939050
+      Sticks_25: 2772574893756224421
+      Sticks_26: -192352066082068973
+      Sticks_27: -4725051728463738685
+      Sticks_28: -5108999138719226216
+      Sticks_29: -2007043030791123951
+      Sticks_3: -2078178154487522780
+      Sticks_30: 686296877961704410
+      Sticks_31: -8471899151264319442
+      Sticks_32: 3656008830667440908
+      Sticks_33: -5318737252514738484
+      Sticks_34: -3134072295634682880
+      Sticks_35: 8213755203779202528
+      Sticks_36: 8778946332343610308
+      Sticks_37: 1721941850795692387
+      Sticks_38: 6954849755292666898
+      Sticks_39: 3732808611192061612
+      Sticks_4: 1203758889246037268
+      Sticks_40: -5705505499267832194
+      Sticks_41: 3936606182631201066
+      Sticks_42: -5462124110118709524
+      Sticks_43: -5444141189381254735
+      Sticks_44: -3006867568439171836
+      Sticks_45: 5282584972830088647
+      Sticks_46: 5384746288798334255
+      Sticks_47: 4190181376526077397
+      Sticks_48: -7431717910676693344
+      Sticks_49: -6361309178465614721
+      Sticks_5: 2339948252438346552
+      Sticks_50: 4951449471148166980
+      Sticks_51: -843850749460619373
+      Sticks_52: 5455130039766731891
+      Sticks_53: 6663751440111116406
+      Sticks_54: 1459531228551982558
+      Sticks_55: -3113137396772492701
+      Sticks_56: -6512850595552529998
+      Sticks_57: 2527307144465763559
+      Sticks_58: -7695290246039453740
+      Sticks_59: 2940880172721824532
+      Sticks_6: -2065835807160258218
+      Sticks_60: 4300579865522284541
+      Sticks_61: 9007286375568547740
+      Sticks_62: -4466380201096901299
+      Sticks_63: 3364324034838199855
+      Sticks_64: 5521038506182588666
+      Sticks_65: -804119872590699644
+      Sticks_66: 8990473615272837570
+      Sticks_67: 7832806131433904894
+      Sticks_68: 1605063441704454537
+      Sticks_69: -2534700730139295166
+      Sticks_7: -6169326892473394669
+      Sticks_70: -2656895906559102279
+      Sticks_71: 5306044588467699596
+      Sticks_72: 910790131567170474
+      Sticks_73: 5529202410207945957
+      Sticks_74: 3931295257128199748
+      Sticks_75: 4041594808626145537
+      Sticks_76: 4716987735367065238
+      Sticks_77: -7891241808581732218
+      Sticks_78: 6151958140965189015
+      Sticks_79: -433392705
+      Sticks_8: 968003345342649740
+      Sticks_9: 2987236024796251279
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

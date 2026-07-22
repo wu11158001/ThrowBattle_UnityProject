@@ -30,7 +30,8 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnPeerThrowReceived -= OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived -= OnPeerHit;
             SocketManager.Instance.OnGameOverReceived -= OnGameOver;
-            SocketManager.Instance.OnReciveCharReceived -= OnReciveChar;
+            SocketManager.Instance.OnReciveChatReceived -= OnReciveChar;
+            SocketManager.Instance.OnReciveStickReceived -= OnReciveStick;
         }
     }
 
@@ -47,7 +48,8 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnPeerThrowReceived += OnPeerThrow;
             SocketManager.Instance.OnPeerHitReceived += OnPeerHit;
             SocketManager.Instance.OnGameOverReceived += OnGameOver;
-            SocketManager.Instance.OnReciveCharReceived += OnReciveChar;
+            SocketManager.Instance.OnReciveChatReceived += OnReciveChar;
+            SocketManager.Instance.OnReciveStickReceived += OnReciveStick;
         }
     }
 
@@ -197,5 +199,17 @@ public class GmaeAPISendAndRecive
             _context.P2_CharacterView;
 
         sendPlayer.ShowTextBubble(data.chatMessage);
+    }
+
+    /// <summary>
+    /// 接收:貼圖訊息
+    /// </summary>
+    public void OnReciveStick(ReciveStickData data)
+    {
+        CharacterView sendPlayer = data.senderSeat == 0 ?
+            _context.P1_CharacterView :
+            _context.P2_CharacterView;
+
+        sendPlayer.ShowStick(data.stickIndex);
     }
 }

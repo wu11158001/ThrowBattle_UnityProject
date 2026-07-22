@@ -24,6 +24,11 @@ public class CharacterView : BaseObject
     [SerializeField] private CanvasGroup _textBubbleCanvasGroup;
     [SerializeField] private TextMeshProUGUI _text_Bubble;
 
+    [Header("貼圖")]
+    [SerializeField] private Canvas _stickCanvas;
+    [SerializeField] private CanvasGroup _stickCanvasGroup;
+    [SerializeField] private Image _img_Stick;
+
     // 初始面向方向
     private bool _initFillX;
 
@@ -54,6 +59,7 @@ public class CharacterView : BaseObject
     public override void OnDestroy()
     {
         _textBubbleCanvasGroup.DOKill();
+        _textBubbleCanvasGroup.DOKill();
         transform.DOKill();
 
         base.OnDestroy();
@@ -68,7 +74,10 @@ public class CharacterView : BaseObject
         CloseThrowStrength();
 
         _textBubbleCanvas.worldCamera = Camera.main;
-        CloseTextBubble();
+        _textBubbleCanvas.gameObject.SetActive(false);
+
+        _stickCanvas.worldCamera = Camera.main;
+        _stickCanvas.gameObject.SetActive(false);
 
         _moveSpeed = _dataConfig.CharacterMoveSpeed;
         _moveRange = _dataConfig.CharacterMoveRange;
@@ -206,18 +215,55 @@ public class CharacterView : BaseObject
     }
 
     /// <summary>
+    /// 顯示貼圖
+    /// </summary>
+    /// <param name="stickIndex"></param>
+    public void ShowStick(int stickIndex)
+    {
+        // 關閉文字泡泡
+        _textBubbleCanvasGroup.DOKill();
+        _textBubbleCanvas.gameObject.SetActive(false);
+
+        if (!_stickCanvas.gameObject.activeSelf)
+        {
+            _stickCanvas.gameObject.SetActive(true);
+        }
+
+        Sprite sprite = StaticDataManager.StickTextures[stickIndex];
+        _img_Stick.sprite = sprite;
+
+        _stickCanvasGroup.DOKill();
+        _stickCanvasGroup.alpha = 0f;
+
+        // 建立動畫序列
+        DOTween.Sequence()
+            .Append(_stickCanvasGroup.DOFade(1f, 0.5f)) // 淡入
+            .AppendInterval(3f)                              // 停留
+            .Append(_stickCanvasGroup.DOFade(0f, 0.5f)) // 淡出 
+            .OnComplete(() =>
+            {
+                _stickCanvas.gameObject.SetActive(false);
+            })
+            .SetLink(gameObject)
+            .SetTarget(_stickCanvasGroup);
+    }
+
+    /// <summary>
     /// 顯示文字泡泡
     /// </summary>
     /// <param name="message"></param>
     public void ShowTextBubble(string message)
     {
-        if(!_textBubbleCanvas.gameObject.activeSelf)
+        // 關閉貼圖
+        _stickCanvasGroup.DOKill();
+        _stickCanvas.gameObject.SetActive(false);
+
+        if (!_textBubbleCanvas.gameObject.activeSelf)
         {
             _textBubbleCanvas.gameObject.SetActive(true);
         }
 
         _text_Bubble.text = message;
-
 
         _textBubbleCanvasGroup.DOKill();
         _textBubbleCanvasGroup.alpha = 0f;
@@ -229,18 +275,10 @@ public class CharacterView : BaseObject
             .Append(_textBubbleCanvasGroup.DOFade(0f, 0.5f)) // 淡出 
             .OnComplete(() =>
             {
-                    _textBubbleCanvas.gameObject.SetActive(false);
+                _textBubbleCanvas.gameObject.SetActive(false);
             })
             .SetLink(gameObject)
             .SetTarget(_textBubbleCanvasGroup);
-    }
-
-    /// <summary>
-    /// 關閉文字泡泡
-    /// </summary>
-    private void CloseTextBubble()
-    {
-        _textBubbleCanvas.gameObject.SetActive(false);
     }
 
     /// <summary>

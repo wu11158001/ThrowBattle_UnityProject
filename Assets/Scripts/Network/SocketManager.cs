@@ -19,6 +19,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     [DllImport("__Internal")] private static extern void EmitExecuteHitJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitTurnEndJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitSendChatJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitSendStickJS(string jsonStr);
 #endif
 
     private SocketIOUnity socket;
@@ -36,7 +37,9 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary> 接收事件:新回合 </summary>
     public Action<NewTurnData> OnNewTurnReceived;
     /// <summary> 接收事件:聊天訊息 </summary>
-    public Action<ReciveChatData> OnReciveCharReceived;
+    public Action<ReciveChatData> OnReciveChatReceived;
+    /// <summary> 接收事件:貼圖訊息 </summary>
+    public Action<ReciveStickData> OnReciveStickReceived;
     /// <summary> 接收事件:遊戲結束 </summary>
     public Action<GameOverData> OnGameOverReceived;
 
@@ -147,7 +150,13 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
         // 監聽:聊天訊息
         socket.On("on_receive_chat", (res) => {
             var data = JsonConvertData<ReciveChatData>(res);
-            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveCharReceived?.Invoke(data); });
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveChatReceived?.Invoke(data); });
+        });
+
+        // 監聽:貼圖訊息
+        socket.On("on_receive_stick", (res) => {
+            var data = JsonConvertData<ReciveStickData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveStickReceived?.Invoke(data); });
         });
 
         // 監聽:遊戲結束
@@ -273,7 +282,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// <summary>
     /// 接收:聊天訊息
     /// </summary>
-    public void OnReceiveChatJS(string jsonText) => OnReciveCharReceived?.Invoke(JsonConvert.DeserializeObject<ReciveChatData>(jsonText));
+    public void OnReceiveChatJS(string jsonText) => OnReciveChatReceived?.Invoke(JsonConvert.DeserializeObject<ReciveChatData>(jsonText));
 
     /// <summary>
     /// 接收:遊戲結束
@@ -357,6 +366,19 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
         EmitSendChatJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("send_chat", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:貼圖訊息
+    /// </summary>
+    public void SendStick(SendStickData data)
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
+        EmitSendStickJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("send_stick", data);
 #endif
     }
     #endregion

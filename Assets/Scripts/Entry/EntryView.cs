@@ -73,7 +73,7 @@ public class EntryView : MonoBehaviour
             var handle = Addressables.LoadAssetAsync<AllConfig>(addressableKey);
             AllConfig allConfig = await handle.ToUniTask();
 
-            ConfigManager.SetConfigDataAsync(allConfig);
+            await ConfigManager.SetConfigDataAsync(allConfig);
         }
         catch (Exception e)
         {
