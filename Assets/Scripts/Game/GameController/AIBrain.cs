@@ -66,7 +66,7 @@ public class AIBrain : MonoBehaviour
     /// </summary>
     public void RequestAIDecision()
     {
-        StartCoroutine(IRequestAIDecision()); ;
+        StartCoroutine(IRequestAIDecision());
     }
 
     private IEnumerator IRequestAIDecision()
@@ -83,8 +83,6 @@ public class AIBrain : MonoBehaviour
         AIStyleData aIStyleData = StaticDataManager.AIStyleData;
         // 風力
         float wind = _context.GameController.ThrowController.WindStrength;
-        // 最大投擲距離
-        float baseMaxDistance = _dataConfig.ThrowMaxDistance;
         // 移動範圍
         Vector2 moveRange = _dataConfig.CharacterMoveRange;
         // AI角色位置
@@ -198,11 +196,14 @@ public class AIBrain : MonoBehaviour
     {
         Debug.LogWarning("AI獲取失敗,保底給予數值");
 
+        // 移動範圍
+        Vector2 moveRange = _dataConfig.CharacterMoveRange;
+
         // 失敗保底
         AIDecisionData responseData = new()
         {
-            moveDirection = 0,
-            moveDistance = 0,
+            moveDirection = UnityEngine.Random.Range(-1f, 1),
+            moveDistance = UnityEngine.Random.Range(0f, moveRange.y - moveRange.x),
             throwType = 0,
             tauntText = "看招！"
         };
