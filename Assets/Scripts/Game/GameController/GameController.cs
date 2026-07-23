@@ -75,10 +75,13 @@ public class GameController : MonoBehaviour
     {
         ThrowController.ResetState();
 
-        // 設置風力強度與方向
-        float windStrength = UnityEngine.Random.Range(-_dataConfig.WindMaxStrength, _dataConfig.WindMaxStrength);
-        ThrowController.WindStrength = windStrength;
-        _context.GameView.SetWindStrength(windStrength);
+        if(StaticDataManager.PlayType != PLAY_TYPE.Match)
+        {
+            // 設置風力強度與方向
+            float windStrength = UnityEngine.Random.Range(-_dataConfig.WindMaxStrength, _dataConfig.WindMaxStrength);
+            ThrowController.WindStrength = windStrength;
+            _context.GameView.SetWindStrength(windStrength);
+        }
 
         // 舊操作者清理
         if (_context.CurrentTurnCharacter != null)
@@ -122,6 +125,16 @@ public class GameController : MonoBehaviour
                     : _context.P1_CharacterView;
 
         SetTurn(nextCharacter);
+    }
+
+    /// <summary>
+    /// 強制角色停止移動
+    /// </summary>
+    public void AllCharacterStop()
+    {
+        _context.P1_CharacterView.SetMove(0, _context.P1_CharacterView.transform.position.x);
+        _context.P2_CharacterView.SetMove(0, _context.P2_CharacterView.transform.position.x);
+        SetInputDirection(0);
     }
 
     /// <summary>

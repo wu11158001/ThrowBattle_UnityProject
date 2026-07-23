@@ -26,6 +26,9 @@ public class GameView : BaseView
     [Header("投擲控制")]
     [SerializeField] private UIEventHandler _throwHandler;
 
+    [Header("催促")]
+    [SerializeField] private TextMeshProUGUI _text_Urge;
+
     [Header("風力")]
     [SerializeField] private GameObject _wind_LeftArror;
     [SerializeField] private GameObject _wind_RightArror;
@@ -76,6 +79,9 @@ public class GameView : BaseView
         {
             _openingAnimationSeq.Kill();
         }
+        _text_Urge.DOKill();
+        Img_P1_HpBar.DOKill();
+        Img_P2_HpBar.DOKill();
 
         base.OnDestroy();
     }
@@ -85,11 +91,9 @@ public class GameView : BaseView
         _moveControlPanel.SetActive(false);
         _wind_LeftArror.SetActive(false);
         _wind_RightArror.SetActive(false);
+        _text_Urge.gameObject.SetActive(false);
         _img_Wind_Left.fillAmount = 0;
         _img_Wind_Right.fillAmount = 0;
-
-        Img_P1_HpBar.fillAmount = 1;
-        Img_P2_HpBar.fillAmount = 1;
 
         _btn_Chat.gameObject.SetActive(StaticDataManager.PlayType == PLAY_TYPE.Match);
         _isOpenChat = false;
@@ -202,6 +206,40 @@ public class GameView : BaseView
                 }
             })
             .AddTo(this);
+    }
+
+    /// <summary>
+    /// 顯示回合倒數
+    /// </summary>
+    /// <param name="cd"></param>
+    public void ShowCountDown(int cd)
+    {
+        if (_text_Urge == null) return;
+
+            if (!_text_Urge.gameObject.activeSelf)
+        {
+            _text_Urge.gameObject.SetActive(true);
+        }
+
+        _text_Urge.fontSize = 0;
+        _text_Urge.text = $"{cd}";
+
+        _text_Urge.DOKill();
+        DOTween.To(() => _text_Urge.fontSize, x => _text_Urge.fontSize = x, 100f, 0.5f)
+            .SetEase(Ease.OutBack)
+            .SetLink(gameObject)
+            .SetTarget(_text_Urge);
+    }
+
+    /// <summary>
+    /// 關閉回合倒數
+    /// </summary>
+    public void CloseCountDown()
+    {
+        if(_text_Urge.gameObject.activeSelf)
+        {
+            _text_Urge.gameObject.SetActive(false);
+        }        
     }
 
     /// <summary>
@@ -345,8 +383,7 @@ public class GameView : BaseView
     /// </summary>
     private void PlayOpeningAnimation()
     {
-        if (_text_Battle == null) return;
-
+        // ----------------- 開場文字 ---------------------------
         _text_Battle.fontSize = 0;
         _text_Battle.gameObject.SetActive(true);
 
@@ -371,6 +408,21 @@ public class GameView : BaseView
             // 遊戲開始
             _context.GameController.StartGamePlay();
         });
+
+        // ----------------- Hp條 ---------------------------
+        Img_P1_HpBar.fillAmount = 0;
+        Img_P1_HpBar.DOKill();
+        Img_P1_HpBar.DOFillAmount(1f, 1.0f)
+            .SetEase(Ease.Linear)
+            .SetLink(gameObject)
+            .SetTarget(Img_P1_HpBar);
+
+        Img_P2_HpBar.fillAmount = 0;
+        Img_P2_HpBar.DOKill();
+        Img_P2_HpBar.DOFillAmount(1f, 1.0f)
+            .SetEase(Ease.Linear)
+            .SetLink(gameObject)
+            .SetTarget(Img_P2_HpBar);
     }
 
     /// <summary>

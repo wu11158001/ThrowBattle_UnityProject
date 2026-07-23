@@ -40,6 +40,8 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     public Action<ReciveChatData> OnReciveChatReceived;
     /// <summary> 接收事件:貼圖訊息 </summary>
     public Action<ReciveStickData> OnReciveStickReceived;
+    /// <summary> 接收事件:回合倒數 </summary>
+    public Action<ReciveTurnCountDownData> OnReciveTurnCountDownReceived;
     /// <summary> 接收事件:遊戲結束 </summary>
     public Action<GameOverData> OnGameOverReceived;
 
@@ -159,6 +161,12 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
             UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveStickReceived?.Invoke(data); });
         });
 
+        // 監聽:回合倒數
+        socket.On("on_turn_countdown", (res) => {
+            var data = JsonConvertData<ReciveTurnCountDownData>(res);
+            UniTask.Void(async () => { await UniTask.SwitchToMainThread(); OnReciveTurnCountDownReceived?.Invoke(data); });
+        });
+
         // 監聽:遊戲結束
         socket.On("game_over", (res) => {
             var data = JsonConvertData<GameOverData>(res);
@@ -255,7 +263,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
 
     #region WebGL 橋接器回傳資料
     /// <summary>
-    /// 接收:角色位置
+    /// 接收:角色移動
     /// </summary>
     public void OnPeerMoveSyncedJS(string jsonText) => OnPeerMoveReceived?.Invoke(JsonConvert.DeserializeObject<MoveData>(jsonText));
 
@@ -288,6 +296,11 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     /// 接收:貼圖訊息
     /// </summary>
     public void OnReciveStickJS(string jsonText) => OnReciveStickReceived?.Invoke(JsonConvert.DeserializeObject<ReciveStickData>(jsonText));
+
+    /// <summary>
+    /// 接收:回合倒數
+    /// </summary>
+    public void OnReciveTurnCountDownJS(string jsonText) => OnReciveTurnCountDownReceived?.Invoke(JsonConvert.DeserializeObject<ReciveTurnCountDownData>(jsonText));
 
     /// <summary>
     /// 接收:遊戲結束

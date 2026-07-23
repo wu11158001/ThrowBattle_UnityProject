@@ -43,9 +43,6 @@ public class DataConfig : ScriptableObject
     [Label("技能_強化攻擊CD回合")] public int StrengthDamageCD = 3;
     [Label("技能_強化攻擊位置高度")] public float SkillStrengthDamagePosHeight = 2.8f;
 
-    [Header("催促")]
-    [Label("催促Icon")] public Sprite UrgeIcon;
-
     [Header("AI設置")]
     [BoxGroup("AI困難度資料")] public List<AIDifficultyData> AIDifficultyDatas;
     [BoxGroup("AI風格資料資料")] public List<AIStyleData> AIStyleDatas;

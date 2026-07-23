@@ -206,6 +206,8 @@ public class NewTurnData
     public int p2Hp;
     /// <summary> 當前回合風力 </summary>
     public float windStrength;
+    /// <summary> 是否是超時而更換回合 </summary>
+    public bool isTimeout;
 }
 
 /// <summary>
@@ -295,6 +297,17 @@ public class ReciveStickData
     /// <summary> 發送顯示時間字串 </summary>
     public string DisplayTime => LocalTime.ToString("HH:mm");
 }
+
+/// <summary>
+/// 回合倒數資料
+/// </summary>
+[Serializable]
+public class ReciveTurnCountDownData
+{
+    /// <summary> 當前回合甚餘秒數 </summary>
+    public int secondsLeft;
+}
+
 
 /// <summary>
 /// 遊戲結束

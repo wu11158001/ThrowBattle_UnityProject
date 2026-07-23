@@ -39,15 +39,17 @@ public class CharacterAnimControl : MonoBehaviour
     /// </summary>
     public void OnThisTurnFinish()
     {
-        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
-            TurnEndData data = new()
+            if(_context.CurrentTurnCharacter.IsLocalPlayer)
             {
-                roomId = StaticDataManager.MatchData.roomId
-            };
+                TurnEndData data = new()
+                {
+                    roomId = StaticDataManager.MatchData.roomId
+                };
 
-            SocketManager.Instance.SendTurnEnd(data);
+                SocketManager.Instance.SendTurnEnd(data);
+            }
         }
         else
         {

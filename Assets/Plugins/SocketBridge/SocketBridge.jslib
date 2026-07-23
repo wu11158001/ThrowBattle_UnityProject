@@ -71,6 +71,12 @@ mergeInto(LibraryManager.library, {
             SendMessage('SocketManager', 'OnReciveStickJS', jsonStr);
         });
 
+        // 監聽:回合倒數
+        window.webglSocket.on('on_turn_countdown', function (data) {
+            var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
+            SendMessage('SocketManager', 'OnReciveTurnCountDownJS', jsonStr);
+        });
+
         // 監聽:遊戲結束
         window.webglSocket.on('game_over', function (data) {
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);

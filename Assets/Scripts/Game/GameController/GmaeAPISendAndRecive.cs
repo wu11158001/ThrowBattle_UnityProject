@@ -32,6 +32,7 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnGameOverReceived -= OnGameOver;
             SocketManager.Instance.OnReciveChatReceived -= OnReciveChar;
             SocketManager.Instance.OnReciveStickReceived -= OnReciveStick;
+            SocketManager.Instance.OnReciveTurnCountDownReceived -= OnReciveTurnCountDown;
         }
     }
 
@@ -50,6 +51,7 @@ public class GmaeAPISendAndRecive
             SocketManager.Instance.OnGameOverReceived += OnGameOver;
             SocketManager.Instance.OnReciveChatReceived += OnReciveChar;
             SocketManager.Instance.OnReciveStickReceived += OnReciveStick;
+            SocketManager.Instance.OnReciveTurnCountDownReceived += OnReciveTurnCountDown;
         }
     }
 
@@ -58,6 +60,12 @@ public class GmaeAPISendAndRecive
     /// </summary>
     private void OnServerNewTurn(NewTurnData data)
     {
+        string json = JsonUtility.ToJson(data);
+        Debug.Log($"接收:新回合通知: {json}");
+
+        // 關閉回合倒數
+        _context.GameView.CloseCountDown();
+
         // 同步Hp
         _context.GameView.UpdateHpBar(true, data.p1Hp);
         _context.GameView.UpdateHpBar(false, data.p2Hp);
@@ -73,6 +81,9 @@ public class GmaeAPISendAndRecive
         float windStrength = data.windStrength;
         _throwController.WindStrength = windStrength;
         _context.GameView.SetWindStrength(windStrength);
+
+        // 強制角色停止移動
+        _context.GameController.AllCharacterStop();
     }
 
     /// <summary>
@@ -80,6 +91,9 @@ public class GmaeAPISendAndRecive
     /// </summary>
     public void OnPeerMove(MoveData data)
     {
+        string json = JsonUtility.ToJson(data);
+        Debug.Log($"接收:角色移動: {json}");
+
         if (_context.CurrentTurnCharacter == null) return;
         _context.CurrentTurnCharacter.SetMove(data.inputDir, data.posX);
     }
@@ -89,7 +103,13 @@ public class GmaeAPISendAndRecive
     /// </summary>
     private void OnPeerCharging(ChargingData data)
     {
-        if(data.isCharging)
+        string json = JsonUtility.ToJson(data);
+        Debug.Log($"接收:畜力狀態: {json}");
+
+        // 關閉回合倒數
+        _context.GameView.CloseCountDown();
+
+        if (data.isCharging)
         {
             _throwController.SetChargingState();
         }
@@ -97,6 +117,9 @@ public class GmaeAPISendAndRecive
         {
             _throwController.StartThrow();
         }
+
+        // 強制角色停止移動
+        _context.GameController.AllCharacterStop();
     }
 
     /// <summary>
@@ -104,6 +127,9 @@ public class GmaeAPISendAndRecive
     /// </summary>
     private void OnPeerThrow(ThrowData data)
     {
+        string json = JsonUtility.ToJson(data);
+        Debug.Log($"接收:投擲: {json}");
+
         // 同步參數狀態
         _throwController.ThrowType = (THROW_TYPE)data.throwType;
         _throwController.ThrowStrength = data.force;
@@ -115,6 +141,9 @@ public class GmaeAPISendAndRecive
         _throwController.ThrowTargetPos = throwTargetPos;
         // 撥放投擲動畫
         _context.CurrentTurnCharacter.PlayThrowAnimation((THROW_TYPE)data.throwType, throwTargetPos);
+
+        // 關閉回合倒數
+        _context.GameView.CloseCountDown();
     }
 
     /// <summary>
@@ -122,6 +151,9 @@ public class GmaeAPISendAndRecive
     /// </summary>
     private void OnPeerHit(HitData data)
     {
+        string json = JsonUtility.ToJson(data);
+        Debug.Log($"接收:擊中: {json}");
+
         // 判斷擊中玩家(0 = Player1, 1 = Player2)
         CharacterView hitCharacter = (data.targetSeat == 0)
             ? _context.P1_CharacterView
@@ -169,6 +201,9 @@ public class GmaeAPISendAndRecive
     {
         _context.GameController.IsGameOver.Value = true;
 
+        // 關閉回合倒數
+        _context.GameView.CloseCountDown();
+
         string winMessage = "";
         if (string.IsNullOrEmpty(data.message))
         {
@@ -211,5 +246,13 @@ public class GmaeAPISendAndRecive
             _context.P2_CharacterView;
 
         sendPlayer.ShowStick(data.stickIndex);
+    }
+
+    /// <summary>
+    /// 接收:回合倒數
+    /// </summary>
+    public void OnReciveTurnCountDown(ReciveTurnCountDownData data)
+    {
+        _context.GameView.ShowCountDown(data.secondsLeft);
     }
 }
