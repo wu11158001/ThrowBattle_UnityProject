@@ -16,27 +16,30 @@ MonoBehaviour:
   AiApiKey: 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
   AiApiUrl: https://api.groq.com/openai/v1/chat/completions
   CharacterPosY: -2.6
-  CharacterMoveRange: {x: 3, y: 7}
+  CharacterMoveRange: {x: 3.2, y: 8}
   CharacterMoveSpeed: 2.5
   CharacterColor_P1: E2FF5D
   CharacterColor_P2: FFFFFF
   CharacterMaxHp: 100
   ThrowChargeSpeed: 1.5
   ThrowGroundJudgeY: -3.5
-  ThrowMaxDistance: 23
+  ThrowMaxDistance: 28
   ThrowMaxHeight: 3.8
   ThrowMoveDuration: 1
   ThrowRaycastRadius: 0.35
   ThrowDamage: 15
-  WindMaxStrength: 5
-  SkillGiantIcon: {fileID: 7677048284982793680, guid: 022797f27223f804d84a5d536986654e, type: 3}
+  WindMaxStrength: 8
+  SkillGiantIcon: {fileID: -5071227148508314305, guid: c9403a358d2a3ee43888fdf02cbd7b6e, type: 3}
+  SkillGiantDescrible: "\u6295\u64F2\u7269\u4EF6\u589E\u5927"
   SkillGiantSize: 2
   SkillGiantCD: 2
-  SkillStrengthDamageIcon: {fileID: 7455952627863186085, guid: 022797f27223f804d84a5d536986654e, type: 3}
+  SkillStrengthDamageIcon: {fileID: 1507104981967960467, guid: c9403a358d2a3ee43888fdf02cbd7b6e, type: 3}
+  SkillStrengthDamageDescrible: "\u50B7\u5BB3\u589E\u52A0"
   SkillStrengthDamageMultiplier: 2
   StrengthDamageCD: 3
   SkillStrengthDamagePosHeight: 2
-  SkillDodgeIcon: {fileID: -6290221921668447333, guid: 022797f27223f804d84a5d536986654e, type: 3}
+  SkillDodgeIcon: {fileID: 7864413017587460762, guid: c9403a358d2a3ee43888fdf02cbd7b6e, type: 3}
+  SkillDodgeDescrible: "\u4E0B\u56DE\u5408\u5FC5\u5B9A\u9583\u907F\u653B\u64CA"
   SkillDodgeCD: 5
   AIDifficultyDatas:
   - BtnString: "\u7B28\u7B28\u7684"

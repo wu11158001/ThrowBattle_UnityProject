@@ -4,6 +4,7 @@ using System;
 using UniRx;
 using UnityEngine.EventSystems;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 
 /// <summary>
 /// 技能按鈕
@@ -40,6 +41,11 @@ public class SkillBtn : MonoBehaviour
     /// </summary>
     public int BelongIndex { get; private set; }
 
+    private void OnDestroy()
+    {
+        _cdMask.DOKill();
+    }
+
     public void SetData(THROW_TYPE skillType, int maxCDTurns, Action clickEvent, Sprite skillIcon, int belongIndex, string describle)
     {
         SkillType = skillType;
@@ -49,6 +55,7 @@ public class SkillBtn : MonoBehaviour
         BelongIndex = belongIndex;
 
         _mainBtn.image.sprite = skillIcon;
+        _cdMask.sprite = skillIcon;
         _cdMask.fillAmount = 0;
 
         Bind();
@@ -97,7 +104,7 @@ public class SkillBtn : MonoBehaviour
                             view.SetDescribleData(
                                 describle: _describle,
                                 targetPos: uiEventHandler.MainRect.position,
-                                yOffset: -100f);
+                                yOffset: -120f);
                         }).Forget();
                 }
             })
@@ -170,6 +177,12 @@ public class SkillBtn : MonoBehaviour
     private void UpdateMask()
     {
         if (_maxCDTurns <= 0) return;
-        _cdMask.fillAmount = (float)_currentCDTurns / _maxCDTurns;
+        float value = (float)_currentCDTurns / _maxCDTurns;
+
+        _cdMask.DOKill();
+        _cdMask.DOFillAmount(value, 0.5f)
+            .SetEase(ease: Ease.Linear)
+            .SetLink(gameObject)
+            .SetTarget(_cdMask);
     }
 }

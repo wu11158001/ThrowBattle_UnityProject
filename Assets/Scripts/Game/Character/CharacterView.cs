@@ -19,7 +19,7 @@ public class CharacterView : BaseObject
     [SerializeField] private GameObject _controlTip;
 
     [Header("投擲力道")]
-    [SerializeField] private GameObject _chargingObj;
+    [SerializeField] private RectTransform _chargingRect;
     [SerializeField] private Image _img_Charging;
 
     [Header("文字泡泡")]
@@ -61,6 +61,9 @@ public class CharacterView : BaseObject
     // 移動輸入值
     private float _inputDir = 0;
 
+    private MaterialPropertyBlock propertyBlock;
+    private static readonly int UseOutlineID = Shader.PropertyToID("_UseOutline");
+
     private GameplayContext _context;
     private DataConfig _dataConfig;
 
@@ -78,6 +81,8 @@ public class CharacterView : BaseObject
         _context = GameplayManager.CurrentContext;
         _dataConfig = StaticDataManager.DataConfig;
 
+        propertyBlock = new MaterialPropertyBlock();
+
         _moveSpeed = _dataConfig.CharacterMoveSpeed;
         _moveRange = _dataConfig.CharacterMoveRange;
 
@@ -88,12 +93,13 @@ public class CharacterView : BaseObject
         _stickObj.SetActive(false);
 
         _controlTip.SetActive(false);
-        _controlTip.transform.DOLocalMoveY(_controlTip.transform.localPosition.y + 0.2f, 0.5f)
+        _controlTip.transform.DOLocalMoveY(_controlTip.transform.localPosition.y - 0.1f, 2f)
             .SetEase(ease: Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo)
             .SetLink(gameObject)
             .SetTarget(_controlTip);
 
+        SetOutline(false);
         Bind();
     }
 
@@ -162,6 +168,15 @@ public class CharacterView : BaseObject
         // 設置角色面向方向
         _initFillX = isPlayer1;
         _spriteRenderer.flipX = _initFillX;
+
+        // 蓄力條位置
+        if(!isPlayer1)
+        {
+            Vector2 initChargingPos = _chargingRect.localPosition;
+            initChargingPos.x = -initChargingPos.x;
+            _chargingRect.localPosition = initChargingPos;
+            _chargingRect.rotation = Quaternion.Euler(0, 0, 0);
+        }
 
         // Hp
         MaxHp = _dataConfig.CharacterMaxHp;
@@ -297,9 +312,9 @@ public class CharacterView : BaseObject
     /// <param name="value">投擲力道(0~1)</param>
     public void UpdateCharging(float value)
     {
-        if (!_chargingObj.activeSelf)
+        if (!_chargingRect.gameObject.activeSelf)
         {
-            _chargingObj.SetActive(true);
+            _chargingRect.gameObject.SetActive(true);
         }
 
         _img_Charging.fillAmount = value;
@@ -310,7 +325,7 @@ public class CharacterView : BaseObject
     /// </summary>
     public void CloseThrowStrength()
     {
-        _chargingObj.SetActive(false);
+        _chargingRect.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -323,6 +338,8 @@ public class CharacterView : BaseObject
         {
             _controlTip.SetActive(isActive);
         }
+
+        SetOutline(isActive);
     }
 
     /// <summary>
@@ -408,14 +425,15 @@ public class CharacterView : BaseObject
     }
 
     /// <summary>
-    /// 伺服器回傳HP
+    /// 操作角色Outline顯示控制
     /// </summary>
-    public void SyncHPFromServer(int serverHP)
+    /// <param name="enable"></param>
+    public void SetOutline(bool enable)
     {
-        CurrentHp = serverHP;
+        _spriteRenderer.GetPropertyBlock(propertyBlock);
 
-        // 更新血條 UI
-        bool isP1 = (this == _context.P1_CharacterView);
-        _context.GameView.UpdateHpBar(isP1, CurrentHp);
+        // 傳入 1.0f 代表開啟，0.0f 代表關閉
+        propertyBlock.SetFloat(UseOutlineID, enable ? 1.0f : 0.0f);
+        _spriteRenderer.SetPropertyBlock(propertyBlock);
     }
 }

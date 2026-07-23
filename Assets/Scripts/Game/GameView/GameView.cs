@@ -36,8 +36,10 @@ public class GameView : BaseView
     [SerializeField] private Image _img_Wind_Right;
 
     [Header("生命條")]
-    [SerializeField] private Image Img_P1_HpBar;
-    [SerializeField] private Image Img_P2_HpBar;
+    [SerializeField] private Image _img_P1_HpBar_Back;
+    [SerializeField] private Image _img_P1_HpBar_Front;
+    [SerializeField] private Image _img_P2_HpBar_Back;
+    [SerializeField] private Image _img_P2_HpBar_Front;
 
     [Header("技能按鈕")]
     [SerializeField] private RectTransform _skillBtnParent_p1;
@@ -80,8 +82,10 @@ public class GameView : BaseView
             _openingAnimationSeq.Kill();
         }
         _text_Urge.DOKill();
-        Img_P1_HpBar.DOKill();
-        Img_P2_HpBar.DOKill();
+        _img_P1_HpBar_Back.DOKill();
+        _img_P1_HpBar_Front.DOKill();
+        _img_P2_HpBar_Back.DOKill();
+        _img_P2_HpBar_Front.DOKill();
 
         base.OnDestroy();
     }
@@ -159,6 +163,7 @@ public class GameView : BaseView
         _btn_Stick.OnClickAsObservable()
             .Subscribe(_ =>
             {
+                _btn_Stick.gameObject.SetActive(false);
                 _stickPanel.gameObject.SetActive(true);
             })
             .AddTo(this);
@@ -167,6 +172,7 @@ public class GameView : BaseView
         _btn_ClostStick.OnClickAsObservable()
             .Subscribe(_ =>
             {
+                _btn_Stick.gameObject.SetActive(true);
                 _stickPanel.gameObject.SetActive(false);
             })
             .AddTo(this);
@@ -451,19 +457,33 @@ public class GameView : BaseView
         });
 
         // ----------------- Hp條 ---------------------------
-        Img_P1_HpBar.fillAmount = 0;
-        Img_P1_HpBar.DOKill();
-        Img_P1_HpBar.DOFillAmount(1f, 1.0f)
+        _img_P1_HpBar_Back.fillAmount = 0;
+        _img_P1_HpBar_Back.DOKill();
+        _img_P1_HpBar_Back.DOFillAmount(1f, 1.0f)
             .SetEase(Ease.Linear)
             .SetLink(gameObject)
-            .SetTarget(Img_P1_HpBar);
+            .SetTarget(_img_P1_HpBar_Back);
 
-        Img_P2_HpBar.fillAmount = 0;
-        Img_P2_HpBar.DOKill();
-        Img_P2_HpBar.DOFillAmount(1f, 1.0f)
+        _img_P1_HpBar_Front.fillAmount = 0;
+        _img_P1_HpBar_Front.DOKill();
+        _img_P1_HpBar_Front.DOFillAmount(1f, 1.0f)
             .SetEase(Ease.Linear)
             .SetLink(gameObject)
-            .SetTarget(Img_P2_HpBar);
+            .SetTarget(_img_P1_HpBar_Front);
+
+        _img_P2_HpBar_Front.fillAmount = 0;
+        _img_P2_HpBar_Front.DOKill();
+        _img_P2_HpBar_Front.DOFillAmount(1f, 1.0f)
+            .SetEase(Ease.Linear)
+            .SetLink(gameObject)
+            .SetTarget(_img_P2_HpBar_Front);
+
+        _img_P2_HpBar_Back.fillAmount = 0;
+        _img_P2_HpBar_Back.DOKill();
+        _img_P2_HpBar_Back.DOFillAmount(1f, 1.0f)
+            .SetEase(Ease.Linear)
+            .SetLink(gameObject)
+            .SetTarget(_img_P2_HpBar_Back);
     }
 
     /// <summary>
@@ -547,11 +567,23 @@ public class GameView : BaseView
 
         if (isPlayer1)
         {
-            if (Img_P1_HpBar != null) Img_P1_HpBar.fillAmount = fillValue;
+            if (_img_P1_HpBar_Front != null) _img_P1_HpBar_Front.fillAmount = fillValue;
+
+            _img_P1_HpBar_Back.DOKill();
+            _img_P1_HpBar_Back.DOFillAmount(fillValue, 1f)
+                .SetEase(ease: Ease.Linear)
+                .SetLink(gameObject)
+                .SetTarget(_img_P1_HpBar_Back);
         }
         else
         {
-            if (Img_P2_HpBar != null) Img_P2_HpBar.fillAmount = fillValue;
+            if (_img_P2_HpBar_Front != null) _img_P2_HpBar_Front.fillAmount = fillValue;
+
+            _img_P2_HpBar_Back.DOKill();
+            _img_P2_HpBar_Back.DOFillAmount(fillValue, 1f)
+                .SetEase(ease: Ease.Linear)
+                .SetLink(gameObject)
+                .SetTarget(_img_P2_HpBar_Back);
         }
     }
 

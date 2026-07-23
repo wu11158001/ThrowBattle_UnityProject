@@ -40,7 +40,7 @@ public class LobbyView : BaseView
 
         if (StaticDataManager.RegisterPlayerData != null)
         {
-            _text_Nickname.text = StaticDataManager.RegisterPlayerData.Nickname;
+            _text_Nickname.text = $"玩家:{StaticDataManager.RegisterPlayerData.Nickname}"; 
         }
 
         Bind();
@@ -52,7 +52,7 @@ public class LobbyView : BaseView
         MessageBroker.Default.Receive<RegisterSuccessMessage>()
             .Subscribe(msg =>
             {
-                _text_Nickname.text = $"{msg.PlayerData.Nickname}";
+                _text_Nickname.text = $"玩家:{msg.PlayerData.Nickname}";
             })
             .AddTo(this);
 

@@ -309,7 +309,6 @@ public class AIBrain : MonoBehaviour
         {
             if (_dodgeCD == 0)
             {
-                Debug.Log("AI 開啟閃避");
                 _dodgeCD = _dataConfig.SkillDodgeCD;
                 _context.CurrentTurnCharacter.IsDodge = true;
 
