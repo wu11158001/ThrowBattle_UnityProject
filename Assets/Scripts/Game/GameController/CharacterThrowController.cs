@@ -132,6 +132,9 @@ public class CharacterThrowController
     /// </summary>
     public void StartThrow()
     {
+        // 還未蓄力
+        if (!_isCharging) return;
+
         _isThrowed = true;
         _isCharging = false;
 
@@ -401,20 +404,23 @@ public class CharacterThrowController
             Mathf.CeilToInt(_dataConfig.ThrowDamage * _dataConfig.SkillStrengthDamageMultiplier) :
             _dataConfig.ThrowDamage;
 
-        bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
-        if (StaticDataManager.PlayType == PLAY_TYPE.Match && isMyTurn)
+        if (StaticDataManager.PlayType == PLAY_TYPE.Match)
         {
+            bool isMyTurn = _context.CurrentTurnCharacter.IsLocalPlayer;
             bool isP1 = (hitCharacter == _context.P1_CharacterView);
 
-            HitData data = new()
+            if(isMyTurn)
             {
-                roomId = StaticDataManager.MatchData.roomId,
-                targetSeat = isP1 ? 0 : 1,
-                throwType = (int)ThrowType,
-                damage = isHitCharacter ? damage : 0
-            };
+                HitData data = new()
+                {
+                    roomId = StaticDataManager.MatchData.roomId,
+                    targetSeat = isP1 ? 0 : 1,
+                    throwType = (int)ThrowType,
+                    damage = isHitCharacter ? damage : 0
+                };
 
-            SocketManager.Instance.SendExecuteHit(data);
+                SocketManager.Instance.SendExecuteHit(data);
+            }
         }
         else
         {
@@ -423,7 +429,7 @@ public class CharacterThrowController
     }
 
     /// <summary>
-    /// 執行擊中
+    /// 執行擊中(本地)
     /// </summary>
     /// <param name="hitCharacter"></param>
     /// <param name="damage"></param>
@@ -442,6 +448,13 @@ public class CharacterThrowController
 
         if (isHitCharacter)
         {
+            // 閃避
+            if(hitCharacter.IsDodge)
+            {
+                hitCharacter.PlayDodgeAnimation();
+                return;
+            }
+
             int remainingHp = hitCharacter.TakeDamage(damage, ThrowType);
 
             // 判斷被擊中的是 P1 還是 P2，並更新對應的血條 UI

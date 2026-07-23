@@ -42,6 +42,8 @@ public class DataConfig : ScriptableObject
     [Label("技能_強化攻擊傷害倍率")] public float SkillStrengthDamageMultiplier = 2f;
     [Label("技能_強化攻擊CD回合")] public int StrengthDamageCD = 3;
     [Label("技能_強化攻擊位置高度")] public float SkillStrengthDamagePosHeight = 2.8f;
+    [Label("技能_閃避Icon")] public Sprite SkillDodgeIcon;
+    [Label("技能_閃避CD回合")] public int SkillDodgeCD = 5;
 
     [Header("AI設置")]
     [BoxGroup("AI困難度資料")] public List<AIDifficultyData> AIDifficultyDatas;

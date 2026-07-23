@@ -25,11 +25,13 @@ public enum AIStyle
 public class AIDecisionData
 {
     /// <summary> 移動方向 </summary>
-    public float moveDirection;
+    public int moveDirection;
     /// <summary> 移動距離 </summary>
     public float moveDistance;
     /// <summary> 投擲類型 </summary>
     public int throwType;
+    /// <summary> 是否開啟閃避 </summary>
+    public bool isDodge;
     /// <summary> 嘲諷語 </summary>
     public string tauntText;
 }
@@ -46,6 +48,7 @@ public class AIBrain : MonoBehaviour
 
     private int _giantCD = 0;
     private int _strengthCD = 0;
+    private int _dodgeCD = 0;
 
     private GameplayContext _context;
     private DataConfig _dataConfig;
@@ -99,8 +102,9 @@ public class AIBrain : MonoBehaviour
         // 建立技能可用狀態說明
         string giantStatus = _giantCD == 0 ? "【可用】" : $"【冷卻中，還需 {_giantCD} 回合】";
         string strengthStatus = _strengthCD == 0 ? "【可用】" : $"【冷卻中，還需 {_strengthCD} 回合】";
+        string dodgeStatus = _dodgeCD == 0 ? "【可用】" : $"【冷卻中，還需 {_dodgeCD} 回合】";
 
-        string prompt = $@"你是一個彈道投擲遊戲的 AI。請根據當前物理參數與局勢做出精準決策。
+        string prompt = $@"你是一個彈道投擲遊戲的 AI。請根據當前物理參數與局勢做出最佳決策。
 
             【AI 性格】
             {aIStyleData.Describe}
@@ -109,31 +113,42 @@ public class AIBrain : MonoBehaviour
             - AI(你)血量: {aiHp} / 敵方血量: {playerHp}
             - AI(你)位置: {aiPosX}，可移動範圍: {-moveRange.y} 到 {-moveRange.x}
             - 敵方距離: {distance} 單位
-            - 技能狀態: 
-              1.[throwType = 0 (普通攻擊)]: 無 CD
-              2.[throwType = 1 (巨大化)]: {giantStatus}
-              3.[throwType = 2 (強化傷害)]: {strengthStatus}
+            - 風向與風力: {wind}
 
-            【約束條件】
-            1. 嚴禁選擇冷卻中的技能 (CD > 0)。
-            2. moveDirection 範圍為 -1 (往左) 到 1 (往右)。
-            3. moveDistance 範圍為 0 到 {moveRange.y - moveRange.x}。
-            4. 走位後的 X 位置不可超越移動範圍 {-moveRange.y} 至 {-moveRange.x}。
-            5. tauntText 必須符合性格，長度 30 字以內繁體中文，避免俗套詞彙。
-            6. 請嚴格依據以下 JSON 格式輸出，絕對不能遺漏任何欄位名稱(Key)：
+            【技能與動作狀態】
+            1. [throwType = 0 (普通攻擊)]: 無 CD
+            2. [throwType = 1 (巨大化)]: {giantStatus}
+            3. [throwType = 2 (強化傷害)]: {strengthStatus}
+            4. [isDodge (開啟閃避)]: {dodgeStatus} 
+
+            【戰略指南 (非常重要)】
+            - 當閃避【可用】且 (AI血量低於 40% 或 敵方血量高於AI) 時，請優先將 ""isDodge"" 設為 true 以保護自己！
+            - 注意：若你選擇啟用閃避 (""isDodge"": true)，本回合將強制進行普通攻擊，無法使用巨大化或強化傷害。
+
+            【嚴格約束條件】
+            1. 嚴禁選擇冷卻中 (CD > 0) 的技能或閃避。
+            2. 規則限制：若 ""isDodge"": true，則 ""throwType"" 必須強制設定為 0 (普通攻擊)。
+            3. moveDirection 只會是 -1(往左移動)，0(不移動)，1(往右移動)。
+            4. moveDistance 範圍 :
+               - 如果moveDirection = -1(往左)，範圍為: 0 至 {Mathf.Abs(moveRange.y) - Mathf.Abs(aiPosX) }。
+               - 如果moveDirection = 1(往右)，範圍為: 0 至 {Mathf.Abs(aiPosX) - Mathf.Abs(moveRange.x) }。
+            5. 走位後的 X 位置不可超越移動範圍 。
+            6. tauntText 必須符合性格，長度 30 字以內繁體中文，避免俗套詞彙。
+            7. 請嚴格依據以下 JSON 格式輸出，必須包含所有欄位，isDodge 必須是布林值 (true 或 false)：
             {{
-              ""moveDirection"": 0.0,
+              ""moveDirection"": 0,
               ""moveDistance"": 0.0,
               ""throwType"": 0,
+              ""isDodge"": false,
               ""tauntText"": ""看招！""
             }}";
 
         // 安全處理字串轉義
         string cleanPrompt = EscapeString(prompt);
 
-        // 嚴謹的 Groq / OpenAI JSON Body 結構(llama-3.3-70b-versatile)
+        // 嚴謹的 Groq / OpenAI JSON Body 結構(llama-3.3-70b-versatile / llama-3.1-8b-instant)
         string jsonRequestBody = "{" +
-            "\"model\": \"llama-3.1-8b-instant\"," +
+            "\"model\": \"llama-3.3-70b-versatile\"," +
             "\"temperature\": 0.7," +
             "\"messages\": [" +
                 "{\"role\": \"system\", \"content\": \"You are a game AI. Always response in pure JSON format.\"}," +
@@ -202,7 +217,7 @@ public class AIBrain : MonoBehaviour
         // 失敗保底
         AIDecisionData responseData = new()
         {
-            moveDirection = UnityEngine.Random.Range(-1f, 1),
+            moveDirection = UnityEngine.Random.Range(-1, 1),
             moveDistance = UnityEngine.Random.Range(0f, moveRange.y - moveRange.x),
             throwType = 0,
             tauntText = "看招！"
@@ -272,6 +287,7 @@ public class AIBrain : MonoBehaviour
         // 扣除技能CD
         _giantCD = Mathf.Max(0, _giantCD - 1);
         _strengthCD = Mathf.Max(0, _strengthCD - 1);
+        _dodgeCD = Mathf.Max(0, _dodgeCD - 1);
 
         // 確定技能並設定進入 CD
         THROW_TYPE throwType = (THROW_TYPE)data.throwType;
@@ -288,6 +304,24 @@ public class AIBrain : MonoBehaviour
             else throwType = THROW_TYPE.Normal;
         }
 
+        // 開啟閃避
+        if (data.isDodge)
+        {
+            if (_dodgeCD == 0)
+            {
+                Debug.Log("AI 開啟閃避");
+                _dodgeCD = _dataConfig.SkillDodgeCD;
+                _context.CurrentTurnCharacter.IsDodge = true;
+
+                data.throwType = 0;
+            }
+            else
+            {
+                data.isDodge = false;
+            }
+        }
+
+        // 設置投擲類型
         _context.GameController.SetThrowType(throwType);
 
         // 開始蓄力

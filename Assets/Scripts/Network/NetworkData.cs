@@ -135,6 +135,18 @@ public class MoveData
 }
 
 /// <summary>
+/// 閃避資料
+/// </summary>
+[Serializable]
+public class DodgeData
+{
+    /// <summary> 房間ID </summary>
+    public string roomId;
+    /// <summary> 閃避角色(0 = P1, 1 = P2) </summary>
+    public int targetSeat;
+}
+
+/// <summary>
 /// 畜力狀態資料
 /// </summary>
 [Serializable]
@@ -174,7 +186,7 @@ public class HitData
     public int targetSeat;
     /// <summary> 投擲類型 </summary>
     public int throwType;
-    /// <summary> 造成傷害 </summary>
+    /// <summary> 造成傷害(0 = 未擊中, -1 = 閃避) </summary>
     public int damage;
     /// <summary> 玩家1Hp </summary>
     public int p1Hp;

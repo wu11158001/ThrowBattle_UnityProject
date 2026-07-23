@@ -9,6 +9,7 @@ public class CharacterAnimControl : MonoBehaviour
     [SerializeField] private Animator _anim;
 
     private readonly int _isMovingParamId = Animator.StringToHash("IsMoving");
+    private readonly int _dodgeParamId = Animator.StringToHash("Dodge");
     private readonly int _hurtParamId = Animator.StringToHash("Hurt");
     private readonly int _hurt_GiantParamId = Animator.StringToHash("Hurt_Giant");
     private readonly int _hurt_StrengthDamageParamId = Animator.StringToHash("Hurt_StrengthDamage");
@@ -63,7 +64,12 @@ public class CharacterAnimControl : MonoBehaviour
     /// <returns></returns>
     private async UniTaskVoid SwitchTurnAsync()
     {
-        await UniTask.Delay(1000);
+        bool isCanceled = await UniTask.Delay(1000, 
+            cancellationToken: this.GetCancellationTokenOnDestroy())
+            .SuppressCancellationThrow();
+
+        if (isCanceled) return;
+
         _context.GameController.SwitchTurn();
     }
 
@@ -90,6 +96,14 @@ public class CharacterAnimControl : MonoBehaviour
     public void PlayDerideAnimation()
     {
         _anim.SetTrigger(_derideParamId);
+    }
+
+    /// <summary>
+    /// 撥放閃避動畫
+    /// </summary>
+    public void PlayDodgeAnimation()
+    {
+        _anim.SetTrigger(_dodgeParamId);
     }
 
     /// <summary>

@@ -114,6 +114,14 @@ mergeInto(LibraryManager.library, {
         }
     },
 
+    // 發送:開啟閃避
+    EmitOpenDodgeJS: function (jsonStr) {
+        var rawJson = UTF8ToString(jsonStr);
+        if (window.webglSocket) {
+            window.webglSocket.emit('open_dodge', JSON.parse(rawJson));
+        }
+    },
+
     // 發送:畜力狀態
     EmitSyncChargingJS: function (jsonStr) {
         var rawJson = UTF8ToString(jsonStr);

@@ -96,6 +96,8 @@ public class GameController : MonoBehaviour
         {
             bool isLocalPlayer = _context.CurrentTurnCharacter.IsLocalPlayer;
 
+            // 關閉閃避
+            _context.CurrentTurnCharacter.IsDodge = false;
             // 本地顯示操作提示
             _context.CurrentTurnCharacter.SetControlTip(true);
             // 本地玩家的回合設置

@@ -53,6 +53,11 @@ public class CharacterView : BaseObject
     // 紀錄強化攻擊瞬移位置
     private Vector3 _teleportTargetPos;
 
+    /// <summary>
+    /// 是否開啟閃避
+    /// </summary>
+    public bool IsDodge { get; set; }
+
     // 移動輸入值
     private float _inputDir = 0;
 
@@ -362,6 +367,11 @@ public class CharacterView : BaseObject
     /// 撥放嘲諷動畫
     /// </summary>
     public void PlayDerideAnimation() => _characterAnimControl.PlayDerideAnimation();
+
+    /// <summary>
+    /// 撥放閃避動畫
+    /// </summary>
+    public void PlayDodgeAnimation() => _characterAnimControl.PlayDodgeAnimation();
 
     /// <summary>
     /// 撥放受擊動畫

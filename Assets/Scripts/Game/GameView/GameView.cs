@@ -317,29 +317,69 @@ public class GameView : BaseView
         int belongIndex = isPlayer1 ? 0 : 1;
         if (parent == null) return;
 
-        // 生成巨大化技能
+        // 巨大化技能
         SkillBtn giantBtn = Instantiate(_skillBtnPrefab, parent);
         giantBtn.gameObject.SetActive(true);
         giantBtn.SetData(
             skillType: THROW_TYPE.Giant, 
             maxCDTurns: _dataConfig.SkillGiantCD, 
-            clickEvent: () => OnSkillClick(THROW_TYPE.Giant), 
+            clickEvent: () =>
+            {
+                _context.GameController.SetThrowType(THROW_TYPE.Giant);
+                OnSkillClick();
+            }, 
             skillIcon: _dataConfig.SkillGiantIcon,
             belongIndex: belongIndex);
 
         targetList.Add(giantBtn);
 
-        // 生成強化傷害技能
+        // 強化傷害技能
         SkillBtn strengthBtn = Instantiate(_skillBtnPrefab, parent);
         strengthBtn.gameObject.SetActive(true);
         strengthBtn.SetData(
             skillType: THROW_TYPE.StrengthDamage,
             maxCDTurns: _dataConfig.StrengthDamageCD,
-            clickEvent: () => OnSkillClick(THROW_TYPE.StrengthDamage),
+            clickEvent: () =>
+            {
+                _context.GameController.SetThrowType(THROW_TYPE.StrengthDamage);
+                OnSkillClick();
+            },
             skillIcon: _dataConfig.SkillStrengthDamageIcon,
             belongIndex: belongIndex);
 
         targetList.Add(strengthBtn);
+
+        // 閃避技能
+        SkillBtn dodgeBtn = Instantiate(_skillBtnPrefab, parent);
+        dodgeBtn.gameObject.SetActive(true);
+        dodgeBtn.SetData(
+            skillType: THROW_TYPE.Normal,
+            maxCDTurns: _dataConfig.SkillDodgeCD,
+            clickEvent: () =>
+            {
+                if(StaticDataManager.PlayType == PLAY_TYPE.Match)
+                {
+                    int targetSeat = _context.CurrentTurnCharacter == _context.P1_CharacterView ? 0 : 1;
+
+                    DodgeData data = new()
+                    {
+                        roomId = StaticDataManager.MatchData.roomId,
+                        targetSeat = targetSeat
+                    };
+
+                    SocketManager.Instance.SendOpenDodge(data);
+                }
+                else
+                {
+                    _context.CurrentTurnCharacter.IsDodge = true;
+                }
+
+                OnSkillClick();
+            },
+            skillIcon: _dataConfig.SkillDodgeIcon,
+            belongIndex: belongIndex);
+
+        targetList.Add(dodgeBtn);
     }
 
     /// <summary>
@@ -365,10 +405,8 @@ public class GameView : BaseView
     /// <summary>
     /// 技能點擊
     /// </summary>
-    private void OnSkillClick(THROW_TYPE type)
+    private void OnSkillClick()
     {
-        _context.GameController.SetThrowType(type);
-
         // 一旦點擊了任何一個技能，這一回合「該玩家的所有技能」都關閉互動
         bool isP1 = (_context.CurrentTurnCharacter == _context.P1_CharacterView);
 

@@ -14,6 +14,7 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     [DllImport("__Internal")] private static extern void EmitJoinEventJS(string playerId);
     [DllImport("__Internal")] private static extern void EmitJoinBattleRoomJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitSyncMoveJS(string jsonStr);
+    [DllImport("__Internal")] private static extern void EmitOpenDodgeJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitSyncChargingJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitExecuteThrowJS(string jsonStr);
     [DllImport("__Internal")] private static extern void EmitExecuteHitJS(string jsonStr);
@@ -319,6 +320,19 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
         EmitSyncMoveJS(json);
 #else
         if (socket != null && socket.Connected) socket.EmitAsync("sync_move", data);
+#endif
+    }
+
+    /// <summary>
+    /// 發送:開啟閃避
+    /// </summary>
+    public void SendOpenDodge(DodgeData data)
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        string json = JsonConvert.SerializeObject(data);
+        EmitOpenDodgeJS(json);
+#else
+        if (socket != null && socket.Connected) socket.EmitAsync("open_dodge", data);
 #endif
     }
 

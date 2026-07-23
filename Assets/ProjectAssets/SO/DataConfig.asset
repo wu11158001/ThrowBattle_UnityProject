@@ -30,12 +30,14 @@ MonoBehaviour:
   ThrowDamage: 15
   WindMaxStrength: 5
   SkillGiantIcon: {fileID: 7677048284982793680, guid: 022797f27223f804d84a5d536986654e, type: 3}
-  SkillStrengthDamageIcon: {fileID: 7455952627863186085, guid: 022797f27223f804d84a5d536986654e, type: 3}
   SkillGiantSize: 2
-  SkillStrengthDamageMultiplier: 2
   SkillGiantCD: 2
+  SkillStrengthDamageIcon: {fileID: 7455952627863186085, guid: 022797f27223f804d84a5d536986654e, type: 3}
+  SkillStrengthDamageMultiplier: 2
   StrengthDamageCD: 3
   SkillStrengthDamagePosHeight: 2
+  SkillDodgeIcon: {fileID: -6290221921668447333, guid: 022797f27223f804d84a5d536986654e, type: 3}
+  SkillDodgeCD: 1
   AIDifficultyDatas:
   - BtnString: "\u7B28\u7B28\u7684"
     HitRate: 55

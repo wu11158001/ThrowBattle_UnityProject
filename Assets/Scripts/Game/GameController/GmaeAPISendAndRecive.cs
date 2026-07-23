@@ -133,7 +133,6 @@ public class GmaeAPISendAndRecive
         // 同步參數狀態
         _throwController.ThrowType = (THROW_TYPE)data.throwType;
         _throwController.ThrowStrength = data.force;
-
         // 關閉投擲力道
         _context.CurrentTurnCharacter.CloseThrowStrength();
         // 計算投擲位置
@@ -141,7 +140,6 @@ public class GmaeAPISendAndRecive
         _throwController.ThrowTargetPos = throwTargetPos;
         // 撥放投擲動畫
         _context.CurrentTurnCharacter.PlayThrowAnimation((THROW_TYPE)data.throwType, throwTargetPos);
-
         // 關閉回合倒數
         _context.GameView.CloseCountDown();
     }
@@ -190,7 +188,10 @@ public class GmaeAPISendAndRecive
         }
         else
         {
-            hitCharacter.PlayDerideAnimation();
+            // 閃避
+            if (data.damage == -1) hitCharacter.PlayDodgeAnimation();
+            // 未擊中
+            else hitCharacter.PlayDerideAnimation();
         }
     }
 
