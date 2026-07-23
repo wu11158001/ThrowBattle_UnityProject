@@ -121,12 +121,12 @@ public class ViewManager : SingletonMonoBehaviour<ViewManager>
     }
 
     /// <summary>
-    /// 獲取介面
+    /// 獲取已開啟介面
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="viewType"></param>
     /// <returns></returns>
-    public T GetView<T>(VIEW_TYPE viewType) where T : BaseView
+    public T GetOpenView<T>(VIEW_TYPE viewType) where T : BaseView
     {
         foreach (var view in _viewStack)
         {

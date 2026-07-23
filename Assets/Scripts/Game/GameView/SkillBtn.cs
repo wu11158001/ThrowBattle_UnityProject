@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UniRx;
+using UnityEngine.EventSystems;
+using Cysharp.Threading.Tasks;
 
 /// <summary>
 /// 技能按鈕
@@ -10,6 +12,7 @@ public class SkillBtn : MonoBehaviour
 {
     [SerializeField] private Button _mainBtn;
     [SerializeField] private Image _cdMask;
+    [SerializeField] private UIEventHandler uiEventHandler;
 
     private Action _clickEvent;
 
@@ -17,6 +20,10 @@ public class SkillBtn : MonoBehaviour
     private int _maxCDTurns;
     // 當前剩餘CD回合
     private int _currentCDTurns = 0;
+    // 技能描述
+    private string _describle;
+
+    private bool _isShowDescrible = false;
 
     /// <summary>
     /// 技能類型
@@ -33,11 +40,12 @@ public class SkillBtn : MonoBehaviour
     /// </summary>
     public int BelongIndex { get; private set; }
 
-    public void SetData(THROW_TYPE skillType, int maxCDTurns, Action clickEvent, Sprite skillIcon, int belongIndex)
+    public void SetData(THROW_TYPE skillType, int maxCDTurns, Action clickEvent, Sprite skillIcon, int belongIndex, string describle)
     {
         SkillType = skillType;
         _maxCDTurns = maxCDTurns;
         _clickEvent = clickEvent;
+        _describle = describle;
         BelongIndex = belongIndex;
 
         _mainBtn.image.sprite = skillIcon;
@@ -50,6 +58,7 @@ public class SkillBtn : MonoBehaviour
 
     private void Bind()
     {
+        // 技能按鈕點擊
         _mainBtn.OnClickAsObservable()
             .Subscribe(_ =>
             {
@@ -57,6 +66,55 @@ public class SkillBtn : MonoBehaviour
                 StartCD();
             })
             .AddTo(this);
+
+        // 將 DownAction 轉為 Observable
+        var pointerDown = Observable.FromEvent<PointerEventData>(
+            h => uiEventHandler.DownAction += h,
+            h => uiEventHandler.DownAction -= h
+        );
+
+        // 將 UpAction 轉為 Observable
+        var pointerUp = Observable.FromEvent<PointerEventData>(
+            h => uiEventHandler.UpAction += h,
+            h => uiEventHandler.UpAction -= h
+
+        );
+        // 技能按鈕長按
+        pointerDown.SelectMany(_ => Observable.Timer(TimeSpan.FromSeconds(0.5f)))
+            .TakeUntil(pointerUp)
+            .Repeat()
+            .Subscribe(_ =>
+            {
+                if(!_isShowDescrible)
+                {
+                    _isShowDescrible = true;
+
+                    ViewManager.Instance.OpenView<DescribleView>(
+                        viewType: VIEW_TYPE.DescribleView,
+                        canvasType: CANVAS_TYPE.Canvas_Highest,
+                        callback: (view) =>
+                        {
+                            view.SetDescribleData(
+                                describle: _describle,
+                                targetPos: uiEventHandler.MainRect.position,
+                                yOffset: -100f);
+                        }).Forget();
+                }
+            })
+            .AddTo(this);
+
+        // 放開按壓
+        pointerUp.Subscribe(_ =>
+        {
+            if(_isShowDescrible)
+            {
+
+                DescribleView describleView = ViewManager.Instance.GetOpenView<DescribleView>(VIEW_TYPE.DescribleView);
+                if (describleView != null) describleView.Close();
+            }
+
+            _isShowDescrible = false;
+        }).AddTo(this);
     }
 
     /// <summary>

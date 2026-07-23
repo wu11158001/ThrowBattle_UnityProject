@@ -11,6 +11,7 @@ public enum VIEW_TYPE
     BackgroundView = 0,
     MessagePopupView,
     AskView,
+    DescribleView,
 
     LobbyView = 100,
     SetNicknameView,

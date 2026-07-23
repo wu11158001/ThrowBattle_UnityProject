@@ -37,7 +37,7 @@ MonoBehaviour:
   StrengthDamageCD: 3
   SkillStrengthDamagePosHeight: 2
   SkillDodgeIcon: {fileID: -6290221921668447333, guid: 022797f27223f804d84a5d536986654e, type: 3}
-  SkillDodgeCD: 1
+  SkillDodgeCD: 5
   AIDifficultyDatas:
   - BtnString: "\u7B28\u7B28\u7684"
     HitRate: 55

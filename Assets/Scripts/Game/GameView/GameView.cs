@@ -329,7 +329,8 @@ public class GameView : BaseView
                 OnSkillClick();
             }, 
             skillIcon: _dataConfig.SkillGiantIcon,
-            belongIndex: belongIndex);
+            belongIndex: belongIndex,
+            describle: _dataConfig.SkillGiantDescrible);
 
         targetList.Add(giantBtn);
 
@@ -345,7 +346,8 @@ public class GameView : BaseView
                 OnSkillClick();
             },
             skillIcon: _dataConfig.SkillStrengthDamageIcon,
-            belongIndex: belongIndex);
+            belongIndex: belongIndex,
+            describle: _dataConfig.SkillStrengthDamageDescrible);
 
         targetList.Add(strengthBtn);
 
@@ -377,7 +379,8 @@ public class GameView : BaseView
                 OnSkillClick();
             },
             skillIcon: _dataConfig.SkillDodgeIcon,
-            belongIndex: belongIndex);
+            belongIndex: belongIndex,
+            describle: _dataConfig.SkillDodgeDescrible);
 
         targetList.Add(dodgeBtn);
     }

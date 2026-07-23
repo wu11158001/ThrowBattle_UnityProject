@@ -36,13 +36,16 @@ public class DataConfig : ScriptableObject
 
     [Header("技能")]
     [Label("技能_巨大化Icon")] public Sprite SkillGiantIcon;
+    [Label("技能_巨大化技能描述")] public string SkillGiantDescrible = "投擲物件增大。";
     [Label("技能_巨大化Size")] public float SkillGiantSize = 2f;
     [Label("技能_巨大化CD回合")] public int SkillGiantCD = 2;
     [Label("技能_強化攻擊傷害Icon")] public Sprite SkillStrengthDamageIcon;
+    [Label("技能_強化攻擊技能描述")] public string SkillStrengthDamageDescrible = "傷害增加。";
     [Label("技能_強化攻擊傷害倍率")] public float SkillStrengthDamageMultiplier = 2f;
     [Label("技能_強化攻擊CD回合")] public int StrengthDamageCD = 3;
     [Label("技能_強化攻擊位置高度")] public float SkillStrengthDamagePosHeight = 2.8f;
     [Label("技能_閃避Icon")] public Sprite SkillDodgeIcon;
+    [Label("技能_閃避技能描述")] public string SkillDodgeDescrible = "下回合必定閃避攻擊。";
     [Label("技能_閃避CD回合")] public int SkillDodgeCD = 5;
 
     [Header("AI設置")]
