@@ -119,7 +119,7 @@ public class AIBrain : MonoBehaviour
             2. moveDirection 範圍為 -1 (往左) 到 1 (往右)。
             3. moveDistance 範圍為 0 到 {moveRange.y - moveRange.x}。
             4. 走位後的 X 位置不可超越移動範圍 {-moveRange.y} 至 {-moveRange.x}。
-            5. tauntText 必須符合性格，長度 15 字以內繁體中文，避免俗套詞彙。
+            5. tauntText 必須符合性格，長度 30 字以內繁體中文，避免俗套詞彙。
             6. 請嚴格依據以下 JSON 格式輸出，絕對不能遺漏任何欄位名稱(Key)：
             {{
               ""moveDirection"": 0.0,

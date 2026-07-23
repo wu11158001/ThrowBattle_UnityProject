@@ -285,6 +285,11 @@ public class SocketManager : SingletonMonoBehaviour<SocketManager>
     public void OnReceiveChatJS(string jsonText) => OnReciveChatReceived?.Invoke(JsonConvert.DeserializeObject<ReciveChatData>(jsonText));
 
     /// <summary>
+    /// 接收:貼圖訊息
+    /// </summary>
+    public void OnReciveStickJS(string jsonText) => OnReciveStickReceived?.Invoke(JsonConvert.DeserializeObject<ReciveStickData>(jsonText));
+
+    /// <summary>
     /// 接收:遊戲結束
     /// </summary>
     public void OnGameOverJS(string jsonText) => OnGameOverReceived?.Invoke(JsonConvert.DeserializeObject<GameOverData>(jsonText));

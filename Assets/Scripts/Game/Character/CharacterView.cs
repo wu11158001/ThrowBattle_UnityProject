@@ -11,21 +11,24 @@ using DG.Tweening;
 public class CharacterView : BaseObject
 {
     [SerializeField] private CharacterAnimControl _characterAnimControl;
-    [SerializeField] private TextMeshPro _text_Nickname;
-    [SerializeField] private GameObject _controlTip;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private TextMeshPro _text_Nickname;
+    [SerializeField] private Canvas _uiCanvas;
+
+    [Header("控制圖示")]
+    [SerializeField] private GameObject _controlTip;
 
     [Header("投擲力道")]
-    [SerializeField] private Canvas _throwStrengthCanvas;
-    [SerializeField] private Image _img_ThrowStrength;
+    [SerializeField] private GameObject _chargingObj;
+    [SerializeField] private Image _img_Charging;
 
     [Header("文字泡泡")]
-    [SerializeField] private Canvas _textBubbleCanvas;
+    [SerializeField] private GameObject _textBubbleObj;
     [SerializeField] private CanvasGroup _textBubbleCanvasGroup;
     [SerializeField] private TextMeshProUGUI _text_Bubble;
 
     [Header("貼圖")]
-    [SerializeField] private Canvas _stickCanvas;
+    [SerializeField] private GameObject _stickObj;
     [SerializeField] private CanvasGroup _stickCanvasGroup;
     [SerializeField] private Image _img_Stick;
 
@@ -70,19 +73,21 @@ public class CharacterView : BaseObject
         _context = GameplayManager.CurrentContext;
         _dataConfig = StaticDataManager.DataConfig;
 
-        _throwStrengthCanvas.worldCamera = Camera.main;
-        CloseThrowStrength();
-
-        _textBubbleCanvas.worldCamera = Camera.main;
-        _textBubbleCanvas.gameObject.SetActive(false);
-
-        _stickCanvas.worldCamera = Camera.main;
-        _stickCanvas.gameObject.SetActive(false);
-
         _moveSpeed = _dataConfig.CharacterMoveSpeed;
         _moveRange = _dataConfig.CharacterMoveRange;
 
+        _uiCanvas.worldCamera = Camera.main;
+        CloseThrowStrength();
+
+        _textBubbleObj.SetActive(false);
+        _stickObj.SetActive(false);
+
         _controlTip.SetActive(false);
+        _controlTip.transform.DOLocalMoveY(_controlTip.transform.localPosition.y + 0.2f, 0.5f)
+            .SetEase(ease: Ease.InOutSine)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetLink(gameObject)
+            .SetTarget(_controlTip);
 
         Bind();
     }
@@ -222,11 +227,11 @@ public class CharacterView : BaseObject
     {
         // 關閉文字泡泡
         _textBubbleCanvasGroup.DOKill();
-        _textBubbleCanvas.gameObject.SetActive(false);
+        _textBubbleObj.SetActive(false);
 
-        if (!_stickCanvas.gameObject.activeSelf)
+        if (!_stickObj.activeSelf)
         {
-            _stickCanvas.gameObject.SetActive(true);
+            _stickObj.SetActive(true);
         }
 
         Sprite sprite = StaticDataManager.StickTextures[stickIndex];
@@ -242,7 +247,7 @@ public class CharacterView : BaseObject
             .Append(_stickCanvasGroup.DOFade(0f, 0.5f)) // 淡出 
             .OnComplete(() =>
             {
-                _stickCanvas.gameObject.SetActive(false);
+                _stickObj.SetActive(false);
             })
             .SetLink(gameObject)
             .SetTarget(_stickCanvasGroup);
@@ -256,11 +261,11 @@ public class CharacterView : BaseObject
     {
         // 關閉貼圖
         _stickCanvasGroup.DOKill();
-        _stickCanvas.gameObject.SetActive(false);
+        _stickObj.SetActive(false);
 
-        if (!_textBubbleCanvas.gameObject.activeSelf)
+        if (!_textBubbleObj.gameObject.activeSelf)
         {
-            _textBubbleCanvas.gameObject.SetActive(true);
+            _textBubbleObj.gameObject.SetActive(true);
         }
 
         _text_Bubble.text = message;
@@ -275,7 +280,7 @@ public class CharacterView : BaseObject
             .Append(_textBubbleCanvasGroup.DOFade(0f, 0.5f)) // 淡出 
             .OnComplete(() =>
             {
-                _textBubbleCanvas.gameObject.SetActive(false);
+                _textBubbleObj.SetActive(false);
             })
             .SetLink(gameObject)
             .SetTarget(_textBubbleCanvasGroup);
@@ -287,12 +292,12 @@ public class CharacterView : BaseObject
     /// <param name="value">投擲力道(0~1)</param>
     public void UpdateCharging(float value)
     {
-        if (!_throwStrengthCanvas.gameObject.activeSelf)
+        if (!_chargingObj.activeSelf)
         {
-            _throwStrengthCanvas.gameObject.SetActive(true);
+            _chargingObj.SetActive(true);
         }
 
-        _img_ThrowStrength.fillAmount = value;
+        _img_Charging.fillAmount = value;
     }
 
     /// <summary>
@@ -300,7 +305,7 @@ public class CharacterView : BaseObject
     /// </summary>
     public void CloseThrowStrength()
     {
-        _throwStrengthCanvas.gameObject.SetActive(false);
+        _chargingObj.SetActive(false);
     }
 
     /// <summary>

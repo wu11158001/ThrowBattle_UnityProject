@@ -232,6 +232,8 @@ public class GameView : BaseView
                         };
 
                         SocketManager.Instance.SendStick(data);
+
+                        _stickPanel.gameObject.SetActive(false);
                     })
                     .AddTo(this);
             }

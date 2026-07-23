@@ -35,8 +35,6 @@ public static class ConfigManager
         if (result != null)
         {
             StaticDataManager.StickTextures = new List<Sprite>(result);
-
-            Debug.Log($"成功載入 {StaticDataManager.StickTextures.Count} 張貼圖！");
         }
     }
 }

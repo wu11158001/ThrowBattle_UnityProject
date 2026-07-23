@@ -68,7 +68,7 @@ mergeInto(LibraryManager.library, {
         // 監聽:貼圖訊息
         window.webglSocket.on('on_receive_stick', function (data) {
             var jsonStr = typeof data === 'string' ? data : JSON.stringify(data);
-            SendMessage('SocketManager', 'OnReceiveStickJS', jsonStr);
+            SendMessage('SocketManager', 'OnReciveStickJS', jsonStr);
         });
 
         // 監聽:遊戲結束
